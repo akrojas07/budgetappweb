@@ -7,7 +7,7 @@ import {map} from 'rxjs/operators';
 })
 export class UserService {
 
-  baseUrl = 'http://localhost:5000/api/user/';
+baseUrl = 'http://localhost:5000/api/user/';
 constructor(private http: HttpClient) { }
 
 login(model:any){
@@ -21,6 +21,10 @@ login(model:any){
       localStorage.setItem('token', user.token);
     }
   } )
-  )
+  );
+}
+
+signUp(model:any){
+  return this.http.post(this.baseUrl +'signUp', model);
 }
 }

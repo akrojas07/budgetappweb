@@ -9,13 +9,18 @@ import { FormsModule } from '@angular/forms';
 import { UserloginComponent } from './userlogin/userlogin.component';
 
 import {UserService} from './_services/user.service';
+import { HomeComponent } from './home/home.component';
+import { SignupComponent } from './signup/signup.component';
+import {ErrorInterceptorProvider} from './_services/error.interceptor';
 
 @NgModule({
-  declarations: [		
+  declarations: [				
     AppComponent,
       UserComponent,
       NavComponent,
-      UserloginComponent
+      UserloginComponent,
+      HomeComponent,
+      SignupComponent
    ],
   imports: [
     BrowserModule,
@@ -23,7 +28,8 @@ import {UserService} from './_services/user.service';
     FormsModule
   ],
   providers: [
-    UserService
+    UserService,
+    ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,8 @@
+<div class="container mt-5">
+  <div *ngIf="!loggedIn()">
+    <p class = "lead">Welcome and introduction information goes here</p>
+  </div>
+  <div *ngIf="loggedIn()">
+    <p>different information goes here</p>
+  </div>
+</div>

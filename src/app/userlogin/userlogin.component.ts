@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
-import {AlertifyjsService} from '../_services/alertifyjs.service';
 
 @Component({
   selector: 'app-userlogin',
@@ -10,37 +9,43 @@ import {AlertifyjsService} from '../_services/alertifyjs.service';
 export class UserloginComponent implements OnInit {
 
   model: any = {};
-  constructor(private userService : UserService, private alertify: AlertifyjsService) { }
+  errorMessage: string;
+  showErrorMessage: boolean;
+  formSubmitted: boolean;
+
+  constructor(private userService : UserService) { }
 
 
   ngOnInit() {
+    this.showErrorMessage = false;
+    this.formSubmitted = false;
   }
 
   signUp()
   {
     this.userService.signUp(this.model).subscribe(() => {
-      this.alertify.success('sign up successful');
+      console.log('sign up successful');
     }, error => {
-      this.alertify.error(error);
+      console.log(error);
     } );
   }
   
   login(){
+    this.formSubmitted = true;
     this.userService.login(this.model).subscribe(next => {
-      this.alertify.success('Login Successful');
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
+      console.log('Login Successful');
+      this.formSubmitted = false;
 
-  loggedIn(){
-    const token = localStorage.getItem('token');
-    return !!token;
+    }, error => {
+      this.errorMessage = error;
+      this.showErrorMessage = true; 
+      this.formSubmitted = false;     
+    });  
   }
 
   logout(){
     localStorage.removeItem('token');
-    this.alertify.message('logged out');
+    console.log('logged out');
   }
 
 

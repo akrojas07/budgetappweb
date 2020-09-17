@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AlertifyjsService} from '../_services/alertifyjs.service';
+
 import { UserService } from '../_services/user.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -8,7 +9,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  constructor(private alertify: AlertifyjsService, private userService : UserService) { }
+  constructor(private userService : UserService) { }
 
   ngOnInit() {
   }
@@ -19,8 +20,6 @@ export class NavComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('token');
-    this.alertify.message('logged out');
-
+    console.log('logged out');
   }
-
 }

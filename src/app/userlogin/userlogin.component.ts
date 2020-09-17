@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class UserloginComponent implements OnInit {
   showErrorMessage: boolean;
   formSubmitted: boolean;
 
-  constructor(private userService : UserService) { }
+  constructor(private userService : UserService,
+    private router: Router) { }
 
 
   ngOnInit() {
@@ -32,20 +34,24 @@ export class UserloginComponent implements OnInit {
   
   login(){
     this.formSubmitted = true;
+    this.showErrorMessage = false;
     this.userService.login(this.model).subscribe(next => {
       console.log('Login Successful');
       this.formSubmitted = false;
 
     }, error => {
       this.errorMessage = error;
-      this.showErrorMessage = true; 
-      this.formSubmitted = false;     
-    });  
+      this.showErrorMessage = true;
+      this.formSubmitted = false;
+    }, () => {
+      this.router.navigate(['/home']);
+    });
   }
 
   logout(){
     localStorage.removeItem('token');
     console.log('logged out');
+    this.router.navigate(['/home']);
   }
 
 

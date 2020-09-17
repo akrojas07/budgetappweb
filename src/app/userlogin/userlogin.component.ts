@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import {AlertifyjsService} from '../_services/alertifyjs.service';
 
 @Component({
   selector: 'app-userlogin',
@@ -9,7 +10,7 @@ import { UserService } from '../_services/user.service';
 export class UserloginComponent implements OnInit {
 
   model: any = {};
-  constructor(private userService : UserService) { }
+  constructor(private userService : UserService, private alertify: AlertifyjsService) { }
 
 
   ngOnInit() {
@@ -18,17 +19,17 @@ export class UserloginComponent implements OnInit {
   signUp()
   {
     this.userService.signUp(this.model).subscribe(() => {
-      console.log('sign up successful');
+      this.alertify.success('sign up successful');
     }, error => {
-      console.log(error);
+      this.alertify.error(error);
     } );
   }
   
   login(){
     this.userService.login(this.model).subscribe(next => {
-      console.log('Login Successful');
+      this.alertify.success('Login Successful');
     }, error => {
-      console.log(error);
+      this.alertify.error(error);
     });
   }
 
@@ -39,7 +40,7 @@ export class UserloginComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('token');
-    console.log('logged out');
+    this.alertify.message('logged out');
   }
 
 

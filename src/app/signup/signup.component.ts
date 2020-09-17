@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import {AlertifyjsService} from '../_services/alertifyjs.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +9,7 @@ import { UserService } from '../_services/user.service';
 })
 export class SignupComponent implements OnInit {
   model: any = {};
-  constructor(private userService : UserService) { }
+  constructor(private userService : UserService, private alertify : AlertifyjsService) { }
 
 
   ngOnInit() {
@@ -17,13 +18,13 @@ export class SignupComponent implements OnInit {
   signUp()
   {
     this.userService.signUp(this.model).subscribe(() => {
-      console.log('sign up successful');
+      this.alertify.success('sign up successful');
     }, error => {
-      console.log(error);
+      this.alertify.error(error);
     } );
   }
 
   cancel(){
-    console.log('cancelled');
+    this.alertify.message('cancelled');
   }
 }

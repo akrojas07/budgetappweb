@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AlertifyjsService} from '../_services/alertifyjs.service';
 
 @Component({
   selector: 'app-nav',
@@ -6,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  signInMode = false;
-  constructor() { }
+  constructor(private alertify: AlertifyjsService) { }
 
   ngOnInit() {
   }
@@ -19,12 +19,8 @@ export class NavComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('token');
-    console.log('logged out');
+    this.alertify.message('logged out');
 
   }
 
-  signInToggle()
-  {
-    this.signInMode = !this.signInMode;
-  }
 }

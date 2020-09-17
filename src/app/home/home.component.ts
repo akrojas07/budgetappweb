@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private userService : UserService) { }
 
   ngOnInit() {
   }
 
   loggedIn(){
-    const token = localStorage.getItem('token');
-    return !!token;
+    this.userService.loggedIn();
   }
 
 

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
-
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +8,12 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  constructor(private userService : UserService) { }
+  constructor(
+    private userService: UserService,
+    private router: Router)
+  { }
+
+  @Output() errorOccurredEvent = new EventEmitter<string>();
 
   ngOnInit() {
   }
@@ -19,7 +23,15 @@ export class NavComponent implements OnInit {
   }
 
   logout(){
-    localStorage.removeItem('token');
-    console.log('logged out');
+    let userId = this.userService.getUserId();
+    this.userService.logOut(userId)
+      .subscribe(res =>{
+        localStorage.removeItem('token');
+        console.log('logged out');
+        this.router.navigate(['/home']);
+      },error =>{
+        console.log(error);
+        this.errorOccurredEvent.emit('Error occurred while logging out.');
+      });
   }
 }

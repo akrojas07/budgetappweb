@@ -10,7 +10,6 @@ export class SignupComponent implements OnInit {
   model: any = {};
   constructor(private userService : UserService) { }
 
-
   ngOnInit() {
   }
 
@@ -21,9 +20,5 @@ export class SignupComponent implements OnInit {
     }, error => {
       console.log(error);
     } );
-  }
-
-  cancel(){
-    console.log('cancelled');
   }
 }

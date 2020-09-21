@@ -32,8 +32,9 @@ export class UserloginComponent implements OnInit {
     this.userService.login(this.model)
       .subscribe(res => {
         console.log('Login Successful');
+        localStorage.setItem('token', res.token);
         this.formSubmitted = false;
-        this.userService.setUserId(5);
+        this.userService.setUserId(res.userId);
         this.userService.setAuthHeader();
       }, error => {
         this.errorMessage = error;

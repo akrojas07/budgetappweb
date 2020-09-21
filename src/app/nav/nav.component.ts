@@ -24,6 +24,8 @@ export class NavComponent implements OnInit {
 
   logout(){
     let userId = this.userService.getUserId();
+    console.log('userid:');
+    console.log(userId);
     this.userService.logOut(userId)
       .subscribe(res =>{
         localStorage.removeItem('token');

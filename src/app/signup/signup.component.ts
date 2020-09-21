@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { Router } from '@angular/router';
+import { formatCurrency } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
@@ -8,17 +10,39 @@ import { UserService } from '../_services/user.service';
 })
 export class SignupComponent implements OnInit {
   model: any = {};
-  constructor(private userService : UserService) { }
+  showErrorMessage : boolean;
+  errorMessage: string;
+
+  @ViewChild('closebutton') closebutton;
+  @ViewChild('signupForm') signUpForm;
+
+  constructor(private userService : UserService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.showErrorMessage = false;
   }
 
   signUp()
   {
-    this.userService.signUp(this.model).subscribe(() => {
+    this.showErrorMessage = false;
+    this.userService.signUp(this.model)
+    .subscribe(res => {
       console.log('sign up successful');
+      this.signUpForm.reset();
+      this.closebutton.nativeElement.click();
+      localStorage.setItem('token', res.token);
+
+      this.userService.setUserId(res.userId);
+      this.userService.setAuthHeader();
     }, error => {
-      console.log(error);
-    } );
+      this.errorMessage = error;
+      this.showErrorMessage = true;
+
+    }, ()=>{
+      this.router.navigate(['/home']);
+    });
   }
+
+
 }

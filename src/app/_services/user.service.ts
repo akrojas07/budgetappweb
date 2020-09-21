@@ -13,9 +13,6 @@ import { UserLoginRequest } from '../_models/userLoginRequest';
 export class UserService {
   baseUrl = environment.apiUrl;
   jwtHelper = new JwtHelperService();
-  
-  private headers: HttpHeaders;
-  private userId: number;
 
   constructor(private http: HttpClient) {}
 
@@ -29,29 +26,31 @@ export class UserService {
 
   loggedIn(): boolean{
     const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
+    if(token != null){
+      return !this.jwtHelper.isTokenExpired(token);
+    }
+
+
+    const userId = localStorage.getItem('userId');
+    if(userId == null)
+    {
+      return false;
+    }
+
   }
 
   getUserByEmail(email): Observable<any>{
-    return this.http.get<any>(this.baseUrl + email, {headers: this.headers});
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+    return this.http.get<any>(this.baseUrl + email, {headers});
   }
 
   logOut(id: number): Observable<any>{
     const body: any = { UserId : id };
-    return this.http.patch(this.baseUrl + 'logout', body,  {headers: this.headers});
-  }
-
-  setUserId(id: number): void{
-    this.userId = id;
-  }
-
-  setAuthHeader(): void{
-    this.headers = new HttpHeaders({
+    const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-  }
-
-  getUserId(): number{
-    return this.userId;
+    return this.http.patch(this.baseUrl + 'logout', body,  {headers});
   }
 }

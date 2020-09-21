@@ -34,8 +34,7 @@ export class UserloginComponent implements OnInit {
         console.log('Login Successful');
         localStorage.setItem('token', res.token);
         this.formSubmitted = false;
-        this.userService.setUserId(res.userId);
-        this.userService.setAuthHeader();
+        localStorage.setItem('userId', res.userId.toString());
       }, error => {
         this.errorMessage = error;
         this.showErrorMessage = true;

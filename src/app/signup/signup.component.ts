@@ -28,13 +28,14 @@ export class SignupComponent implements OnInit {
     this.showErrorMessage = false;
     this.userService.signUp(this.model)
     .subscribe(res => {
+      console.log(res);
+      console.log(res.userId);
       console.log('sign up successful');
+
       this.signUpForm.reset();
       this.closebutton.nativeElement.click();
       localStorage.setItem('token', res.token);
-
-      this.userService.setUserId(res.userId);
-      this.userService.setAuthHeader();
+      localStorage.setItem('userId', res.userId.toString());
     }, error => {
       this.errorMessage = error;
       this.showErrorMessage = true;

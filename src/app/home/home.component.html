@@ -1,8 +1,37 @@
-<div class="container mt-5">
-  <div *ngIf="!loggedIn()">
-    <p class = "lead">Mi Feria is a new personal budget application that aims to help everyone learn about budgeting and money management.</p>
+<div>
+  <div *ngIf="!loggedIn()" class="container-fluid"> 
+    <!-- container fluid will give the full width of the container -->
+    <!--These will all have screenshots next to them and will be a different section-->
+    <p class = "lead text-center">Handling your money shouldn't be scary</p>
+    <p>Mi Feria makes budgeting and money management easy.</p>
+    <p>Start by selecting a budgeting plan:</p>
+    <ul>
+      <li>Zero Based Budget</li>
+      <li>Cash Only</li>
+      <li>50/30/20</li>
+    </ul>
+    <p>Input your expenses, income, savings.</p>
+    <p>Create personalized budget and money management goals</p>
+
   </div>
   <div *ngIf="loggedIn()">
-    <p>different information goes here</p>
+    <p class = "lead">Get Started:</p>
+    <!--include tool tips?-->
+    <div class = "budgeting container-fluid">
+    <p class = "lead">Learn about different budget plans</p>
+    <ul>
+      <li>Zero Based Budget</li>
+      <li>Cash Only</li>
+      <li>50/30/20</li>
+    </ul>
+    Select a budget plan
+    <p >Want to create a custom budget style? <a href="#">Click here</a></p>
+  </div>
+    <ul>
+      <li><a href='#'>Enter Expenses</a></li>
+      <li><a href='#'>Income</a></li>
+      <li><a href='#'>Savings</a></li>
+    </ul>
+    <p class = "lead">Set goals</p>
   </div>
 </div>

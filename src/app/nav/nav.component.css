@@ -1,7 +1,8 @@
 .navigation{
-     background-color: rgb(179,196,212); 
-
-    color:whitesmoke;
+    background-color: rgb(33,182,168); 
+    color:rgb(72,87,94);
+    font-size: small;
+    letter-spacing: .25em;
 }
 .navbar-brand{
     color: whitesmoke;
@@ -11,7 +12,4 @@
 }
 .nav-item:hover, .nav-link :hover{
     color: rgb(217,185,170);
-}
-.icon{
-    background-color: whitesmoke;
 }

@@ -1,0 +1,18 @@
+.learning{
+    color: rgb(16,120,105);
+    font-size: large;
+}
+
+// remove bullet points 
+.learning ul{
+    list-style-type: none;
+}
+
+// information about each budget plan
+.paragraphs{
+    font-size:medium;
+    background-color: rgb(204,224,210);
+    padding: 5%;
+    text-align: justify;
+    border-radius: 25px;
+}

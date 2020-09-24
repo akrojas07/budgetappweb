@@ -5,6 +5,7 @@ import { BudgetComponent } from './budget/Budget.component';
 import { DashboardComponent } from './dashboard/Dashboard.component';
 import { UserloginComponent } from './userlogin/userlogin.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { UserDetailResolver } from './_resolvers/userDetails.resolver';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ export const appRoutes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent},
+      { path: 'profile/:id', component: ProfileComponent, resolve: {user: UserDetailResolver}},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'budget', component: BudgetComponent },
     ],

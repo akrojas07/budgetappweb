@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserLoginResponse } from '../_models/userLoginResponse';
 import { UserLoginRequest } from '../_models/userLoginRequest';
+import { UserUpdateProfile } from '../_models/userUpdateProfileResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -39,11 +40,18 @@ export class UserService {
 
   }
 
-  getUserByEmail(email): Observable<any>{
+  getUserByEmail(email:string): Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
     return this.http.get<any>(this.baseUrl + email, {headers});
+  }
+
+  getUserById(id:number): Observable<UserUpdateProfile>{
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+    return this.http.get<any>(this.baseUrl + id, {headers});
   }
 
   logOut(id: number): Observable<any>{
@@ -52,5 +60,9 @@ export class UserService {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
     return this.http.patch(this.baseUrl + 'logout', body,  {headers});
+  }
+
+  updateProfile(model: any): Observable<UserUpdateProfile>{
+    return this.http.patch<UserUpdateProfile>(this.baseUrl + 'updateuser', model);
   }
 }

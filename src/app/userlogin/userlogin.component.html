@@ -1,20 +1,19 @@
 <div class="d-flex justify-content-center">
-  <div class="w-50" id="signIn">
-    <!--*ngIf="!loggedIn()"-->
+  <div id="signIn" class="signIn">
     <div class="alert alert-danger p-1" role="alert" *ngIf="showErrorMessage">
       {{errorMessage}}
     </div>
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="login()">
-      <input type="email" class="form-control mt-3" id="exampleInputEmail1" name="email" placeholder="Email Address" required
-        [(ngModel)]="model.email">
+      <input type="email" class="form-control mt-3" id="exampleInputEmail1" name="email" placeholder="Email Address"
+        required [(ngModel)]="model.email">
       <div class="form-group mt-3">
         <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password"
           required [(ngModel)]="model.password">
       </div>
       <div class="checkbox">
         <span class="align-baseline">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
+          <label class="checkMe">
+            <input  type="checkbox" value="remember-me"> Remember me
           </label>
         </span>
       </div>
@@ -27,7 +26,7 @@
     <hr>
     <p class="text-left">New around here? <a href="#signupModal" data-toggle="modal" data-target="#signupModal">Sign
         Up</a></p>
-    <!--sign up will be a modal-->
+
     <p class="text-left">Forgot Password?</p>
     <!--this will send them to a link where they enter their 
         email and if they exist, an update password link will be sent-->

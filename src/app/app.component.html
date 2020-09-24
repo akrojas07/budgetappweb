@@ -1,20 +1,17 @@
 <app-nav (errorOccurredEvent)="errorOccurred($event)"></app-nav>
 
-<div class="container">
-  <div>
-    <h1 class = "welcome" style="text-align: center">
-      Welcome to {{title}}
-    </h1>
-    <br />
-    <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
-      {{errorMessage}}
-    </div>
-    <div class="budgeting">
-      <router-outlet></router-outlet>
-    </div>
-
-    <app-signup></app-signup>
-
+<div class="container body">
+  <h1 class="welcome" style="text-align: center">
+    Welcome to {{title}}
+  </h1>
+  <br />
+  <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
+    {{errorMessage}}
   </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-signup></app-signup>
 
 </div>

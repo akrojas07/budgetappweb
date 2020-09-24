@@ -8,6 +8,7 @@ import { UserComponent } from './user/user.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { UserloginComponent } from './userlogin/userlogin.component';
+import {UserDetailResolver} from '../app/_resolvers/userDetails.resolver';
 
 import {UserService} from './_services/user.service';
 import { HomeComponent } from './home/home.component';
@@ -39,7 +40,8 @@ import {appRoutes} from './routes';
   ],
   providers: [
     UserService,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    UserDetailResolver
   ],
   bootstrap: [AppComponent]
 })

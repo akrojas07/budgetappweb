@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
 import { UserLoginResponse } from '../_models/userLoginResponse';
 import { UserLoginRequest } from '../_models/userLoginRequest';
 import { UserUpdateProfile } from '../_models/userUpdateProfileResponse';
+import {UserProfileUpdateRequest } from '../_models/UserProfileUpdateRequest';
+import { UserUpdatePasswordRequest } from '../_models/UserUpdatePasswordRequest';
+import { UserUpdatePasswordResponse } from '../_models/UserUpdatePasswordResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +65,21 @@ export class UserService {
     return this.http.patch(this.baseUrl + 'logout', body,  {headers});
   }
 
-  updateProfile(model: any): Observable<UserUpdateProfile>{
-    return this.http.patch<UserUpdateProfile>(this.baseUrl + 'updateuser', model);
+  updateProfile(body: UserProfileUpdateRequest): Observable<UserUpdateProfile>{
+    const headers = new HttpHeaders(
+      {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    );
+    return this.http.patch<UserUpdateProfile>(this.baseUrl + 'updateuser', body, {headers});
+  }
+
+  updatePassword(body: UserUpdatePasswordRequest): Observable<UserUpdatePasswordResponse>{
+    const headers = new HttpHeaders(
+      {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    );
+    return this.http.patch<UserUpdatePasswordResponse>(this.baseUrl + 'updatePassword', body, {headers});
   }
 }

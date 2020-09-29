@@ -15,8 +15,8 @@ export class UserloginComponent implements OnInit {
   showErrorMessage: boolean;
   formSubmitted: boolean;
 
-  constructor(private userService : UserService,
-    private router: Router) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
 
   ngOnInit() {

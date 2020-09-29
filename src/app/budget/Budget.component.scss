@@ -1,3 +1,9 @@
+.aside{
+    background-color: rgb(144,187,194);
+    border-radius: 25px;
+    color: whitesmoke;
+}
+
 .learning{
     color: rgb(16,120,105);
     font-size: large;
@@ -11,8 +17,12 @@
 // information about each budget plan
 .paragraphs{
     font-size:medium;
-    background-color: rgb(204,224,210);
+    background-color: rgb(221,255,231);
     padding: 5%;
     text-align: justify;
     border-radius: 25px;
+}
+
+.aside h3, .asideLink{
+    color: whitesmoke;
 }

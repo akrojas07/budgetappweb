@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'Mi Feria';
   showErrorMessage: boolean;
   errorMessage: string;
+  confirmPassword: string;
 
   ngOnInit() {
     this.showErrorMessage = false;
@@ -21,4 +22,5 @@ export class AppComponent {
     this.showErrorMessage = true;
     this.errorMessage = message;
   }
+
 }

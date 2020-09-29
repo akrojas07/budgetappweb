@@ -3,6 +3,7 @@
     <div class="alert alert-danger p-1" role="alert" *ngIf="showErrorMessage">
       {{errorMessage}}
     </div>
+    <!-- pretty sure this is an example of output event binding -->
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="login()">
       <input type="email" class="form-control mt-3" id="exampleInputEmail1" name="email" placeholder="Email Address"
         required [(ngModel)]="model.email">
@@ -17,6 +18,7 @@
           </label>
         </span>
       </div>
+      <!--  [disabled]="!loginForm.valid" is an example of input property binding -->
       <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="formSubmitted"></span>
         Submit

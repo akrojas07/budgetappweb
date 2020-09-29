@@ -26,8 +26,8 @@
                             value="{{currentUser.firstName}}">
                     </div>
                     <div class="col">
-                        <label for="inputFirstName">Update First Name</label>
-                        <input type="FirstName" class="form-control" id="inputFirstName" name="firstName"
+                        <label for="inputFirst">Update First Name</label>
+                        <input type="FirstName" class="form-control" id="inputFirst" name="firstName"
                             placeholder="First Name" required [(ngModel)]="updateUser.FirstName">
                     </div>
                 </div>
@@ -38,8 +38,8 @@
                             value="{{currentUser.lastName}}">
                     </div>
                     <div class="col">
-                        <label for="inputLastName">Update Last Name</label>
-                        <input type="LastName" class="form-control" id="inputLastName" name="lastName"
+                        <label for="inputLast">Update Last Name</label>
+                        <input type="LastName" class="form-control" id="inputLast" name="lastName"
                             placeholder="Last Name" required [(ngModel)]="updateUser.LastName">
                     </div>
                 </div>
@@ -65,23 +65,41 @@
             <hr>
 
             <h3>Update Password</h3>
+            <div class="alert alert-danger py-2 my-2" role="alert" *ngIf="showPasswordError">
+                {{errorMessage}}
+            </div>
+            <div class="alert alert-success py-2 my-2" role="alert" *ngIf="showPasswordSuccess">
+                {{successMessage}}
+            </div>
             <p class="text-muted">Choose a password that will be hard for other to guess</p>
             <form #passwordForm="ngForm" class="form-password w-75" (ngSubmit)="submitPasswordChanges()">
                 <div class="form-group row mt-3">
                     <div class="col">
                         <label for="inputPassword">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" name="password"
-                            placeholder="Password" required [(ngModel)] = "updatedPassword.Password">
+                        <input type="password" 
+                            class="form-control" 
+                            id="inputPassword" 
+                            name="password"
+                            placeholder="Password" 
+                            (input)="validatePasswordsMatch()" 
+                            [(ngModel)] = "updatedPassword.Password"
+                            required>
                     </div>
                     <div class="col">
                         <label for="confirmInputPassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmInputPassword" name="password"
-                            placeholder="Confirm Password" required [(ngModel)] = "currentPassword.ConfirmPassword">
+                        <input type="password" 
+                            class="form-control"
+                            id="confirmInputPassword" 
+                            name="confirmPassword"
+                            placeholder="Confirm Password" 
+                            (input)="validatePasswordsMatch()" 
+                            [(ngModel)] = "confirmPassword" 
+                            required >
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit" [disabled]="!passwordForm.valid">
+                <button class="btn btn-primary" type="submit" [disabled]="!passwordForm.valid || !passwordFormValid">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-                        *ngIf="formSubmitted"></span>
+                        *ngIf="passwordFormSubmitted"></span>
                     Save Changes
                 </button>
             </form>

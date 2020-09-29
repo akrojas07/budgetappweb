@@ -9,7 +9,7 @@ import { UserLoginRequest } from '../_models/userLoginRequest';
 import { UserUpdateProfile } from '../_models/userUpdateProfileResponse';
 import {UserProfileUpdateRequest } from '../_models/UserProfileUpdateRequest';
 import { UserUpdatePasswordRequest } from '../_models/UserUpdatePasswordRequest';
-import { UserUpdatePasswordResponse } from '../_models/UserUpdatePasswordResponse';
+// import { UserUpdatePasswordResponse } from '../_models/UserUpdatePasswordResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -43,14 +43,14 @@ export class UserService {
 
   }
 
-  getUserByEmail(email:string): Observable<any>{
+  getUserByEmail(email: string): Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
     return this.http.get<any>(this.baseUrl + email, {headers});
   }
 
-  getUserById(id:number): Observable<UserUpdateProfile>{
+  getUserById(id: number): Observable<UserUpdateProfile>{
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
@@ -74,12 +74,12 @@ export class UserService {
     return this.http.patch<UserUpdateProfile>(this.baseUrl + 'updateuser', body, {headers});
   }
 
-  updatePassword(body: UserUpdatePasswordRequest): Observable<UserUpdatePasswordResponse>{
+  updatePassword(body: UserUpdatePasswordRequest): Observable<any>{
     const headers = new HttpHeaders(
       {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     );
-    return this.http.patch<UserUpdatePasswordResponse>(this.baseUrl + 'updatePassword', body, {headers});
+    return this.http.patch<any>(this.baseUrl + 'updatePassword', body, {headers});
   }
 }

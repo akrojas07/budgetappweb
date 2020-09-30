@@ -2,14 +2,11 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserLoginRequest } from '../_models/userLoginRequest';
+import { Router } from '@angular/router';
 import { UserProfileUpdateRequest } from '../_models/UserProfileUpdateRequest';
 import { UserUpdateProfile } from '../_models/userUpdateProfileResponse';
 import { UserService } from '../_services/user.service';
-// import { UserUpdatePasswordResponse } from '../_models/UserUpdatePasswordResponse';
 import { UserUpdatePasswordRequest } from '../_models/UserUpdatePasswordRequest';
-import { UserUpdatePassword } from '../_models/UserUpdatePassword';
 
 @Component({
   selector: 'app-Profile',
@@ -20,7 +17,6 @@ export class ProfileComponent implements OnInit {
   currentUser: UserUpdateProfile = new UserUpdateProfile();
   updateUser: UserProfileUpdateRequest = new UserProfileUpdateRequest();
 
-  // currentPassword: UserUpdatePasswordResponse = new UserUpdatePasswordResponse();
   updatedPassword: UserUpdatePasswordRequest = new UserUpdatePasswordRequest();
   confirmPassword: string;
   errorMessage: string;
@@ -87,7 +83,6 @@ export class ProfileComponent implements OnInit {
   }
 
   submitPasswordChanges() {
-    console.log(this.confirmPassword);
     this.updatedPassword.UserId = Number(localStorage.getItem('userId'));
     this.passwordFormSubmitted = true;
     this.showPasswordError = false;

@@ -21,11 +21,11 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   login(model: UserLoginRequest): Observable<UserLoginResponse>{
-    return this.http.patch<UserLoginResponse>(this.baseUrl + 'login', model);
+    return this.http.patch<UserLoginResponse>(this.baseUrl + 'user/login', model);
   }
 
   signUp(model: any): Observable<UserLoginResponse>{
-    return this.http.post<UserLoginResponse>(this.baseUrl + 'signUp', model);
+    return this.http.post<UserLoginResponse>(this.baseUrl + 'user/signUp', model);
   }
 
   loggedIn(): boolean{
@@ -47,14 +47,14 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.get<any>(this.baseUrl + email, {headers});
+    return this.http.get<any>(this.baseUrl + 'user/'+ email, {headers});
   }
 
   getUserById(id: number): Observable<UserUpdateProfile>{
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.get<any>(this.baseUrl + id, {headers});
+    return this.http.get<any>(this.baseUrl + 'user/' + id, {headers});
   }
 
   logOut(id: number): Observable<any>{
@@ -62,7 +62,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.patch(this.baseUrl + 'logout', body,  {headers});
+    return this.http.patch(this.baseUrl + 'user/logout', body,  {headers});
   }
 
   updateProfile(body: UserProfileUpdateRequest): Observable<UserUpdateProfile>{
@@ -71,7 +71,7 @@ export class UserService {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     );
-    return this.http.patch<UserUpdateProfile>(this.baseUrl + 'updateuser', body, {headers});
+    return this.http.patch<UserUpdateProfile>(this.baseUrl + 'user/updateuser', body, {headers});
   }
 
   updatePassword(body: UserUpdatePasswordRequest): Observable<any>{
@@ -80,6 +80,6 @@ export class UserService {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     );
-    return this.http.patch<any>(this.baseUrl + 'updatePassword', body, {headers});
+    return this.http.patch<any>(this.baseUrl + 'user/updatePassword', body, {headers});
   }
 }

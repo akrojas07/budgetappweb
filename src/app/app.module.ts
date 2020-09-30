@@ -18,10 +18,11 @@ import { ProfileComponent } from './profile/Profile.component';
 import { DashboardComponent } from './dashboard/Dashboard.component';
 import { BudgetComponent } from './budget/Budget.component';
 import {appRoutes} from './routes';
+import { PasswordResetComponent } from './passwordReset/passwordReset.component';
 
 
 @NgModule({
-  declarations: [							
+  declarations: [								
     AppComponent,
       UserComponent,
       NavComponent,
@@ -30,11 +31,12 @@ import {appRoutes} from './routes';
       SignupComponent,
       ProfileComponent,
       DashboardComponent,
-      BudgetComponent
+      BudgetComponent,
+      PasswordResetComponent
    ],
   imports: [
     BrowserModule,
-    HttpClientModule, 
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],

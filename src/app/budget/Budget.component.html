@@ -1,62 +1,236 @@
 <!-- If budget plan is blank -->
+<!-- https://www.mint.com/mint-categories -->
 <div class="row">
-  <div class="col aside">
-    <h3 class="mt-4">Start Here:</h3>
-    <p class="lead">Learn about budget plans:</p>
-    <div class="learning">
-      <ul class="ml-n4">
-        <li><a href="#zbb" data-toggle="collapse" class="asideLink">Zero Based Budget</a></li>
+  <div class="col-2">
+    <h3>Start Here</h3>
+    <p class="small">Learn about budget plans</p>
+  </div>
+  <div class="col">
+    <!-- zero based -->
+    <div class="learning card border-1 shadow col">
+      <div class="card-body info">
+        <h3 class="asideLink mt-2 card-title">Zero Based Budget</h3>
+        <hr>
+        "Zero-based budgeting is a method that has you allocate all of your money to expenses, savings, and debt
+        payments. The goal is that your income minus your expenditures equals zero by the end of the month."
+        <br>
+        <small class="text-muted">Source: NerdWallet <br>
+          Learn More about
+          <a href="https://www.nerdwallet.com/article/finance/zero-based-budgeting-explained">Zero-Based
+            Budgeting</a></small>
+      </div>
 
-        <p class="paragraphs" id="zbb">
-          "Zero-based budgeting is a method that has you allocate all of your money to expenses, savings, and debt
-          payments. The goal is that your income minus your expenditures equals zero by the end of the month."
-          <br>
-          <small class="text-muted">Source: NerdWallet <br>
-            Learn More about
-            <a href="https://www.nerdwallet.com/article/finance/zero-based-budgeting-explained">Zero-Based
-              Budgeting</a></small>
-        </p>
-
-
-        <li><a href="#envelope" data-toggle="collapse" class="asideLink">Envelope System</a></li>
-
-        <p class="paragraphs" id="envelope">
-          With the Envelope System, you physically allocate portions of your monthly income (in cash) toward different
-          spending categories, which you designate with an envelope.
-          <br>
-          <small class="text-muted">Source: NerdWallet<br>
-            Learn more about
-            <a href="https://www.nerdwallet.com/article/finance/envelope-system"> The Envelope System</a>
-          </small>
-        </p>
-        <li><a href="#fifty" data-toggle="collapse" class="asideLink">50/30/20 Budget</a></li>
-
-        <p class="paragraphs" id="fifty">
-          The 50/30/20 budgeting plan divides your expenses into three categories: needs, wants, and savings / debt
-          repayment. Your net income is then allocated 50% to needs, 30% to wants, 20% to savings / debt repayment.
-          <br>
-          <small class="text-muted"> Source: NerdWallet<br>
-            Learn more about
-            <a href="https://www.nerdwallet.com/article/finance/nerdwallet-budget-calculator"> 50/30/20 budgeting</a>
-          </small>
-        </p>
-      </ul>
     </div>
   </div>
-
-
-
-  <div class="col-9">
-    <h4>Select a budget plan</h4>
-    <h4>Enter Expenses, Income, Savings</h4>
-    <h4>Set goals</h4>
+  <div class="col">
+    <!-- envelope -->
+    <div class="learning card border-1 shadow col">
+      <div class="card-body info">
+        <h3 class="asideLink mt-2 card-title">Envelope System</h3>
+        <hr>
+        With the Envelope System, you physically allocate portions of your monthly income (in cash) toward different
+        spending categories, which you designate with an envelope.
+        <br>
+        <small class="text-muted">Source: NerdWallet<br>
+          Learn more about
+          <a href="https://www.nerdwallet.com/article/finance/envelope-system"> The Envelope System</a>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <!-- 50 -->
+    <div class="learning card border-1 shadow col">
+      <div class="card-body info">
+        <h3 class="asideLink mt-2 card-title">50/30/20 Budget</h3>
+        <hr>
+        The 50/30/20 budgeting plan divides your expenses into three categories: needs, wants, and savings / debt
+        repayment. Your net income is then allocated 50% to needs, 30% to wants, 20% to savings / debt repayment.
+        <br>
+        <small class="text-muted"> Source: NerdWallet<br>
+          Learn more about
+          <a href="https://www.nerdwallet.com/article/finance/nerdwallet-budget-calculator"> 50/30/20 budgeting</a>
+        </small>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- select a budget  -->
+<div class="row">
+  <div class="col-2">
+    <h3>Select a budget plan</h3>
+  </div>
+  <div class="col">
+    <div class="learning card border-1 shadow">
+      <div class="card-body">
+        <div class="dropdown">
+          <button class="btn buttonColor dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Budget Plan
+          </button>
+          <div class="dropdown-menu dropDownColor" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" data-toggle="collapse" href="#zbb">Zero Based</a>
+            <a class="dropdown-item" data-toggle="collapse" href="#envelope">Envelope</a>
+            <a class="dropdown-item" data-toggle="collapse" href="#fifty">50/30/20</a>
+          </div>
+        </div>
+        <div class="">
+          <div class="collapse mt-3" id="zbb">
+            <!-- zero based will work by having them input all of their incomes first, then 
+enter their savings + expenses, but as they're entering these, the amount from the income 
+keeps gets substracted - have a part that says : amount remaining 
+stop when they don't have anythign left-->
+            <form #zbbForm="ngForm" class="form-profile">
+              Income
+              <p class="small text-muted">Enter all income that you expect in a month</p>
+              <hr>
+              <div class="form-group row mt-3">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <label for="employerSalary" class="mt-2">Paycheck</label>
+                      <input type="number" class="form-control" id="employerSalary" name="employerSalary" placeholder=""
+                        required>
+                    </div>
+
+                    <div class="col">
+                      <label for="interest" class="mt-2">Interest and Dividends</label>
+                      <input type="number" class="form-control" id="interest" name="interest" placeholder="" required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <label for="ss" class="mt-2">Social Security Benefits</label>
+                      <input type="number" class="form-control" id="ss" name="ss" placeholder="" required>
+                    </div>
+
+                    <div class="col">
+                      <label for="unemployment" class="mt-2">Unemployment Benefits</label>
+                      <input type="number" class="form-control" id="unemployment" name="unemployment" placeholder=""
+                        required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <label for="alimony" class="mt-2">Alimony</label>
+                      <input type="number" class="form-control" id="alimony" name="alimony" placeholder="" required>
+                    </div>
+
+                    <div class="col">
+                      <label for="custom" class="mt-2">Custom</label>
+                      <input type="number" class="form-control" id="custom" name="custom" placeholder="" required>
+                    </div>
+                  </div>
+
+
+                  <!-- need section for custom inputs 
+                  allow infinite custom inputs -->
+                </div>
+              </div>
+
+              Savings
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <!-- maybe do a tooltip that explains what it is? -->
+                  <label for="employerSponsed" class="mt-2">Employer Sponsored Savings</label>
+                  <input type="number" class="form-control" id="employerSponsed" name="employerSponsed" placeholder=""
+                    required>
+                </div>
+
+                <div class="col">
+                  <label for="SavingsAccount" class="mt-2">Savings Account</label>
+                  <input type="number" class="form-control" id="SavingsAccount" name="SavingsAccount" placeholder=""
+                    required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <!-- maybe do a tooltip that explains what it is? -->
+                  <label for="mma" class="mt-2">Money Market Account</label>
+                  <input type="number" class="form-control" id="mma" name="mma" placeholder="" required>
+                </div>
+
+                <div class="col">
+                  <label for="cd" class="mt-2">Certificate of Deposit</label>
+                  <input type="number" class="form-control" id="cd" name="cd" placeholder="" required>
+                </div>
+              </div>
+              <!-- again need custom option -->
+              
+              Expenses
+              <hr>
+              <h5>Bills and Utilities</h5>
+              <div class="row">
+
+                <div class="col">
+
+                  <label for="housing" class="mt-2">Housing</label>
+                  <input type="number" class="form-control" id="housing" name="housing" placeholder="" required>
+                </div>
+
+                <div class="col">
+                  <label for="wg" class="mt-2">Water and Gas</label>
+                  <input type="number" class="form-control" id="wg" name="wg" placeholder="" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <!-- maybe do a tooltip that explains what it is? -->
+                  <label for="cable" class="mt-2">Cable & Internet</label>
+                  <input type="number" class="form-control" id="cable" name="cable" placeholder="" required>
+                </div>
+
+                <div class="col">
+                  <label for="mobile" class="mt-2">Mobile</label>
+                  <input type="number" class="form-control" id="mobile" name="mobile" placeholder="" required>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" type="submit" [disabled]="!zbbForm.valid">
+                <!-- <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                      ></span> -->
+                Save Changes
+              </button>
+            </form>
+
+
+
+          </div>
+          <div class="collapse mt-3" id="envelope">
+            Here goes the envelope form
+            <!-- for envelope, they will enter their total monthly income 
+            they will enter amounts for savings + expense categories 
+          will also subtract from income, but will allow them to overspend  -->
+          </div>
+          <div class="collapse mt-3" id="fifty">
+            <!-- will enter income
+              savings will automatically be calculated based 20% rule
+
+            will enter amounts into expense - need group (auto calculate 50%)
+          will enter amounts into expense - want group (auto calculate 30%)
+         -->
+            here goes the fifty form
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>Set goals</h4>
+
+
+
+
 
 <!-- If budget plan is not blank-->
 <div>
   <div class="row">
-    <div class="col aside">
+    <div class="col">
       <h4 class="mt-4">Key points about their selected budget plan</h4>
       <!-- if budget plan is zbb, then info -->
       <!-- if budget is 50, then info -->

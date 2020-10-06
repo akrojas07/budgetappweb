@@ -1,0 +1,15 @@
+.navigation{
+    background-color: rgb(36,134,128); 
+    color:rgb(72,87,94);
+    font-size: small;
+    letter-spacing: .25em;
+}
+.navbar-brand{
+    color: whitesmoke;
+}
+.nav-link{
+    color: rgb(214,215,220);
+}
+.nav-item:hover, .nav-link :hover{
+    color: rgb(217,185,170);
+}

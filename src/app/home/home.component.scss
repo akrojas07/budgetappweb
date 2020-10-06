@@ -1,0 +1,49 @@
+h1{
+
+}
+
+
+.picture{
+    position: relative;
+    border-radius: 25px;
+    z-index: 9;
+}
+
+.goals{
+    position: absolute;
+    left:0;
+    background-color: whitesmoke;
+    border-radius: 25px;
+    padding: 3%;
+    margin: 5%;
+    z-index: 10;
+}
+
+.description{
+    position: absolute;
+    right:0;
+    background-color: whitesmoke;
+    border-radius: 25px;
+    padding: 3%;
+    margin: 5%;
+    z-index: 10;
+}
+
+.learning{
+    color: rgb(16,120,105);
+    font-size: large;
+}
+
+// remove bullet points 
+.learning ul{
+    list-style-type: none;
+}
+
+// information about each budget plan
+.paragraphs{
+    font-size:medium;
+    background-color: rgb(204,224,210);
+    padding: 5%;
+    text-align: justify;
+    border-radius: 25px;
+}

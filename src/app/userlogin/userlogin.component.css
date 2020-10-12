@@ -1,0 +1,21 @@
+p,
+.checkMe {
+  color: rgb(29, 97, 122);
+  font-size: small;
+}
+.signIn{
+    width: 32%;
+}
+
+@media screen and (max-width: 400px) {
+  .signIn {
+
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+    .signIn {
+      width: 50%;
+    }
+  }

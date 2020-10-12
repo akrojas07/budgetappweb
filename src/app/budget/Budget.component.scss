@@ -1,26 +1,109 @@
-
-.learning{
-    color: rgb(16,120,105);
-    font-size: medium;
-    margin-bottom: 5%;
+.learning {
+  color: rgb(16, 120, 105);
+  font-size: medium;
+  margin-bottom: 5%;
+  padding-top: 5%;
+  padding-left: 5%;
 }
 
-.aside h3, .asideLink{
-    color: rgb(32,85,96);
-    font-size: x-large;
+.icon {
+  display: block;
+  margin: auto;
+  width: 15%;
 }
 
-.buttonColor{
-    background-color: rgb(36,134,128); 
-    color: whitesmoke;
+.nw {
+  font-size: small;
+  background-color: rgb(152, 215, 194);
+  color: whitesmoke;
+  padding: 5%;
+  border-radius: 5px;
 }
-.dropDownColor :hover{
-    background-color: rgb(36,134,128); 
-    color: whitesmoke;
+
+.selections {
+  color: rgb(32, 85, 96);
+  font-size: medium;
+}
+
+.buttonColor {
+  background-color: rgb(36, 134, 128);
+  color: whitesmoke;
+}
+
+.dropDownColor :hover {
+  background-color: rgb(36, 134, 128);
+  color: whitesmoke;
+  font-size: small;
+  letter-spacing: 0.25em;
+}
+
+.toc {
+  font-size: small;
+  color: rgb(32, 85, 96);
+}
+.nav-link {
+  color: rgb(32, 85, 96);
+}
+.nav-link :active,
+.nav-link :hover {
+  color: rgb(144, 187, 194);
+}
+
+.inputs {
+  border-radius: 5px;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 65px;
+  margin-right: 25%;
+}
+
+.links {
+  color: rgb(97, 194, 162);
+}
+
+th {
+  border-bottom: 1px solid;
+}
+.goalsTable {
+  table-layout: auto;
+  margin: 2%;
+  font-size: medium;
+}
+
+@media screen and (max-width: 500px) {
+  .goalsTable {
+    font-size: large;
+    margin: 5%;
+  }
+  .toc {
+    display: none;
+  }
+  .goalText {
+    display: none;
+  }
+  .nav-link {
     font-size: small;
-    letter-spacing: .25em;
+  }
 }
 
-.info{
-    text-align: justify;
+@media screen and (max-width: 980px) {
+  .goalsTable {
+    font-size: large;
+    margin: 5%;
+  }
+  .goalText {
+    display: none;
+  }
+  .nav-link{
+      font-size:medium;
+  }
+}
+
+@media screen and (max-width: 2000px) {
+  .goalsTable {
+    font-size: large;
+  }
 }

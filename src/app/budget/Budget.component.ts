@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NetWorthCalculator } from '../_models/netWorthCalculator';
 
 @Component({
   selector: 'app-Budget',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetComponent implements OnInit {
 
-  constructor() { }
 
   ngOnInit() {
   }
+
+
 
 }

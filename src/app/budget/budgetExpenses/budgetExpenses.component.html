@@ -1,0 +1,95 @@
+<form #expensesZbbForm="ngForm" data-toggle="collapse" class="form-expenses">
+  <p class="small text-muted ml-3 mt-2 mb-n2">Enter your expected monthly expenses</p>
+  <hr>
+  <div class="row ml-3">
+    <div class="col">
+      <label for="expenseType">
+        <select name="expenseType" id="expenseType" class="custom-select">
+          <option selected>Expense Type</option>
+          <option value="housing">Housing</option>
+          <option value="groceries">Groceries</option>
+          <option value="internet">Internet</option>
+          <option value="mobile">Mobile Phone</option>
+          <option value="ge">Gas and Electric</option>
+          <option value="water">Water</option>
+          <option value="gas">Gas</option>
+          <option value="healthcare"> Health Insurance Premium </option>
+          <option value=" clothing">Clothing</option>
+          <option value="laundry">Laundry</option>
+        </select>
+      </label>
+    </div>
+    <div class="col mr-3">
+      <input type="number" class="form-control mb-3" id="expenseAmount" name="expenseAmount" placeholder="0.00"
+        required>
+    </div>
+  </div>
+
+  <!-- new expense for of loop -->
+  <div *ngFor="let newExpense of newExpenses; let i=index;">
+    <div class="row ml-3 mt-2">
+      <div class="col">
+        <label for="expenseType">
+          <select name="expenseType" id="expenseType" class="custom-select">
+            <option selected>Expense Type</option>
+            <option value="housing">Housing</option>
+            <option value="groceries">Groceries</option>
+            <option value="internet">Internet</option>
+            <option value="mobile">Mobile Phone</option>
+            <option value="ge">Gas and Electric</option>
+            <option value="water">Water</option>
+            <option value="gas">Gas</option>
+            <option value="healthcare"> Health Insurance Premium </option>
+            <option value=" clothing">Clothing</option>
+            <option value="laundry">Laundry</option>
+          </select>
+        </label>
+      </div>
+      <div class="col mr-3">
+        <input type="number" class="form-control" id="expenseAmount" name="expenseAmount" placeholder="0.00" required>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom for of loop -->
+  <div *ngFor="let custom of customExpenses; let i = index;">
+    <div class="row ml-3 mt-2">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Custom Expense Name" [(ngModel)]="custom.customType"
+          [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <div class="col mr-3">
+        <input type="number" class="form-control" placeholder="0.00">
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="mb-3">
+    <div class="row">
+      <div class="col">
+        <button class="btn ml-4" type="button" id="addNewExpenseBtn" (click)="addNewExpense()">
+          <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path fill-rule="evenodd"
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+          </svg>
+          Add New Expense
+        </button>
+      </div>
+      <div class="col">
+        <button class="btn ml-5" type="button" id="addCustomBtn" (click)="addCustomExpense()">
+          <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path fill-rule="evenodd"
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+          </svg>
+          Add Custom Expense
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

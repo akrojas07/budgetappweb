@@ -19,10 +19,14 @@ import { DashboardComponent } from './dashboard/Dashboard.component';
 import { BudgetComponent } from './budget/Budget.component';
 import {appRoutes} from './routes';
 import { PasswordResetComponent } from './passwordReset/passwordReset.component';
+import { BudgetGoalsComponent } from './budget/budget-goals/budget-goals.component';
+import { BudgetIncomeComponent } from './budget/budgetIncome/budgetIncome.component';
+import { BudgetExpensesComponent } from './budget/budgetExpenses/budgetExpenses.component';
+import { BudgetSavingsComponent} from './budget/budget-Savings/budget-Savings.component';
 
 
 @NgModule({
-  declarations: [								
+  declarations: [										
     AppComponent,
       UserComponent,
       NavComponent,
@@ -32,7 +36,11 @@ import { PasswordResetComponent } from './passwordReset/passwordReset.component'
       ProfileComponent,
       DashboardComponent,
       BudgetComponent,
-      PasswordResetComponent
+      PasswordResetComponent,
+      BudgetGoalsComponent,
+      BudgetIncomeComponent,
+      BudgetExpensesComponent, 
+      BudgetSavingsComponent
    ],
   imports: [
     BrowserModule,

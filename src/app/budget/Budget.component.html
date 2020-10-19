@@ -13,24 +13,20 @@
             <a class="nav-link ml-3 my-1" href="budget#envelopeIntro">Envelope System Budgeting</a>
           </nav>
           <a class="nav-link" href="budget#selection">Select a Budget</a>
-          <a class="nav-link" href="budget#input">Enter Income, Savings, and Expenses</a>
-          <a class="nav-link" href="budget#goals">Goals</a>
-          <nav class="nav flex-column">
-            <a class="nav-link ml-3 my-1" href="budget#goalsTable">Goals Table</a>
-            <a class="nav-link ml-3 my-1" href="budget#createGoals">Create new goals</a>
-          </nav>
+          <a class="nav-link" href="budget#inputs">Enter Income, Savings, and Expenses</a>
+          <a href="budget#budgetBreakdown" class="nav-link">Budget Breakdown</a>
         </nav>
       </nav>
     </div>
 
     <div class="col-10">
       <div style="position:relative;">
-        <!-- if budget is plan, show -->
+        <!-- if budget is plan empty, show -->
         <h3 id="gettingstarted">Getting started</h3>
         <p class="lead">Learn about budgeting plans</p>
         <div class="row">
           <div class="col">
-            <div class="card px-4 py-4 shadow learning">
+            <div class="card px-4 py-4 border learning">
               <h5 id="zbbIntro" class="text-center">Zero Based</h5>
               <div class="icon mt-2">
                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-diagram-3" fill="currentColor"
@@ -96,135 +92,208 @@
             </div>
           </div>
         </div>
+
         <!-- if budget is empty, show select a budget, if budget is populated, show update budget plan -->
 
         <h3 id="selection" class="mt-5">Select A Budget</h3>
         <div class="row">
+          <!-- radio buttons -->
           <div class="col-sm-4 ml-4">
+            <form id="budgetSelections">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="budgetType" id="zbb" value="zbb">
+              <label class="form-check-label" for="zbb">
+                Zero-Based
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="budgetType" id="envelope" value="envelope">
+              <label class="form-check-label" for="envelope">
+                Envelope
+              </label>
+            </div>
+            <div class="form-check disabled">
+              <input class="form-check-input" type="radio" name="budgetType" id="fifty" value="fifty">
+              <label class="form-check-label" for="fifty">
+                50/30/20
+              </label>
+            </div>
+          </form>
+          </div>
+        </div>
+
+
+        <div class="row" id="inputs">
+          <div class="col-sm-6 col-md-7 mt-3  ml-2">
+            <div class="inputs border">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link links active" data-toggle="tab" href="#incomeZ">Income</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link links" data-toggle="tab" href="#savingsZ">Savings</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link links" data-toggle="tab" href="#expensesZ">Expenses</a>
+                </li>
+              </ul>
+              <div class="tab-content" (ngSubmit)="onSubmit()">
+                <div id="incomeZ" class="tab-pane active">
+                  <app-budgetIncome></app-budgetIncome>
+                </div>
+
+                <div id="expensesZ" class="tab-pane">
+                  <app-budgetExpenses></app-budgetExpenses>
+                </div>
+
+                <div id="savingsZ" class="tab-pane">
+                  <app-budget-Savings (savingsChangeEvent)="recalculateSavings($event)"></app-budget-Savings>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class class="col-sm-6 col-md-4">
+            <div class=" nw mt-3">
+              <div class="icon">
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-calculator" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M12 1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
+                  <path
+                    d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z" />
+                </svg>
+              </div>
+
+              <!-- add up from input fields from input forms-->
+              <!-- make a call to the children components -->
+              <h6 class="card-title text-center mt-2">
+                Net Worth Calculator
+              </h6>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <p>Total Income</p>
+                </div>
+                <div class="col">
+                  <input type="number" class="form-control mb-3 smallText" id="totalIncomeAmount"
+                    name="totalIncomeAmount" placeholder="0.00">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p>Total Expenses</p>
+                </div>
+                <div class="col">
+                  <input type="number" class="form-control mb-3 smallText" id="totalExpensesAmount"
+                    name="totalExpensesAmount" placeholder="0.00">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p>Total Savings</p>
+                </div>
+                <div class="col">
+                  <input type="number" class="form-control mb-3 smallText" id="totalSavingsAmount" [(ngModel)]= "savingsAmount"
+                    name="totalSavingsAmount" placeholder="0.00">
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <p><strong>Net Worth</strong></p>
+                </div>
+                <div class="col">
+                  <input type="number" class="form-control mb-3 smallText" id="nwAmount" name="nwAmount"
+                    placeholder="0.00">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="row">
+          <div class="col text-center mb-3">
+            <button class="btn ml-4 mt-4 buttonColor" type="submit"> Submit</button>
+          </div>
+        </div>
+
+
+
+<!-- make a call to the children components -->
+        <div class="row">
+          <div class="col-mg-12 col-lg-8 mt-3 mb-3 ml-2">
             <div class="row">
-              <div class="col">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="budgetType" id="zbb" value="zbb">
-                  <label class="form-check-label" for="zbb">
-                    Zero-Based
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="budgetType" id="envelope" value="envelope">
-                  <label class="form-check-label" for="envelope">
-                    Envelope
-                  </label>
-                </div>
-                <div class="form-check disabled">
-                  <input class="form-check-input" type="radio" name="budgetType" id="fifty" value="fifty">
-                  <label class="form-check-label" for="fifty">
-                    50/30/20
-                  </label>
-                </div>
-              </div>
+              <h3 id="budgetBreakdown">Budget Breakdown</h3>
+            </div>
+            <p></p>
+            <!-- Calculate the budget based on total income entered and budget chosen -->
+            <div class="row">
+              <div class="card pl-3 pt-3">
+                <div class="row">
+                  <div class="col-sm-2 col-md-2">
 
+                  </div>
+                  <div class="col-sm-4 col-md-5">
+                    <label>Target</label>
+                  </div>
+                  <div class="col-sm-4 col-md-5">
+                    <label> Actual </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 col-md-2">
+                    <label>
+                      Income
+                    </label>
+                  </div>
+                  <div class="col-sm-4 col-md-5">
+                    <input type="number" readonly class="form-control-plaintext" id="staticBudgetIncome"
+                      placeholder="0.00" value="Total Income amount with double curly brackets">
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number" readonly class="form-control-plaintext" id="staticBudgetIncome"
+                      placeholder="0.00" value="Total Income amount with double curly brackets">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <label>Savings</label>
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number" readonly class="form-control-plaintext" id="staticBudgetSavings"
+                      placeholder="0.00" value="Total Income amount with double curly brackets">
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number" readonly class="form-control-plaintext" id="staticBudgetSavings"
+                      placeholder="0.00" [(ngModel)] ="savingsAmount">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <label> Expenses</label>
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number" readonly class="form-control-plaintext" id="staticBudgetExpenses"
+                      placeholder="0.00" value="Total Income amount with double curly brackets">
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number" readonly class="form-control-plaintext" id="staticBudgetExpenses"
+                      placeholder="0.00" value="Total Income amount with double curly brackets">
+                  </div>
+                </div>
+
+
+              </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class class="col-sm-6 col-md-4">
-              <div class="shadow nw mt-3">
-                <div class="icon">
-                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-calculator" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M12 1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
-                    <path
-                      d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z" />
-                  </svg>
-                </div>
-
-                <!-- add up from input fields -->
-                <h6 class="card-title text-center mt-2">
-                  Net Worth Calculator
-                </h6>
-                <hr>
-                <div class="row">
-                  <div class="col">
-                    <p>Total Income</p>
-                  </div>
-                  <div class="col">
-                    <input type="number" class="form-control mb-3" id="totalIncomeAmount" name="totalIncomeAmount"
-                      placeholder="0.00" required>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <p>Total Expenses</p>
-                  </div>
-                  <div class="col">
-                    <input type="number" class="form-control mb-3" id="totalExpensesAmount" name="totalExpensesAmount"
-                      placeholder="0.00" required>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <p>Total Savings</p>
-                  </div>
-                  <div class="col">
-                    <input type="number" class="form-control mb-3" id="totalSavingsAmount" name="totalSavingsAmount"
-                      placeholder="0.00" required>
-                  </div>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col">
-                    <p><strong>Net Worth</strong></p>
-                  </div>
-                  <div class="col">
-                    <input type="number" class="form-control mb-3" id="nwAmount" name="nwAmount" placeholder="0.00"
-                      required>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-8 mt-3">
-
-              <!-- when budget is empty, this is disabled unless a budget is chosen -->
-              <div class="inputs shadow">
-                <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link links active" data-toggle="tab" href="#incomeZ">Income</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link links" data-toggle="tab" href="#savingsZ">Savings</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link links" data-toggle="tab" href="#expensesZ">Expenses</a>
-                  </li>
-                </ul>
-                <div class="tab-content">
-                  <div id="incomeZ" class="tab-pane active">
-                    <app-budgetIncome></app-budgetIncome>
-                  </div>
-
-                  <div id="expensesZ" class="tab-pane">
-                    <!-- update based on budget -->
-                    <app-budgetExpenses></app-budgetExpenses>
-                  </div>
-
-                  <div id="savingsZ" class="tab-pane">
-                    <!-- update based on budget -->
-                    <app-budget-Savings></app-budget-Savings>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <div class="col text-center">
-              <button class="btn ml-4 mt-4 buttonColor" type="button"> Submit</button>
-            </div>
+          <div class="col">
+            <div class="row"></div>
+            <div class="row mt-5 budgetExplanation">Explanation of budget goes here IF LARGE, OTHERWISE NO BUDGET EXPLANATION</div>
           </div>
-
-
-
-
-
-
-    </div>
+        </div>
+      </div>

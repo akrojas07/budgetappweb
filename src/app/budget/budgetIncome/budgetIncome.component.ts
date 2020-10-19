@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BudgetIncomeType } from '../../_models/budgetIncomeType';
 
 @Component({
   selector: 'app-budgetIncome',
@@ -10,11 +11,24 @@ export class BudgetIncomeComponent implements OnInit {
   constructor() { }
 
   customIncomes: any = [];
-  customExpenses: any =[];
-  customSavings: any = [];
   newIncomes: any = [];
-  newExpenses: any =[];
-  newSavings: any = [];
+
+
+  incomeSelect:BudgetIncomeType; 
+ 
+
+  incomeTypes = [
+    { id: 1, name: 'Alimony' },
+    { id: 2, name: 'Pay Check' },
+    { id: 3, name: 'Unemployment Benefits' },
+    { id: 4, name: 'Bonus' },
+    { id: 5, name: 'Child Support' },
+    { id: 6, name: 'Disability Benefits' },
+    { id: 7, name: 'Gambling income' },
+    { id: 8, name: 'Gift Income' },
+    { id: 9, name: 'Interest and Dividends' },
+    { id: 10, name: 'Jury Duty Pay' },
+  ];
 
   ngOnInit() {
   }

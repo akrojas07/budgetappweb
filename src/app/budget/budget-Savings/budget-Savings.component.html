@@ -1,31 +1,11 @@
-<form #savingszbbForm="ngForm" data-toggle="collapse" class="form-savings">
+<form #savingszbbForm="ngForm" class="form-savings">
   <p class="small text-muted ml-3 mt-2 mb-n2">Enter your expected monthly savings</p>
   <hr>
-  <div class="row ml-3 mt-2">
-    <div class="col">
-      <label for="savingsType">
-        <select name="savingsType" id="savingsType" class="custom-select">
-          <option selected>Savings Type</option>
-          <option value="deposit">Deposit Savings</option>
-          <option value="mma">Money Market Account</option>
-          <option value="cd">Certificate of Deposit (CD)</option>
-          <option value="tbill">Treasury Bill</option>
-          <option value="bond">Bonds</option>
-          <option value="employerSponsored">Employer Sponsored</option>
-        </select>
-      </label>
-    </div>
-    <div class="col mr-3">
-      <input type="number" class="form-control" id="savingsAmount" name="savingsAmount" placeholder="0.00" required>
-    </div>
-  </div>
-
-  <!-- new saving for of loop -->
-  <div *ngFor="let newSaving of newSavings; let i=index;">
-    <div class="row ml-3 mt-2">
+  <!-- <div class="form-group mt-3">
+    <div class="row ml-3 mb-n1">
       <div class="col">
         <label for="savingsType">
-          <select name="savingsType" id="savingsType" class="custom-select">
+          <select name="savingsType" id="savingsType" class="form-control options">
             <option selected>Savings Type</option>
             <option value="deposit">Deposit Savings</option>
             <option value="mma">Money Market Account</option>
@@ -36,22 +16,51 @@
           </select>
         </label>
       </div>
+
+
+
+
+
       <div class="col mr-3">
-        <input type="number" class="form-control" id="savingsAmount" name="savingsAmount" placeholder="0.00" required>
+        <input type="number" class="form-control options" id="savingsAmount" name="savingsAmount" placeholder="0.00"
+          (input)="emitSavingsEvent()" required>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- new saving for of loop -->
+  <div *ngFor="let newSaving of newSavings; let i=index;">
+    <div class="row ml-3">
+      <div class="col">
+        <label for="savingsType">
+          <select name="savingsType" class="form-control options" [(ngModel)]="newSaving.newSavingsType" [ngModelOptions]="{standalone: true}" required>
+            <option value="" disabled>Savings Type</option>
+            <option value="deposit">Deposit Savings</option>
+            <option value="mma">Money Market Account</option>
+            <option value="cd">Certificate of Deposit (CD)</option>
+            <option value="tbill">Treasury Bill</option>
+            <option value="bond">Bonds</option>
+            <option value="employerSponsored">Employer Sponsored</option>
+          </select>
+        </label>
+      </div>
+      <div class="col mr-3">
+        <input type="number" class="form-control mb-3 options" name="savingsAmount" placeholder="0.00" [(ngModel)]="newSaving.savingsAmount" [ngModelOptions]="{standalone: true}" (input)="emitSavingsEvent()"
+          required>
       </div>
     </div>
   </div>
 
   <!-- Custom for of loop -->
   <div *ngFor="let custom of customSavings; let i = index;">
-    <div class="row ml-3 mt-3">
+    <div class="row ml-3 mb-3">
       <div class="col">
-        <input type="text" class="form-control" placeholder="Custom Saving Name" [(ngModel)]="custom.customType"
+        <input type="text" class="form-control options" placeholder="Custom Saving" [(ngModel)]="custom.customType"
           [ngModelOptions]="{standalone: true}">
       </div>
 
       <div class="col mr-3">
-        <input type="number" class="form-control" placeholder="0.00">
+        <input type="number" class="form-control options" placeholder="0.00" [(ngModel)]="custom.savingsAmount" (input)="emitSavingsEvent()">
       </div>
     </div>
   </div>
@@ -61,8 +70,6 @@
   <div class="mb-3">
     <div class="row">
       <div class="col">
-
-
         <button class="btn ml-4" type="button" id="addNewSavingBtn" (click)="addNewSaving()">
           <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +77,7 @@
             <path fill-rule="evenodd"
               d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
           </svg>
-          Add New Saving
+          <p class="smallText">Add New </p>
         </button>
       </div>
       <div class="col">
@@ -82,7 +89,7 @@
             <path fill-rule="evenodd"
               d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
           </svg>
-          Add Custom Saving
+          <p class="smallText"> Add Custom </p>
         </button>
       </div>
     </div>

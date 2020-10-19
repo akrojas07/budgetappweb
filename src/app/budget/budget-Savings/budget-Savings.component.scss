@@ -1,0 +1,16 @@
+@media screen and (max-width: 960px) {
+    .options{
+        font-size:small;
+        width: 100%;
+    }
+    .smallText{
+        font-size:x-small;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .options{
+        font-size:medium;
+        width: 200px;
+    }
+  }

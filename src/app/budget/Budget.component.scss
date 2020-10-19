@@ -5,6 +5,9 @@
   padding-top: 5%;
   padding-left: 5%;
 }
+.learning a{
+  color: rgb(152, 215, 194);
+}
 
 .icon {
   display: block;
@@ -74,36 +77,30 @@ th {
 }
 
 @media screen and (max-width: 500px) {
-  .goalsTable {
-    font-size: large;
-    margin: 5%;
-  }
   .toc {
-    display: none;
-  }
-  .goalText {
     display: none;
   }
   .nav-link {
     font-size: small;
   }
+  .budgetExplanation{
+    display:none;
+  }
 }
 
 @media screen and (max-width: 980px) {
-  .goalsTable {
-    font-size: large;
-    margin: 5%;
-  }
-  .goalText {
-    display: none;
-  }
   .nav-link{
-      font-size:medium;
+      font-size:small;
+  }
+  .smallText
+  {
+    font-size: x-small;
+  }
+  .budgetExplanation{
+    display:none;
   }
 }
 
 @media screen and (max-width: 2000px) {
-  .goalsTable {
-    font-size: large;
-  }
+
 }

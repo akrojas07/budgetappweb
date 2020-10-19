@@ -1,113 +1,105 @@
-<!-- </div> -->
+<div class="container">
 
-<ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link links active" data-toggle="tab" href="#profile">Profile</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link links" data-toggle="tab" href="#accounts">Accounts</a>
-    </li>
-</ul>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link links active" data-toggle="tab" href="#profile">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link links" data-toggle="tab" href="#accounts">Accounts</a>
+        </li>
+    </ul>
 
-<div class="tab-content">
-    <div id="profile" class="tab-pane active">
-        <div id="profile" class="profileUpdate">
-            <div class="alert alert-danger py-2 my-2" role="alert" *ngIf="showErrorMessage">
-                {{errorMessage}}
-            </div>
-            <div class="alert alert-success py-2 my-2" role="alert" *ngIf="showSuccessMessage">
-                {{successMessage}}
-            </div>
-            <form #profileForm="ngForm" class="form-profile w-75" (ngSubmit)="submitProfileChanges()">
-                <div class="form-group row mt-3">
-                    <div class="col">
-                        <label for="staticFirstName">First Name</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticFirstName"
-                            value="{{currentUser.firstName}}">
-                    </div>
-                    <div class="col">
-                        <label for="inputFirst">Update First Name</label>
-                        <input type="text" class="form-control" id="inputFirst" name="firstName"
-                            placeholder="First Name" required [(ngModel)]="updateUser.FirstName">
-                    </div>
+    <div class="tab-content">
+        <div id="profile" class="tab-pane active">
+            <div id="profile" class="profileUpdate">
+                <div class="alert alert-danger py-2 my-2" role="alert" *ngIf="showErrorMessage">
+                    {{errorMessage}}
                 </div>
-                <div class="form-group row mt-3">
-                    <div class="col">
-                        <label for="staticLastName">Last Name</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticLastName"
-                            value="{{currentUser.lastName}}">
-                    </div>
-                    <div class="col">
-                        <label for="inputLast">Update Last Name</label>
-                        <input type="text" class="form-control" id="inputLast" name="lastName"
-                            placeholder="Last Name" required [(ngModel)]="updateUser.LastName">
-                    </div>
+                <div class="alert alert-success py-2 my-2" role="alert" *ngIf="showSuccessMessage">
+                    {{successMessage}}
                 </div>
-                <div class="form-group row ">
-                    <div class="col">
-                        <label for="staticEmail">Email</label>
-                        <input type="Email" readonly class="form-control-plaintext" id="staticEmail"
-                            value="{{currentUser.email}}">
+                <form #profileForm="ngForm" class="form-profile w-75" (ngSubmit)="submitProfileChanges()">
+                    <div class="form-group row mt-3">
+                        <div class="col">
+                            <label for="staticFirstName">First Name</label>
+                            <input type="text" readonly class="form-control-plaintext" id="staticFirstName"
+                                value="{{currentUser.firstName}}">
+                        </div>
+                        <div class="col">
+                            <label for="inputFirst">Update First Name</label>
+                            <input type="text" class="form-control" id="inputFirst" name="firstName"
+                                placeholder="First Name" required [(ngModel)]="updateUser.FirstName">
+                        </div>
                     </div>
-                    <div class="col">
-                        <label for="inputEmail">Update Email</label>
-                        <input type="Email" class="form-control" id="inputEmail" name="email"
-                            placeholder="Email Address" required [(ngModel)]="updateUser.Email">
+                    <div class="form-group row mt-3">
+                        <div class="col">
+                            <label for="staticLastName">Last Name</label>
+                            <input type="text" readonly class="form-control-plaintext" id="staticLastName"
+                                value="{{currentUser.lastName}}">
+                        </div>
+                        <div class="col">
+                            <label for="inputLast">Update Last Name</label>
+                            <input type="text" class="form-control" id="inputLast" name="lastName"
+                                placeholder="Last Name" required [(ngModel)]="updateUser.LastName">
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group row ">
+                        <div class="col">
+                            <label for="staticEmail">Email</label>
+                            <input type="Email" readonly class="form-control-plaintext" id="staticEmail"
+                                value="{{currentUser.email}}">
+                        </div>
+                        <div class="col">
+                            <label for="inputEmail">Update Email</label>
+                            <input type="Email" class="form-control" id="inputEmail" name="email"
+                                placeholder="Email Address" required [(ngModel)]="updateUser.Email">
+                        </div>
+                    </div>
 
-                <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-                        *ngIf="formSubmitted"></span>
-                    Save Changes
-                </button>
-            </form>
-            <hr>
+                    <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                            *ngIf="formSubmitted"></span>
+                        Save Changes
+                    </button>
+                </form>
+                <hr>
 
-            <h3>Update Password</h3>
-            <div class="alert alert-danger py-2 my-2" role="alert" *ngIf="showPasswordError">
-                {{errorMessage}}
-            </div>
-            <div class="alert alert-success py-2 my-2" role="alert" *ngIf="showPasswordSuccess">
-                {{successMessage}}
-            </div>
-            <p class="text-muted">Choose a password that will be hard for other to guess</p>
-            <form #passwordForm="ngForm" class="form-password w-75" (ngSubmit)="submitPasswordChanges()">
-                <div class="form-group row mt-3">
-                    <div class="col">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" 
-                            class="form-control" 
-                            id="inputPassword" 
-                            name="password"
-                            placeholder="Password" 
-                            (input)="validatePasswordsMatch()" 
-                            [(ngModel)] = "updatedPassword.Password"
-                            required>
-                    </div>
-                    <div class="col">
-                        <label for="confirmInputPassword">Confirm Password</label>
-                        <input type="password" 
-                            class="form-control"
-                            id="confirmInputPassword" 
-                            name="confirmPassword"
-                            placeholder="Confirm Password" 
-                            (input)="validatePasswordsMatch()" 
-                            [(ngModel)] = "confirmPassword" 
-                            required >
-                    </div>
+                <h3>Update Password</h3>
+                <div class="alert alert-danger py-2 my-2" role="alert" *ngIf="showPasswordError">
+                    {{errorMessage}}
                 </div>
-                <button class="btn btn-primary" type="submit" [disabled]="!passwordForm.valid || !passwordFormValid">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-                        *ngIf="passwordFormSubmitted"></span>
-                    Save Changes
-                </button>
-            </form>
+                <div class="alert alert-success py-2 my-2" role="alert" *ngIf="showPasswordSuccess">
+                    {{successMessage}}
+                </div>
+                <p class="text-muted">Choose a password that will be hard for other to guess</p>
+                <form #passwordForm="ngForm" class="form-password w-75" (ngSubmit)="submitPasswordChanges()">
+                    <div class="form-group row mt-3">
+                        <div class="col">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" name="password"
+                                placeholder="Password" (input)="validatePasswordsMatch()"
+                                [(ngModel)]="updatedPassword.Password" required>
+                        </div>
+                        <div class="col">
+                            <label for="confirmInputPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmInputPassword" name="confirmPassword"
+                                placeholder="Confirm Password" (input)="validatePasswordsMatch()"
+                                [(ngModel)]="confirmPassword" required>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit"
+                        [disabled]="!passwordForm.valid || !passwordFormValid">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                            *ngIf="passwordFormSubmitted"></span>
+                        Save Changes
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
 
 
-    <div id="accounts" class="tab-pane">
-        <p>Some content in menu 1.</p>
+        <div id="accounts" class="tab-pane">
+            <p>Some content in menu 1.</p>
+        </div>
     </div>
 </div>

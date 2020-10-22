@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BudgetIncomeType } from '../../_models/budgetIncomeType';
+import { Income } from '../../_models/Income';
 
 @Component({
   selector: 'app-budgetIncome',
@@ -10,12 +11,10 @@ export class BudgetIncomeComponent implements OnInit {
 
   constructor() { }
 
+  @Output() incomeChangeEvent = new EventEmitter<Income[]>();
+
   customIncomes: any = [];
-  newIncomes: any = [];
-
-
-  incomeSelect:BudgetIncomeType; 
- 
+  newIncomes: any = [{newIncomeType: '', incomeAmount: undefined}];
 
   incomeTypes = [
     { id: 1, name: 'Alimony' },
@@ -34,14 +33,47 @@ export class BudgetIncomeComponent implements OnInit {
   }
 
   addCustomIncome(): void{
-    this.customIncomes.push({ customType: undefined });
+    this.customIncomes.push({ customType: undefined, incomeAmount:undefined });
   }
   
 
   addNewIncome(): void{
-    this.newIncomes.push({newIncomeType: undefined});
+    this.newIncomes.push({newIncomeType: '' , incomeAmount:undefined});
   }
 
+  emitIncomeEvent(){
+    const incomeList: Income[] = [];
+    this.newIncomes.forEach(i => {
+      const income = new Income(); 
+      income.IncomeAmount = i.incomeAmount;
+      income.IncomeType = i.newIncomeType;
+      incomeList.push(income);
+    });
 
+    this.customIncomes.forEach(i => {
+      const income = new Income();
+      income.IncomeAmount = i.incomeAmount;
+      income.IncomeType = i.customType;
+      incomeList.push(income);
+    });
+    this.incomeChangeEvent.emit(incomeList);
+  }
+
+  removeCustomIncome(i:number){
+    console.log(i);
+    this.customIncomes.splice(i, 1); 
+    console.log(this.customIncomes);
+
+    this.emitIncomeEvent();
+    
+  }
+
+  removeNewIncome(i:number){
+    console.log(i);
+    this.newIncomes.splice(i, 1); 
+    console.log(this.newIncomes);
+
+    this.emitIncomeEvent();
+  }
 
 }

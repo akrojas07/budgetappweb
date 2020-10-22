@@ -1,33 +1,6 @@
 <form #savingszbbForm="ngForm" class="form-savings">
   <p class="small text-muted ml-3 mt-2 mb-n2">Enter your expected monthly savings</p>
   <hr>
-  <!-- <div class="form-group mt-3">
-    <div class="row ml-3 mb-n1">
-      <div class="col">
-        <label for="savingsType">
-          <select name="savingsType" id="savingsType" class="form-control options">
-            <option selected>Savings Type</option>
-            <option value="deposit">Deposit Savings</option>
-            <option value="mma">Money Market Account</option>
-            <option value="cd">Certificate of Deposit (CD)</option>
-            <option value="tbill">Treasury Bill</option>
-            <option value="bond">Bonds</option>
-            <option value="employerSponsored">Employer Sponsored</option>
-          </select>
-        </label>
-      </div>
-
-
-
-
-
-      <div class="col mr-3">
-        <input type="number" class="form-control options" id="savingsAmount" name="savingsAmount" placeholder="0.00"
-          (input)="emitSavingsEvent()" required>
-      </div>
-    </div>
-  </div> -->
-
   <!-- new saving for of loop -->
   <div *ngFor="let newSaving of newSavings; let i=index;">
     <div class="row ml-3">
@@ -69,7 +42,7 @@
 
   <div class="mb-3">
     <div class="row">
-      <div class="col">
+      <div class="col-6">
         <button class="btn ml-4" type="button" id="addNewSavingBtn" (click)="addNewSaving()">
           <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
@@ -80,7 +53,7 @@
           <p class="smallText">Add New </p>
         </button>
       </div>
-      <div class="col">
+      <div class="col-6">
 
         <button class="btn ml-5" type="button" id="addCustomSavingBtn" (click)="addCustomSaving()">
           <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"

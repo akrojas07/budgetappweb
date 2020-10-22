@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Expenses } from '../../_models/Expenses';
 
 @Component({
   selector: 'app-budgetExpenses',
@@ -9,24 +10,41 @@ export class BudgetExpensesComponent implements OnInit {
 
   constructor() { }
 
+  @Output() expensesEventEmit = new EventEmitter<Expenses[]>();
 
-  customExpenses: any =[];
-
-  newExpenses: any =[];
+  customExpenses: any = [];
+  newExpenses: any = [{newExpenseType: '', expenseAmount: undefined}];
 
 
   ngOnInit() {
   }
-
- 
   
   addCustomExpense(): void{
-    this.customExpenses.push({ customType: undefined });
+    this.customExpenses.push({ customType: undefined, expenseAmount: undefined });
   }
 
   addNewExpense(): void{
-    this.newExpenses.push({newExpenseType: undefined});
+    this.newExpenses.push({newExpenseType: '', expenseAmount: undefined});
   }
 
 
+  emitExpenseEvent(){
+    const expenseList: Expenses[] = [];
+
+    this.newExpenses.forEach(e => {
+      const expense = new Expenses();
+      expense.ExpenseAmount = e.expenseAmount;
+      expense.ExpenseType = e.newExpenseType;
+      expenseList.push(expense);
+    });
+
+    this.customExpenses.forEach(e => {
+      const expense = new Expenses();
+      expense.ExpenseAmount = e.expenseAmount;
+      expense.ExpenseType = e.customType; 
+      expenseList.push(expense);
+    });
+
+    this.expensesEventEmit.emit(expenseList);
+  }
 }

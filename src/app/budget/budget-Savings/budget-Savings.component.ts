@@ -13,7 +13,7 @@ export class BudgetSavingsComponent implements OnInit {
   @Output() savingsChangeEvent = new EventEmitter<Savings[]>();
 
   customSavings: any = [];
-  newSavings: any[] = [{newSavingsType: "", savingsAmount: undefined}];
+  newSavings: any = [{newSavingsType: '', savingsAmount: undefined}];
 
   ngOnInit() {
   }
@@ -25,7 +25,7 @@ export class BudgetSavingsComponent implements OnInit {
 
 
   addNewSaving(): void{
-    this.newSavings.push({newSavingsType: "", savingsAmount: undefined});
+    this.newSavings.push({newSavingsType: '', savingsAmount: undefined});
   }
 
   emitSavingsEvent(){
@@ -35,7 +35,6 @@ export class BudgetSavingsComponent implements OnInit {
       let savings = new Savings();
       savings.savingsType = s.newSavingsType;
       savings.savingsAmount = s.savingsAmount;
-      
       savingsList.push(savings);
     });
 
@@ -43,7 +42,6 @@ export class BudgetSavingsComponent implements OnInit {
       let savings = new Savings();
       savings.savingsType = c.customType;
       savings.savingsAmount = c.savingsAmount;
-
       savingsList.push(savings);
     })
 

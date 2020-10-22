@@ -16,7 +16,21 @@ export class BudgetExpensesComponent implements OnInit {
   customExpenses: any = [];
   newExpenses: any = [{newExpenseType: '', expenseAmount: undefined}];
 
+  expenseTypes=
+  [
+    { id: 1, name: 'Housing' },
+    { id: 2, name: 'Groceries'},
+    { id: 3, name: 'Internet'},
+    { id: 4, name: 'Mobile Phone'},
+    { id: 5, name: 'Gas and Electric'},
+    { id: 6, name: 'Water'},
+    { id: 7, name: 'Gasoline'},
+    { id: 8, name: 'Health Insurance Premium'},
+    { id: 9, name: 'Clothing'},
+    { id: 10, name: 'Laundry'},
 
+  ]
+  
   ngOnInit() {
     this.budgetType = null;
     this.disable = true;
@@ -49,6 +63,15 @@ export class BudgetExpensesComponent implements OnInit {
     });
 
     this.expensesEventEmit.emit(expenseList);
+  }
+  removeNewExpense(i:number){
+    this.newExpenses.splice(i,1);
+    this.emitExpenseEvent();
+  }
+  removeCustomExpense(i:number){
+    this.customExpenses.splice(i, 1); 
+    this.emitExpenseEvent();
+    
   }
 
   disableField(): boolean{ 

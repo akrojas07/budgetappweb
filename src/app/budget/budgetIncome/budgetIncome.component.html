@@ -38,7 +38,7 @@
     <div *ngFor="let custom of customIncomes; let i = index;">
       <div class="row">
         <div class="col-5">
-          <input type="text" class="form-control options" placeholder="Custom Income Name"
+          <input type="text" class="form-control options" placeholder="Custom Income"
             [(ngModel)]="custom.customType" [ngModelOptions]="{standalone: true}"
             [disabled] ="disableField()">
         </div>

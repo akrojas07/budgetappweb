@@ -17,6 +17,17 @@ export class BudgetSavingsComponent implements OnInit {
   customSavings: any = [];
   newSavings: any = [{newSavingsType: '', savingsAmount: undefined}];
 
+  savingsTypes=
+  [
+    { id: 1, name: 'Deposit Savings' },
+    { id: 2, name: 'Money Market Account'},
+    { id: 3, name: 'Certificate of Deposit (CD)'},
+    { id: 4, name: 'Treasury Bill'},
+    { id: 5, name: 'Bonds'},
+    { id: 6, name: 'Employer Sponsored'}
+
+  ]
+
   ngOnInit() {
     this.budgetType = null;
     this.disable = true;
@@ -48,8 +59,17 @@ export class BudgetSavingsComponent implements OnInit {
       savings.savingsAmount = c.savingsAmount;
       savingsList.push(savings);
     })
-
     this.savingsChangeEvent.emit(savingsList);
+  }
+
+  removeNewSaving(i:number){
+    this.newSavings.splice(i,1);
+    this.emitSavingsEvent();
+  }
+  removeCustomSaving(i:number){
+    this.customSavings.splice(i, 1); 
+    this.emitSavingsEvent();
+    
   }
 
   disableField(): boolean{ 

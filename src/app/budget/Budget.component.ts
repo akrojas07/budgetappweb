@@ -72,12 +72,12 @@ export class BudgetComponent implements OnInit {
   }
 
   hideInputBox(){
-    this.hide = !this.hide;
+    this.hide = true;
     // this.ze.nativeElement.style = 'visibility: hidden';
   }
 
   showInputBox(){
-    this.hide = !this.hide;
+    this.hide = false;
     // this.ze.nativeElement.style = 'visibility: visible';
   }
 
@@ -97,7 +97,7 @@ export class BudgetComponent implements OnInit {
     // if(this.ze.nativeElement.style == 'visibility:hidden')
     if(this.hide == true)
     {
-      this.targetExpenseAmount = this.incomeAmount * .3;
+      this.targetExpenseAmount = this.incomeAmount * .8;
     }
     else
     {

@@ -18,6 +18,7 @@ export class BudgetComponent implements OnInit {
   targetSavingsAmount: number;
   targetExpenseAmount: number;
   total: number;
+  hide:boolean; 
   budgetBreakdown: BudgetUserBreakdown;
   
 
@@ -29,6 +30,7 @@ export class BudgetComponent implements OnInit {
     this.incomeAmount = 0.00;
     this.targetSavingsAmount = 0;
     this.targetExpenseAmount = 0;
+    this.hide = true; 
     this.budgetBreakdown = new BudgetUserBreakdown();
   }
 
@@ -70,15 +72,17 @@ export class BudgetComponent implements OnInit {
   }
 
   hideInputBox(){
-    this.ze.nativeElement.style = 'visibility: hidden';
+    this.hide = !this.hide;
+    // this.ze.nativeElement.style = 'visibility: hidden';
   }
 
   showInputBox(){
-    this.ze.nativeElement.style = 'visibility: visible';
+    this.hide = !this.hide;
+    // this.ze.nativeElement.style = 'visibility: visible';
   }
 
   updateTargetSavings(){
-    if(this.ze.nativeElement.style == 'visibility:hidden')
+    if(this.hide == true)
     {
       this.targetSavingsAmount = (this.incomeAmount * .2);
     }
@@ -90,7 +94,8 @@ export class BudgetComponent implements OnInit {
   }
 
   updateTargetExpenses(){
-    if(this.ze.nativeElement.style == 'visibility:hidden')
+    // if(this.ze.nativeElement.style == 'visibility:hidden')
+    if(this.hide == true)
     {
       this.targetExpenseAmount = this.incomeAmount * .3;
     }

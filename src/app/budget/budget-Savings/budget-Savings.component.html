@@ -6,7 +6,8 @@
     <div class="row ml-3">
       <div class="col">
         <label for="savingsType">
-          <select name="savingsType" class="form-control options" [(ngModel)]="newSaving.newSavingsType" [ngModelOptions]="{standalone: true}" required>
+          <select name="savingsType" class="form-control options" [(ngModel)]="newSaving.newSavingsType" [ngModelOptions]="{standalone: true}" 
+          [disabled] ="disableField()" required>
             <option value="" disabled>Savings Type</option>
             <option value="deposit">Deposit Savings</option>
             <option value="mma">Money Market Account</option>
@@ -19,7 +20,7 @@
       </div>
       <div class="col mr-3">
         <input type="number" class="form-control mb-3 options" name="savingsAmount" placeholder="0.00" [(ngModel)]="newSaving.savingsAmount" [ngModelOptions]="{standalone: true}" (input)="emitSavingsEvent()"
-          required>
+        [disabled] ="disableField()" required>
       </div>
     </div>
   </div>
@@ -29,11 +30,11 @@
     <div class="row ml-3 mb-3">
       <div class="col">
         <input type="text" class="form-control options" placeholder="Custom Saving" [(ngModel)]="custom.customType"
-          [ngModelOptions]="{standalone: true}">
+          [ngModelOptions]="{standalone: true}" [disabled] ="disableField()">
       </div>
 
       <div class="col mr-3">
-        <input type="number" class="form-control options" placeholder="0.00" [(ngModel)]="custom.savingsAmount" (input)="emitSavingsEvent()">
+        <input type="number" class="form-control options" placeholder="0.00" [(ngModel)]="custom.savingsAmount" (input)="emitSavingsEvent()" [disabled] ="disableField()">
       </div>
     </div>
   </div>
@@ -43,7 +44,7 @@
   <div class="mb-3">
     <div class="row">
       <div class="col-6">
-        <button class="btn ml-4" type="button" id="addNewSavingBtn" (click)="addNewSaving()">
+        <button class="btn ml-4" type="button" id="addNewSavingBtn" (click)="addNewSaving()" [disabled] ="disableField()" >
           <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -55,7 +56,7 @@
       </div>
       <div class="col-6">
 
-        <button class="btn ml-5" type="button" id="addCustomSavingBtn" (click)="addCustomSaving()">
+        <button class="btn ml-5" type="button" id="addCustomSavingBtn" (click)="addCustomSaving()" [disabled] ="disableField()">
           <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />

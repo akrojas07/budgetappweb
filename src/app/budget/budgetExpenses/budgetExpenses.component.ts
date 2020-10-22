@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Expenses } from '../../_models/Expenses';
 
 @Component({
@@ -9,14 +9,17 @@ import { Expenses } from '../../_models/Expenses';
 export class BudgetExpensesComponent implements OnInit {
 
   constructor() { }
-
+  @Input('budgetType') budgetType: String;
   @Output() expensesEventEmit = new EventEmitter<Expenses[]>();
 
+  disable: boolean;
   customExpenses: any = [];
   newExpenses: any = [{newExpenseType: '', expenseAmount: undefined}];
 
 
   ngOnInit() {
+    this.budgetType = null;
+    this.disable = true;
   }
   
   addCustomExpense(): void{
@@ -46,5 +49,16 @@ export class BudgetExpensesComponent implements OnInit {
     });
 
     this.expensesEventEmit.emit(expenseList);
+  }
+
+  disableField(): boolean{ 
+    if(this.budgetType === null){
+      return this.disable;
+    }
+    else{
+      this.disable = false;
+    }
+
+    return this.disable; 
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { BudgetIncomeType } from '../../_models/budgetIncomeType';
 import { Income } from '../../_models/Income';
 
@@ -10,9 +10,10 @@ import { Income } from '../../_models/Income';
 export class BudgetIncomeComponent implements OnInit {
 
   constructor() { }
-
+  @Input('budgetType') budgetType: String;
   @Output() incomeChangeEvent = new EventEmitter<Income[]>();
 
+  disable: boolean;
   customIncomes: any = [];
   newIncomes: any = [{newIncomeType: '', incomeAmount: undefined}];
 
@@ -30,6 +31,8 @@ export class BudgetIncomeComponent implements OnInit {
   ];
 
   ngOnInit() {
+    this.budgetType = null;
+    this.disable = true;
   }
 
   addCustomIncome(): void{
@@ -60,20 +63,24 @@ export class BudgetIncomeComponent implements OnInit {
   }
 
   removeCustomIncome(i:number){
-    console.log(i);
     this.customIncomes.splice(i, 1); 
-    console.log(this.customIncomes);
-
     this.emitIncomeEvent();
     
   }
 
   removeNewIncome(i:number){
-    console.log(i);
     this.newIncomes.splice(i, 1); 
-    console.log(this.newIncomes);
-
     this.emitIncomeEvent();
   }
 
+  disableField(): boolean{ 
+    if(this.budgetType === null){
+      return this.disable;
+    }
+    else{
+      this.disable = false;
+    }
+
+    return this.disable; 
+  }
 }

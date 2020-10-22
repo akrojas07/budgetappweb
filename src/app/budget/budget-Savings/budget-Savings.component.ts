@@ -1,5 +1,5 @@
 import { stringify } from '@angular/compiler/src/util';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import {Savings} from '../../_models/Savings';
 
 @Component({
@@ -10,12 +10,16 @@ import {Savings} from '../../_models/Savings';
 export class BudgetSavingsComponent implements OnInit {
 
   constructor() { }
+  @Input('budgetType') budgetType: String;
   @Output() savingsChangeEvent = new EventEmitter<Savings[]>();
 
+  disable: boolean;
   customSavings: any = [];
   newSavings: any = [{newSavingsType: '', savingsAmount: undefined}];
 
   ngOnInit() {
+    this.budgetType = null;
+    this.disable = true;
   }
 
 
@@ -46,6 +50,17 @@ export class BudgetSavingsComponent implements OnInit {
     })
 
     this.savingsChangeEvent.emit(savingsList);
+  }
+
+  disableField(): boolean{ 
+    if(this.budgetType === null){
+      return this.disable;
+    }
+    else{
+      this.disable = false;
+    }
+
+    return this.disable; 
   }
 
 }

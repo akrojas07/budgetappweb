@@ -7,7 +7,9 @@
       <div class="row ml-3">
         <div class="col">
           <label for="expenseType">
-            <select name="expenseType" id="expenseType" class="form-control options" [(ngModel)]="newExpense.newExpenseType" [ngModelOptions]="{standalone: true}" required>
+            <select name="expenseType" id="expenseType" class="form-control options" [(ngModel)]="newExpense.newExpenseType" [ngModelOptions]="{standalone: true}" 
+            [disabled] ="disableField()"
+            required>
               <option selected disabled value="">Expense Type</option>
               <option value="housing">Housing</option>
               <option value="groceries">Groceries</option>
@@ -24,7 +26,9 @@
         </div>
         <div class="col mr-3">
           <input type="number" class="form-control mb-3 options" id="expenseAmount" name="expenseAmount" placeholder="0.00" [(ngModel)]="newExpense.expenseAmount" (input)="emitExpenseEvent()"
-          [ngModelOptions]="{standalone: true}" required>
+          [ngModelOptions]="{standalone: true}" 
+          [disabled] ="disableField()" 
+          required>
         </div>
       </div>
     </div>
@@ -34,11 +38,13 @@
       <div class="row ml-3 mb-3">
         <div class="col">
           <input type="text" class="form-control options" placeholder="Custom Expense Name"
-            [(ngModel)]="custom.customType" [ngModelOptions]="{standalone: true}">
+            [(ngModel)]="custom.customType" [ngModelOptions]="{standalone: true}"
+            [disabled] ="disableField()">
         </div>
 
         <div class="col mr-3">
-          <input type="number" class="form-control options" placeholder="0.00"  [(ngModel)]="custom.expenseAmount" (input)="emitExpenseEvent()" [ngModelOptions]="{standalone: true}">
+          <input type="number" class="form-control options" placeholder="0.00"  [(ngModel)]="custom.expenseAmount" (input)="emitExpenseEvent()" [ngModelOptions]="{standalone: true}"
+          [disabled] ="disableField()">
         </div>
       </div>
     </div>
@@ -48,7 +54,8 @@
   <div class="mb-3">
     <div class="row">
       <div class="col-6 mb-3 pl-5">
-        <button class="btn" type="button" id="addNewExpenseBtn" (click)="addNewExpense()">
+        <button class="btn" type="button" id="addNewExpenseBtn" (click)="addNewExpense()"
+        [disabled] ="disableField()">
           <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -59,7 +66,7 @@
         </button>
       </div>
       <div class="col-6">
-        <button class="btn" type="button" id="addCustomBtn" (click)="addCustomExpense()">
+        <button class="btn" type="button" id="addCustomExpenseBtn" (click)="addCustomExpense()" [disabled] ="disableField()">
           <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />

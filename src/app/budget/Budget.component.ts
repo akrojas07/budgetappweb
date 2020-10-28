@@ -3,6 +3,8 @@ import { Savings } from '../_models/Savings';
 import { Expenses} from '../_models/Expenses';
 import { Income } from '../_models/Income';
 import { BudgetUserBreakdown } from '../_models/budgetUserBreakdown';
+import { UserService } from '../_services/user.service';
+import { BudgetService } from '../_services/budget.service'; 
 
 
 @Component({
@@ -18,9 +20,12 @@ export class BudgetComponent implements OnInit {
   targetSavingsAmount: number;
   targetExpenseAmount: number;
   total: number;
-  hide:boolean; 
+  hide: boolean; 
   budgetBreakdown: BudgetUserBreakdown;
+
+  hasPopulatedBudgetType: boolean;
   
+  constructor(private userService: UserService, private budgetService: BudgetService){}
 
   @ViewChild('ze') ze: ElementRef;
 
@@ -32,6 +37,29 @@ export class BudgetComponent implements OnInit {
     this.targetExpenseAmount = 0;
     this.hide = true; 
     this.budgetBreakdown = new BudgetUserBreakdown();
+
+    this.checkPopulatedBudgetType();
+  }
+
+  // maybe?
+  loggedIn(){
+    return this.userService.loggedIn();
+  }
+
+  checkPopulatedBudgetType() : void{
+    const userId =  Number(localStorage.getItem('userId'));
+    this.budgetService.getBudgetBreakdownByUser(userId)
+    .subscribe(res =>{
+      console.log(res);
+      if (res === null){
+        this.hasPopulatedBudgetType = false;
+      }
+
+      this.hasPopulatedBudgetType = true;
+    }, error => {
+      console.log(error);
+      this.hasPopulatedBudgetType = false;
+    });
   }
 
   onSubmit(){

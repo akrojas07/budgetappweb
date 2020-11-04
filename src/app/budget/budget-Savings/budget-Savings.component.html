@@ -9,7 +9,7 @@
           <select name="savingsType" class="form-control options" [(ngModel)]="newSaving.newSavingsType" [ngModelOptions]="{standalone: true}" 
           [disabled] ="disableField()" required>
             <option value="" disabled>Savings Type</option>
-            <option *ngFor="let savingsType of savingsTypes" [ngValue]="savingsType">{{savingsType.name}}</option>
+            <option *ngFor="let savingsType of savingsTypes" [ngValue]="savingsType.name">{{savingsType.name}}</option>
           </select>
         </label>
       </div>
@@ -66,7 +66,7 @@
     <div class="row">
       <div class="col-6 pl-5">
         <button class="btn" type="button" id="addNewSavingBtn" (click)="addNewSaving()" [disabled] ="disableField()" >
-          <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+          <svg width="1em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
             <path fill-rule="evenodd"
@@ -78,7 +78,7 @@
       <div class="col-6">
 
         <button class="btn" type="button" id="addCustomSavingBtn" (click)="addCustomSaving()" [disabled] ="disableField()">
-          <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+          <svg width="1em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
             <path fill-rule="evenodd"

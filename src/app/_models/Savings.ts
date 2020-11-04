@@ -1,4 +1,6 @@
 export class Savings {
-  savingsType: string;
-  savingsAmount: number;
+  SavingType: string;
+  Amount: number;
+  UserId: number;
+  Id: number;
 }

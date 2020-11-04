@@ -1,5 +1,7 @@
+import { unescapeIdentifier } from '@angular/compiler';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Expenses } from '../../_models/Expenses';
+import { BudgetExpenseService } from '../../_services/budgetExpense.service';
 
 @Component({
   selector: 'app-budgetExpenses',
@@ -8,13 +10,15 @@ import { Expenses } from '../../_models/Expenses';
 })
 export class BudgetExpensesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private expenseService: BudgetExpenseService) { }
   @Input('budgetType') budgetType: String;
   @Output() expensesEventEmit = new EventEmitter<Expenses[]>();
 
   disable: boolean;
   customExpenses: any = [];
   newExpenses: any = [{newExpenseType: '', expenseAmount: undefined}];
+  userId: number;
+  expenseList: Expenses[] = [];
 
   expenseTypes=
   [
@@ -34,36 +38,74 @@ export class BudgetExpensesComponent implements OnInit {
   ngOnInit() {
     this.budgetType = null;
     this.disable = true;
+    this.userId = Number(localStorage.getItem('userId'));
+    this.getExpenseDetails();
   }
   
   addCustomExpense(): void{
-    this.customExpenses.push({ customType: undefined, expenseAmount: undefined });
+    this.customExpenses.push({ customType: undefined, expenseAmount: undefined, id: undefined });
   }
 
   addNewExpense(): void{
-    this.newExpenses.push({newExpenseType: '', expenseAmount: undefined});
+    this.newExpenses.push({newExpenseType: '', expenseAmount: undefined, id:undefined});
   }
 
 
   emitExpenseEvent(){
-    const expenseList: Expenses[] = [];
+    this.expenseList = [];
 
     this.newExpenses.forEach(e => {
       const expense = new Expenses();
-      expense.ExpenseAmount = e.expenseAmount;
+      expense.Amount = e.expenseAmount;
       expense.ExpenseType = e.newExpenseType;
-      expenseList.push(expense);
+      expense.UserId = this.userId;
+      expense.Id = e.id;
+      this.expenseList.push(expense);
     });
 
     this.customExpenses.forEach(e => {
       const expense = new Expenses();
-      expense.ExpenseAmount = e.expenseAmount;
+      expense.Amount = e.expenseAmount;
       expense.ExpenseType = e.customType; 
-      expenseList.push(expense);
+      expense.UserId = this.userId;
+      expense.Id = e.id;
+      this.expenseList.push(expense);
     });
 
-    this.expensesEventEmit.emit(expenseList);
+    this.expensesEventEmit.emit(this.expenseList);
   }
+
+  getExpenseDetails(){
+    this.removeNewExpense(0);
+    this.expenseService.getAllExpensesByUser(this.userId)
+    .subscribe(
+      responseExpense =>
+      {
+        this.expenseList = responseExpense;
+        this.expenseList.forEach(
+          item => {
+            if(item.expenseType in this.expenseTypes){
+            this.newExpenses.push({newExpenseType: item.expenseType, expenseAmount: item.expenseAmount, id: item.id});
+            this.emitExpenseEvent();
+
+          }
+          else{
+            this.customExpenses.push({ customType: item.expenseType, expenseAmount: item.expenseAmount, id: item.id});
+            this.emitExpenseEvent();
+          }
+
+          }
+        );
+
+      },
+      err =>
+      {
+        console.log(err);
+      }
+    );
+
+  }
+
   removeNewExpense(i:number){
     this.newExpenses.splice(i,1);
     this.emitExpenseEvent();

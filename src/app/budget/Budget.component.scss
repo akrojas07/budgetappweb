@@ -9,6 +9,32 @@
   color: rgb(152, 215, 194);
 }
 
+.caption{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  background-color: rgb(32, 85, 96);
+  padding: 5px;
+  color: #ffffff;
+  text-align: center;
+
+
+}
+.parallax{
+  background-image: url("../../assets/images/calculator.PNG");
+
+  /* Set a specific height */
+    height: 250px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 150px;
+  display: block;
+}
+
 .icon {
   display: block;
   margin: auto;

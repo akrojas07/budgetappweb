@@ -9,45 +9,29 @@ import { BudgetBreakdown} from '../_models/BudgetBreakdown';
 })
 export class BudgetService {
 
-baseUrl = environment.budgetApiUrl;
-constructor(private http: HttpClient) { }
+  baseUrl = environment.budgetApiUrl;
+  constructor(private http: HttpClient) { }
 
-hasPopulatedBudgetType(): any{
-  const userId =  Number(localStorage.getItem('userId'));
-  this.getBudgetBreakdownByUser(userId)
-  .subscribe(res =>{
-    console.log(res);
-    if (res === null){
-      return false;
-    }
+  addNewBudgetBreakdown(model: BudgetBreakdown){
+    return this.http.post(this.baseUrl +'breakdown/newbreakdown', model);
+  }
 
-    return true;
-  }, error => {
-    return false;
-  });
-  
-}
+  getBudgetBreakdownByUser(userId: number) : Observable<BudgetBreakdown>{
+    return this.http.get<BudgetBreakdown>(this.baseUrl + 'breakdown/' + userId);
+  }
 
-addNewBudgetBreakdown(){
+  getBudgetTypeByUser(userId: number): Observable<string>{
+    return this.http.get<string>(this.baseUrl + 'breakdown/budgettype/'+ userId);
+  }
 
-}
+  updateBudgetBreakdownByUser(model: BudgetBreakdown){
+    return this.http.patch(this.baseUrl +'breakdown/updatebreakdown', model);
+  }
 
-getBudgetBreakdownByUser(userId: number) : Observable<BudgetBreakdown>{
-  return this.http.get<BudgetBreakdown>(this.baseUrl + 'budget/breakdown/breakdown/'+ userId);
-  
-
-}
-
-getBudgetTypeByUser(){
-
-}
-
-updateBudgetBreakdownByUser(){
-
-}
-
-removeBudgetBreakdown(){
-
-}
+  //only gets called when user is removing existing line items already in the db
+  //will need child input 
+  removeBudgetBreakdown(model: any){
+    return this.http.delete(this.baseUrl + 'breakdown/removebreakdown', model);
+  }
 
 }

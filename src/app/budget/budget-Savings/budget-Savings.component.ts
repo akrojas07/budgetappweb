@@ -1,6 +1,7 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import {Savings} from '../../_models/Savings';
+import {BudgetSavingsService} from '../../_services/budgetSavings.service';
 
 @Component({
   selector: 'app-budget-Savings',
@@ -9,13 +10,16 @@ import {Savings} from '../../_models/Savings';
 })
 export class BudgetSavingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private savingsService: BudgetSavingsService) { }
+
   @Input('budgetType') budgetType: String;
   @Output() savingsChangeEvent = new EventEmitter<Savings[]>();
 
   disable: boolean;
-  customSavings: any = [];
-  newSavings: any = [{newSavingsType: '', savingsAmount: undefined}];
+  userId: number;
+  customSavings: any = [{customType: undefined, savingsAmount: undefined, id: undefined}];
+  newSavings: any = [{newSavingsType: '', savingsAmount: undefined, id: undefined}];
+  savingsList : Savings[] = [];
 
   savingsTypes=
   [
@@ -31,35 +35,72 @@ export class BudgetSavingsComponent implements OnInit {
   ngOnInit() {
     this.budgetType = null;
     this.disable = true;
+    this.userId = Number(localStorage.getItem('userId'));
+    this.getSavingsDetails();
   }
 
 
   addCustomSaving(): void{
-    this.customSavings.push({ customType: undefined, savingsAmount: undefined });
+    this.customSavings.push({ customType: undefined, savingsAmount: undefined, id: undefined });
   }
 
 
   addNewSaving(): void{
-    this.newSavings.push({newSavingsType: '', savingsAmount: undefined});
+    this.newSavings.push({newSavingsType: '', savingsAmount: undefined, id: undefined});
   }
 
   emitSavingsEvent(){
-    let savingsList : Savings[] = [];
+    this.savingsList = [];
 
     this.newSavings.forEach(s =>{
       let savings = new Savings();
-      savings.savingsType = s.newSavingsType;
-      savings.savingsAmount = s.savingsAmount;
-      savingsList.push(savings);
+      savings.SavingType = s.newSavingsType;
+      savings.Amount = s.savingsAmount;
+      savings.UserId = this.userId;
+      savings.Id = s.id;
+      this.savingsList.push(savings);
     });
 
     this.customSavings.forEach(c =>{
       let savings = new Savings();
-      savings.savingsType = c.customType;
-      savings.savingsAmount = c.savingsAmount;
-      savingsList.push(savings);
+      savings.SavingType = c.customType;
+      savings.Amount = c.savingsAmount;
+      savings.UserId = this.userId;
+      savings.Id = c.id;
+      this.savingsList.push(savings);
     })
-    this.savingsChangeEvent.emit(savingsList);
+    this.savingsChangeEvent.emit(this.savingsList);
+  }
+
+  getSavingsDetails(){
+    this.removeNewSaving(0);
+    this.removeCustomSaving(0);
+    
+    this.savingsService.getAllSavingsByUser(this.userId)
+    .subscribe(
+      responseSavings =>
+      {
+        this.savingsList = responseSavings;
+        console.log(responseSavings);
+        this.savingsList.forEach(
+          item => {
+
+            if(item.savingsType in this.savingsTypes){
+              this.newSavings.push({newSavingsType: item.savingsType, savingsAmount: item.savingsAmount, id: item.id});
+              this.emitSavingsEvent();
+            }
+            else{
+              this.customSavings.push( {customType:  item.savingsType, savingsAmount: item.savingsAmount, id: item.id} );
+              this.emitSavingsEvent();
+            }
+          }
+        );
+      },
+      err =>
+      {
+        console.log(err);
+      }
+    );
   }
 
   removeNewSaving(i:number){

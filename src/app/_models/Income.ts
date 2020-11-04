@@ -1,4 +1,6 @@
 export class Income {
     IncomeType: string;
-    IncomeAmount: number;
+    Amount: number;
+    UserId: number;
+    Id: number;
 }

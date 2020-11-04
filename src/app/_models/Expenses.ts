@@ -1,4 +1,6 @@
 export class Expenses {
     ExpenseType: string;
-    ExpenseAmount: number;
+    Amount: number;
+    UserId: number;
+    Id: number;
 }

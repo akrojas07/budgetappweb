@@ -1,7 +1,8 @@
 export class BudgetBreakdown {
-    Id: number;
-    UserId: number;
-    BudgetType: string;
-    ExpenseBreakdown: number;
-    SavingsBreakdown: number;
+    id: number;
+    userId: number;
+    budgetType: string;
+    expensesBreakdown: number;
+    savingsBreakdown: number;
+    income: number;
 }

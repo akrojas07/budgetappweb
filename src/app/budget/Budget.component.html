@@ -106,8 +106,10 @@
 
         <div class="col">
           <div style="position:relative;">
-            <h3 id="gettingstarted" class="caption">Getting started</h3>
-            <p class="caption">Learn about 3 tried-and-true budgeting plans</p>
+            <div class="caption">
+              <h3 id="gettingstarted" class="">Getting started</h3>
+              <p class="">Learn about 3 tried-and-true budgeting plans</p>
+            </div>
             <div class="row">
               <div class="col-sm-12 col-md-4">
                 <div class="card px-4 py-4 border learning shadow">
@@ -186,17 +188,15 @@
       <!-- if budget is empty, show select a budget -->
       <div class="col">
         <div *ngIf="!hasPopulatedBudgetType">
-          <div class="row">
-            <div class="col-12">
-              <h3 id="selection" class="caption">Select A Budget</h3>
-            </div>
-            <div class="col">
-              <p class="caption">After reviewing each budget plan, select a plan that best fits your lifestyle.
+          <div class="caption">
+              <h3 id="selection" class="">Select A Budget</h3>
+              <p class="">After reviewing each budget plan, select a plan that best fits your lifestyle.
                 <br>
-                Start by considering how each plan works with your financial goals. Also take into account the amount of
+                Start by considering how each plan works with your financial goals.
+                <br>
+                 Also take into account the amount of
                 time you want to dedicate each day / week / month to budgeting.
               </p>
-            </div>
           </div>
 
 
@@ -262,7 +262,7 @@
                         aria-describedby="targetExpenses" placeholder="% of income"
                         [(ngModel)]="budgetBreakdown.expensesBreakdown" [ngModelOptions]="{standalone: true}">
                     </div>
-                    <div class="col-2 mt-2 text-center ml-n5 ">
+                    <div class="col-2 mt-2 text-center ml-n4 ">
                       <p>%</p>
                     </div>
                   </div>
@@ -270,7 +270,7 @@
                     <div class="col-sm-4 col-md-6">
                       <label class="mt-2" for="targetSavings">Target Savings Budget</label>
                     </div>
-                    <div class="col-sm-6 col-md-5 text-center  mr-n5">
+                    <div class="col-sm-6 col-md-5 text-center  mr-n4">
                       <input type="number" min="0" max="100" step="1" class="form-control" id="targetSavings"
                         aria-describedby="targetSavings" placeholder="% of income"
                         [(ngModel)]="budgetBreakdown.savingsBreakdown" [ngModelOptions]="{standalone: true}">

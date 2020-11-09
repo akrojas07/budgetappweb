@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Savings } from '../_models/Savings';
-import { Expenses } from '../_models/Expenses';
-import { Income } from '../_models/Income';
+import { SavingsRequest } from '../_models/SavingsRequest';
+import { ExpensesRequest } from '../_models/ExpensesRequest';
+import { IncomeRequest } from '../_models/IncomeRequest';
 import { BudgetBreakdown } from '../_models/BudgetBreakdown';
 
 import { UserService } from '../_services/user.service';
@@ -25,15 +25,15 @@ import { BudgetSavingsService } from '../_services/budgetSavings.service';
 })
 export class BudgetComponent implements OnInit, OnDestroy {
   savingAmount: number;
-  savingsList: Savings[] = [];
+  savingsList: SavingsRequest[] = [];
   targetSavingsAmount: number;
 
   expenseAmount: number;
-  expenseList: Expenses[] = [];
+  expenseList: ExpensesRequest[] = [];
   targetExpenseAmount: number;
 
   incomeAmount: number;
-  incomeList: Income[] = [];
+  incomeList: IncomeRequest[] = [];
 
   userId: number;
   total: number;
@@ -111,7 +111,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
     }
   }
 
-  populateIncomeList(event: Income[]): void {
+  populateIncomeList(event: IncomeRequest[]): void {
     // clear income list after each event - only get the latest
     this.incomeList = [];
     for (let income of event) {
@@ -119,14 +119,14 @@ export class BudgetComponent implements OnInit, OnDestroy {
     }
   }
 
-  populateExpenseList(event: Expenses[]): void {
+  populateExpenseList(event: ExpensesRequest[]): void {
     this.expenseList = [];
     for (let expense of event) {
       this.expenseList.push(expense);
     }
   }
 
-  populateSavingsList(event: Savings[]): void {
+  populateSavingsList(event: SavingsRequest[]): void {
     this.savingsList = [];
     for (let saving of event) {
       this.savingsList.push(saving);
@@ -137,7 +137,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   //enable features
 
-  enableSubmitButton(event: Expenses[]) {
+  enableSubmitButton(event: ExpensesRequest[]) {
     for (let i = 0; i < event.length; i++) {
       let expense = event[i].Amount;
       if (
@@ -160,7 +160,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
   }
   //net worth methods
 
-  recalculateSavings(event: Savings[]): void {
+  recalculateSavings(event: SavingsRequest[]): void {
     this.savingAmount = 0.0;
     for (let i = 0; i < event.length; i++) {
       this.savingAmount += event[i].Amount;
@@ -170,7 +170,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
     this.populateSavingsList(event);
   }
 
-  recalculateExpenses(event: Expenses[]): void {
+  recalculateExpenses(event: ExpensesRequest[]): void {
     this.expenseAmount = 0.0;
     for (let i = 0; i < event.length; i++) {
       this.expenseAmount += event[i].Amount;
@@ -180,7 +180,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
     this.enableSubmitButton(event);
   }
 
-  recalculateIncome(event: Income[]): void {
+  recalculateIncome(event: IncomeRequest[]): void {
     this.incomeAmount = 0.0;
     for (let i = 0; i < event.length; i++) {
       this.incomeAmount += event[i].Amount;
@@ -318,8 +318,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
       );
     }
   }
-  onUpdate() {}
-
   //submit information end
 
   // async

@@ -2,70 +2,72 @@
 <!-- https://www.mint.com/mint-categories -->
 <div *ngIf="loggedIn()">
   <div class="container mt-2" style="position:relative;">
-
-    <div class="row" *ngIf="hasPopulatedBudgetType">
-      <div class="col-mg-12 col-lg-8 mt-3 mb-3 ml-2">
-        <div class="row">
-          <h3 id="budgetBreakdown">Budget Breakdown</h3>
-          <p class="">
+    <div *ngIf="hasPopulatedBudgetType">
+      <div class="row">
+        <div class="col caption">
+          <h3>Budget Breakdown</h3>
+          <p>
             Use this breakdown to track the progress you're making toward your budget
           </p>
         </div>
-        <p></p>
-        <!-- Calculate the budget based on total income entered and budget chosen -->
-        <div class="row">
+      </div>
+
+
+      <!-- Calculate the budget based on total income entered and budget chosen -->
+      <div class="row">
+        <div class="col">
           <div class="card pl-3 pt-3">
             <div class="card-body">
-              <div class="row">
-                <div class="col-2 col-md-2">
+              <div class="row no-gutters">
+                <div class="col-2">
                 </div>
-                <div class="col-5 col-md-5 border-bottom text-center">
+                <div class="col-5 border-bottom text-center">
                   <p>Target</p>
                 </div>
-                <div class="col-5 col-md-5 border-bottom text-center">
+                <div class="col-5 border-bottom text-center">
                   <p> Actual </p>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-2  col-md-2">
-                  <label class="text-center mt-2">
+              <div class="row no-gutters">
+                <div class="col-2">
+                  <label class="text-center mt-2 ml-n2">
                     Income
                   </label>
                 </div>
-                <div class="col-5 col-md-5">
+                <div class="col-5 ml-3 mr-n3">
                   <input type="number" readonly class="form-control-plaintext text-center" id="staticTargetIncome"
                     placeholder="0" [(ngModel)]="budgetBreakdown.income">
                 </div>
-                <div class="col-5 col-md-5">
+                <div class=" col-5">
                   <input type="number" readonly class="form-control-plaintext text-center" id="staticActualIncome"
                     placeholder="0.00" [(ngModel)]="incomeAmount">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-2 col-md-2">
-                  <label class="text-center mt-2">Savings</label>
+              <div class="row no-gutters">
+                <div class="col-2">
+                  <label class="text-center mt-2 ml-n2">Savings</label>
                 </div>
-                <div class="col-5 col-md-5">
+                <div class="col-5 ml-3 mr-n3">
                   <input type="number" readonly class="form-control-plaintext text-center" id="staticTargetSavings"
                     placeholder="0.00" [(ngModel)]="targetSavingsAmount">
 
                 </div>
-                <div class="col-5 col-md-5">
+                <div class="col-5 ">
                   <input type="number" readonly class="form-control-plaintext text-center" id="staticActualSavings"
                     placeholder="0.00" [(ngModel)]="savingAmount">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-2 col-md-2">
-                  <label class="text-center mt-2"> Expenses</label>
+              <div class="row no-gutters">
+                <div class="col-2">
+                  <label class="text-center mt-2 ml-n2"> Expenses</label>
                 </div>
-                <div class="col-5 col-md-5">
+                <div class="col-5 ml-3 mr-n3">
                   <input type="number" readonly class="form-control-plaintext text-center" id="staticTargetExpenses"
                     placeholder="0.00" [(ngModel)]="targetExpenseAmount">
 
 
                 </div>
-                <div class="col-5 col-md-5">
+                <div class="col-5">
                   <input type="number" readonly class="form-control-plaintext text-center" id="staticActualExpenses"
                     placeholder="0.00" [(ngModel)]="expenseAmount">
                 </div>
@@ -74,17 +76,14 @@
 
             </div>
           </div>
-
         </div>
-      </div>
-      <div class="col">
-        <div class="row"></div>
-        <div class="row mt-5 ">
+        <div class="col-sm-12 col-md-6">
           <div class="text-center">
-            <img src="assets/images/computer.PNG">
+            <img src="assets/images/computer.PNG" width="35%">
           </div>
         </div>
       </div>
+
     </div>
 
     <div *ngIf="!hasPopulatedBudgetType">
@@ -107,8 +106,8 @@
 
         <div class="col">
           <div style="position:relative;">
-            <h3 id="gettingstarted">Getting started</h3>
-            <p class="">Learn about 3 tried-and-true budgeting plans</p>
+            <h3 id="gettingstarted" class="caption">Getting started</h3>
+            <p class="caption">Learn about 3 tried-and-true budgeting plans</p>
             <div class="row">
               <div class="col-sm-12 col-md-4">
                 <div class="card px-4 py-4 border learning shadow">
@@ -189,10 +188,10 @@
         <div *ngIf="!hasPopulatedBudgetType">
           <div class="row">
             <div class="col-12">
-              <h3 id="selection">Select A Budget</h3>
+              <h3 id="selection" class="caption">Select A Budget</h3>
             </div>
             <div class="col">
-              <p class="">After reviewing each budget plan, select a plan that best fits your lifestyle.
+              <p class="caption">After reviewing each budget plan, select a plan that best fits your lifestyle.
                 <br>
                 Start by considering how each plan works with your financial goals. Also take into account the amount of
                 time you want to dedicate each day / week / month to budgeting.
@@ -204,18 +203,23 @@
         </div>
 
         <!--  if budget is populated, show update budget plan -->
-        <div *ngIf="hasPopulatedBudgetType">
-          <h3>Update your budget selection</h3>
+        <div *ngIf="hasPopulatedBudgetType" class="caption">
+          <h3 >Update your budget selection</h3>
           <p>
-            Ready to try a different budget plan? 
+            Ready to try a different budget plan?
           </p>
         </div>
       </div>
       <div class="col-12">
-        <div class="row">
+        <div class="row ">
 
           <!-- radio buttons -->
-          <div class="col-sm-2 col-md-4 ml-4">
+          <div class="col-sm-2 col-md-4 ">
+            <div class="text-center">
+              <img src="assets/images/money.PNG" width="45%">
+            </div>
+          </div>
+          <div class="col-sm-2 col-md-3">
             <form id="budgetSelections">
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="budgetType" data-target="#ze" value="zbb"
@@ -243,63 +247,62 @@
           </div>
 
           <!-- budget breakdown for zero based and envelope - does not show if zbb or envelope radio button not selected  -->
-          <div class="col-sm-10 col-md-6 ml-2">
+          <div class="col-sm-8 col-md-5">
             <div class="card w-100" #ze [hidden]="hide">
               <div class="card-body">
-              <form>
-                <div class="row">
-                  <div class="col-sm-4 col-md-6">
-                    <label class="mt-2" for="targetExpenses">
-                      Target Expense Budget
-                    </label>
+                <form>
+                  <div class="row">
+                    <div class="col-sm-4 col-md-6">
+                      <label class="mt-2" for="targetExpenses">
+                        Target Expense Budget
+                      </label>
+                    </div>
+                    <div class="col-sm-6 col-md-5 text-center mr-n5">
+                      <input type="number" min="0" max="100" step="1" class="form-control" id="targetExpenses"
+                        aria-describedby="targetExpenses" placeholder="% of income"
+                        [(ngModel)]="budgetBreakdown.expensesBreakdown" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-2 mt-2 text-center ml-n5 ">
+                      <p>%</p>
+                    </div>
                   </div>
-                  <div class="col-sm-6 col-md-5 text-center mr-n5">
-                    <input type="number" min="0" max="100" step="1" class="form-control" id="targetExpenses"
-                      aria-describedby="targetExpenses" placeholder="% of income" [(ngModel)]="budgetBreakdown.expensesBreakdown"
-                      [ngModelOptions]="{standalone: true}">
+                  <div class="row">
+                    <div class="col-sm-4 col-md-6">
+                      <label class="mt-2" for="targetSavings">Target Savings Budget</label>
+                    </div>
+                    <div class="col-sm-6 col-md-5 text-center  mr-n5">
+                      <input type="number" min="0" max="100" step="1" class="form-control" id="targetSavings"
+                        aria-describedby="targetSavings" placeholder="% of income"
+                        [(ngModel)]="budgetBreakdown.savingsBreakdown" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-2 mt-2 text-center ml-n5">
+                      <p>%</p>
+                    </div>
                   </div>
-                  <div class="col-2 mt-2 text-center ml-n5 ">
-                    <p>%</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-4 col-md-6">
-                    <label class="mt-2" for="targetSavings">Target Savings Budget</label>
-                  </div>
-                  <div class="col-sm-6 col-md-5 text-center  mr-n5">
-                    <input type="number" min="0" max="100" step="1" class="form-control" id="targetSavings"
-                      aria-describedby="targetSavings" placeholder="% of income" [(ngModel)]="budgetBreakdown.savingsBreakdown"
-                      [ngModelOptions]="{standalone: true}">
-                  </div>
-                  <div class="col-2 mt-2 text-center ml-n5">
-                    <p>%</p>
-                  </div>
-                </div>
 
-              </form>
-            </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="parallax mt-2 rounded">
-      <div class="caption">
-        <span>
-          Enter your current monthly income, savings, and expenses
-        </span>
-      </div>
-    </div>
+
 
     <div class="row">
       <div class="col-12">
-        <p class="lead mt-2">
-          Enter your current monthly income, savings, and expenses
-        </p>
-        <p>
-          Add, update, and remove items from your finances as often as you'd like
-        </p>
+        <div class="mt-2">
+          <div class="caption">
+            <h3 class="text-capitalize">
+              Enter your current monthly income, savings, and expenses
+            </h3>
+            <p>
+              Add, update, and remove items from your finances as often as you'd like
+            </p>
+
+          </div>
+        </div>
       </div>
       <div class="col-7">
         <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">

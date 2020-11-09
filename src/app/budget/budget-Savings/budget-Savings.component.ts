@@ -1,6 +1,6 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import {Savings} from '../../_models/Savings';
+import { SavingsRequest } from 'src/app/_models/SavingsRequest';
 import {BudgetSavingsService} from '../../_services/budgetSavings.service';
 
 @Component({
@@ -13,13 +13,13 @@ export class BudgetSavingsComponent implements OnInit {
   constructor(private savingsService: BudgetSavingsService) { }
 
   @Input('budgetType') budgetType: String;
-  @Output() savingsChangeEvent = new EventEmitter<Savings[]>();
+  @Output() savingsChangeEvent = new EventEmitter<SavingsRequest[]>();
 
   disable: boolean;
   userId: number;
   customSavings: any = [{customType: undefined, savingsAmount: undefined, id: undefined}];
   newSavings: any = [{newSavingsType: '', savingsAmount: undefined, id: undefined}];
-  savingsList : Savings[] = [];
+  savingsRequestsList : SavingsRequest[] = [];
 
   savingsTypes=
   [
@@ -50,39 +50,37 @@ export class BudgetSavingsComponent implements OnInit {
   }
 
   emitSavingsEvent(){
-    this.savingsList = [];
+    this.savingsRequestsList = [];
 
     this.newSavings.forEach(s =>{
-      let savings = new Savings();
+      let savings = new SavingsRequest();
       savings.SavingType = s.newSavingsType;
       savings.Amount = s.savingsAmount;
       savings.UserId = this.userId;
       savings.Id = s.id;
-      this.savingsList.push(savings);
+      this.savingsRequestsList.push(savings);
     });
 
     this.customSavings.forEach(c =>{
-      let savings = new Savings();
+      let savings = new SavingsRequest();
       savings.SavingType = c.customType;
       savings.Amount = c.savingsAmount;
       savings.UserId = this.userId;
       savings.Id = c.id;
-      this.savingsList.push(savings);
+      this.savingsRequestsList.push(savings);
     })
-    this.savingsChangeEvent.emit(this.savingsList);
+    this.savingsChangeEvent.emit(this.savingsRequestsList);
   }
 
-  getSavingsDetails(){
+  getSavingsDetails(): void{
     this.removeNewSaving(0);
     this.removeCustomSaving(0);
-    
+
     this.savingsService.getAllSavingsByUser(this.userId)
     .subscribe(
       responseSavings =>
       {
-        this.savingsList = responseSavings;
-        console.log(responseSavings);
-        this.savingsList.forEach(
+        responseSavings.forEach(
           item => {
 
             if(item.savingsType in this.savingsTypes){
@@ -103,14 +101,13 @@ export class BudgetSavingsComponent implements OnInit {
     );
   }
 
-  removeNewSaving(i:number){
+  removeNewSaving(i: number): void{
     this.newSavings.splice(i,1);
     this.emitSavingsEvent();
   }
-  removeCustomSaving(i:number){
-    this.customSavings.splice(i, 1); 
+  removeCustomSaving(i: number): void{
+    this.customSavings.splice(i, 1);
     this.emitSavingsEvent();
-    
   }
 
   disableField(): boolean{ 

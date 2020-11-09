@@ -10,30 +10,30 @@
 }
 
 .caption{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 50%;
-  background-color: rgb(32, 85, 96);
-  padding: 5px;
-  color: #ffffff;
+  padding: 1%;
+  color: rgb(144, 187, 194);
+  border-color: rgb(152,215,194);
+  border-radius: 10px;
+  border-width: 4px;
+  border-style: double;
+  margin-bottom: 2%;
+  margin-top: 2%;
   text-align: center;
 
-
 }
-.parallax{
-  background-image: url("../../assets/images/calculator.PNG");
+// .parallax{
+//   background-image: url("../../assets/images/calculator.PNG");
 
-  /* Set a specific height */
-    height: 250px;
+//   /* Set a specific height */
+//     height: 250px;
 
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: repeat;
-  background-size: 150px;
-  display: block;
-}
+//   /* Create the parallax scrolling effect */
+//   background-attachment: fixed;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: 150px;
+//   display: block;
+// }
 
 .icon {
   display: block;
@@ -42,9 +42,11 @@
 }
 
 .nw {
+  color: rgb(144, 187, 194);
   font-size: small;
-  background-color: rgb(152, 215, 194);
-  color: whitesmoke;
+  border-color: rgb(152,215,194);
+  border-width: 2px;
+  border-style: dashed;
   padding: 5%;
   border-radius: 5px;
 }
@@ -55,7 +57,8 @@
 }
 
 .buttonColor {
-  background-color: rgb(36, 134, 128);
+  background-color: rgb(144, 187, 194);
+ 
   color: whitesmoke;
 }
 
@@ -66,10 +69,6 @@
   letter-spacing: 0.25em;
 }
 
-.toc {
-  font-size: small;
-  color: rgb(32, 85, 96);
-}
 .nav-link {
   color: rgb(32, 85, 96);
 }
@@ -82,25 +81,10 @@
   border-radius: 5px;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 65px;
-  margin-right: 25%;
-}
-
 .links {
   color: rgb(97, 194, 162);
 }
 
-th {
-  border-bottom: 1px solid;
-}
-.goalsTable {
-  table-layout: auto;
-  margin: 2%;
-  font-size: medium;
-}
 
 @media screen and (max-width: 500px) {
   .toc {

@@ -1,4 +1,4 @@
-export class Savings {
+export class SavingsRequest {
   SavingType: string;
   Amount: number;
   UserId: number;

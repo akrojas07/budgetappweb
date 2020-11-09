@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { BudgetIncomeType } from '../../_models/budgetIncomeType';
-import { Income } from '../../_models/Income';
+import { IncomeRequest } from '../../_models/IncomeRequest';
 import { BudgetIncomeService } from '../../_services/budgetIncome.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class BudgetIncomeComponent implements OnInit {
   constructor(private budgetIncomeServices: BudgetIncomeService) {}
 
   @Input('budgetType') budgetType: String;
-  @Output() incomeChangeEvent = new EventEmitter<Income[]>();
+  @Output() incomeChangeEvent = new EventEmitter<IncomeRequest[]>();
   newIncomeType: string; 
   incomeAmount: number; 
   existingIncomeType: string; 
@@ -21,7 +21,7 @@ export class BudgetIncomeComponent implements OnInit {
   customIncomes: any = [];
   newIncomes: any = [{ newIncomeType: '', incomeAmount: undefined }];
   existingIncomes: any = [{ existingIncomeType: '', incomeAmount: 0 }];
-  incomeList: Income[] = [];
+  incomeList: IncomeRequest[] = [];
 
   incomeTypes: BudgetIncomeType[] = [
     { name: 'Alimony' },
@@ -55,7 +55,7 @@ export class BudgetIncomeComponent implements OnInit {
   emitIncomeEvent() {
     this.incomeList = [];
     this.newIncomes.forEach((i) => {
-      const income = new Income();
+      const income = new IncomeRequest();
       income.Amount = i.incomeAmount;
       income.IncomeType = i.newIncomeType;
       income.UserId = this.userId;
@@ -64,7 +64,7 @@ export class BudgetIncomeComponent implements OnInit {
     });
 
     this.customIncomes.forEach((i) => {
-      const income = new Income();
+      const income = new IncomeRequest();
       income.Amount = i.incomeAmount;
       income.IncomeType = i.customType;
       income.UserId = this.userId;
@@ -80,8 +80,8 @@ export class BudgetIncomeComponent implements OnInit {
     .subscribe(
       res =>
       {
-        this.incomeList = res;
-        this.incomeList.forEach(
+
+        res.forEach(
           item => {
             if(item.incomeType in this.incomeTypes){
               this.newIncomes.push({newIncomeType: item.incomeType, incomeAmount: item.amount, id: item.id});
@@ -125,9 +125,6 @@ export class BudgetIncomeComponent implements OnInit {
   getAllIncomeByUser() {
     const userId = Number(localStorage.getItem('userId'));
     //needs a .subscribe
-    let incomes = this.budgetIncomeServices.getAllIncomeByUser(userId);
-    incomes.forEach((element) => {
-      console.log(element);
-    });
+    let incomes = this.budgetIncomeServices.getAllIncomeByUser(userId).subscribe();
   }
 }

@@ -1,6 +1,6 @@
 import { unescapeIdentifier } from '@angular/compiler';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { Expenses } from '../../_models/Expenses';
+import { ExpensesRequest } from '../../_models/ExpensesRequest';
 import { BudgetExpenseService } from '../../_services/budgetExpense.service';
 
 @Component({
@@ -12,13 +12,13 @@ export class BudgetExpensesComponent implements OnInit {
 
   constructor(private expenseService: BudgetExpenseService) { }
   @Input('budgetType') budgetType: String;
-  @Output() expensesEventEmit = new EventEmitter<Expenses[]>();
+  @Output() expensesEventEmit = new EventEmitter<ExpensesRequest[]>();
 
   disable: boolean;
   customExpenses: any = [];
   newExpenses: any = [{newExpenseType: '', expenseAmount: undefined}];
   userId: number;
-  expenseList: Expenses[] = [];
+  expenseList: ExpensesRequest[] = [];
 
   expenseTypes=
   [
@@ -55,7 +55,7 @@ export class BudgetExpensesComponent implements OnInit {
     this.expenseList = [];
 
     this.newExpenses.forEach(e => {
-      const expense = new Expenses();
+      const expense = new ExpensesRequest();
       expense.Amount = e.expenseAmount;
       expense.ExpenseType = e.newExpenseType;
       expense.UserId = this.userId;
@@ -64,7 +64,7 @@ export class BudgetExpensesComponent implements OnInit {
     });
 
     this.customExpenses.forEach(e => {
-      const expense = new Expenses();
+      const expense = new ExpensesRequest();
       expense.Amount = e.expenseAmount;
       expense.ExpenseType = e.customType; 
       expense.UserId = this.userId;
@@ -75,14 +75,14 @@ export class BudgetExpensesComponent implements OnInit {
     this.expensesEventEmit.emit(this.expenseList);
   }
 
-  getExpenseDetails(){
+  getExpenseDetails(): void{
     this.removeNewExpense(0);
     this.expenseService.getAllExpensesByUser(this.userId)
     .subscribe(
       responseExpense =>
       {
-        this.expenseList = responseExpense;
-        this.expenseList.forEach(
+
+        responseExpense.forEach(
           item => {
             if(item.expenseType in this.expenseTypes){
             this.newExpenses.push({newExpenseType: item.expenseType, expenseAmount: item.expenseAmount, id: item.id});

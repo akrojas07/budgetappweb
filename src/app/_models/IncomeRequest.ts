@@ -1,5 +1,5 @@
-export class Expenses {
-    ExpenseType: string;
+export class IncomeRequest {
+    IncomeType: string;
     Amount: number;
     UserId: number;
     Id: number;

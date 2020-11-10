@@ -1,26 +1,116 @@
-
-.learning{
-    color: rgb(16,120,105);
-    font-size: medium;
-    margin-bottom: 5%;
+.learning {
+  color: rgb(16, 120, 105);
+  font-size: medium;
+  margin-bottom: 5%;
+  padding-top: 5%;
+  padding-left: 5%;
+}
+.learning a{
+  color: rgb(152, 215, 194);
 }
 
-.aside h3, .asideLink{
-    color: rgb(32,85,96);
-    font-size: x-large;
+.caption{
+  padding: 1%;
+  color: rgb(144, 187, 194);
+  border-color: rgb(152,215,194);
+  border-radius: 10px;
+  border-width: 4px;
+  border-style: double;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  text-align: center;
+
+}
+// .parallax{
+//   background-image: url("../../assets/images/calculator.PNG");
+
+//   /* Set a specific height */
+//     height: 250px;
+
+//   /* Create the parallax scrolling effect */
+//   background-attachment: fixed;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: 150px;
+//   display: block;
+// }
+
+.icon {
+  display: block;
+  margin: auto;
+  width: 15%;
 }
 
-.buttonColor{
-    background-color: rgb(36,134,128); 
-    color: whitesmoke;
+.nw {
+  color: rgb(144, 187, 194);
+  font-size: small;
+  border-color: rgb(152,215,194);
+  border-width: 2px;
+  border-style: dashed;
+  padding: 5%;
+  border-radius: 5px;
 }
-.dropDownColor :hover{
-    background-color: rgb(36,134,128); 
-    color: whitesmoke;
+
+.selections {
+  color: rgb(32, 85, 96);
+  font-size: medium;
+}
+
+.buttonColor {
+  background-color: rgb(144, 187, 194);
+ 
+  color: whitesmoke;
+}
+
+.dropDownColor :hover {
+  background-color: rgb(36, 134, 128);
+  color: whitesmoke;
+  font-size: small;
+  letter-spacing: 0.25em;
+}
+
+.nav-link {
+  color: rgb(32, 85, 96);
+}
+.nav-link :active,
+.nav-link :hover {
+  color: rgb(144, 187, 194);
+}
+
+.inputs {
+  border-radius: 5px;
+}
+
+.links {
+  color: rgb(97, 194, 162);
+}
+
+
+@media screen and (max-width: 500px) {
+  .toc {
+    display: none;
+  }
+  .nav-link {
     font-size: small;
-    letter-spacing: .25em;
+  }
+  .budgetExplanation{
+    display:none;
+  }
 }
 
-.info{
-    text-align: justify;
+@media screen and (max-width: 980px) {
+  .nav-link{
+      font-size:small;
+  }
+  .smallText
+  {
+    font-size: x-small;
+  }
+  .budgetExplanation{
+    display:none;
+  }
+}
+
+@media screen and (max-width: 2000px) {
+
 }

@@ -1,3 +1,54 @@
-<p>
-  Dashboard works!
+<h3 id="goals" class="mt-4">Enter Financial Goals</h3>
+
+<!-- if goals aren't empty, show -->
+
+<div class="card" id="goalsTable">
+  <table class="goalsTable">
+    <tr>
+      <th class="toDisplay">
+        Goal Name
+      </th>
+      <th class="goalText" colspan="2">
+        Goal Summary
+      </th>
+      <th class="toDisplay">
+        Goal Amount
+      </th>
+      <th class="goalText">
+        Start Date
+      </th>
+      <th class="goalText">
+        End Date
+      </th>
+
+    </tr>
+    <tr>
+      <td class="toDisplay">
+        Downpayment
+        <!-- {{goal.GoalName}} -->
+      </td>
+      <td class="goalText px-2" colspan="2">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt nostrum, amet minima accusamus et
+        blanditiis
+        fugiat laborum. Quod pariatur quo, eius cupiditate impedit, officiis, perspiciatis modi illum
+        voluptatum
+        delectus eaque!
+      </td>
+      <td class="toDisplay">
+        123456132
+      </td>
+      <td class="goalText">
+        12/31/20
+      </td>
+      <td class="goalText">
+        01/31/20
+      </td>
+
+    </tr>
+  </table>
+
+</div>
+<p id="createGoals" class="mt-3 mb-n1">
+  Create short and long term financial goals
 </p>
+<app-budget-goals></app-budget-goals>

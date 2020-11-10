@@ -4,18 +4,17 @@ p,
   font-size: small;
 }
 .signIn{
-    width: 32%;
+    width: 15%;
 }
 
 @media screen and (max-width: 400px) {
   .signIn {
-
     width: 100%;
   }
 }
 
 @media screen and (max-width: 1000px) {
     .signIn {
-      width: 50%;
+      width: 35%;
     }
   }

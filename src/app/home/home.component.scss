@@ -1,5 +1,10 @@
-h1{
+.lead{
+    font-family: monospace;
+    font-size: x-large;
+}
 
+p{
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 
@@ -47,3 +52,11 @@ h1{
     text-align: justify;
     border-radius: 25px;
 }
+
+.buttonColor {
+    color: rgb(36, 134, 128);
+    background-color: rgb(204,224,210);
+    font-family: monospace;
+  }
+
+  

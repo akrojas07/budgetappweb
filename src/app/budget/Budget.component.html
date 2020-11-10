@@ -1,245 +1,421 @@
 <!-- If budget plan is blank -->
 <!-- https://www.mint.com/mint-categories -->
-<div class="row">
-  <div class="col-2">
-    <h3>Start Here</h3>
-    <p class="small">Learn about budget plans</p>
-  </div>
-  <div class="col">
-    <!-- zero based -->
-    <div class="learning card border-1 shadow col">
-      <div class="card-body info">
-        <h3 class="asideLink mt-2 card-title">Zero Based Budget</h3>
-        <hr>
-        "Zero-based budgeting is a method that has you allocate all of your money to expenses, savings, and debt
-        payments. The goal is that your income minus your expenditures equals zero by the end of the month."
-        <br>
-        <small class="text-muted">Source: NerdWallet <br>
-          Learn More about
-          <a href="https://www.nerdwallet.com/article/finance/zero-based-budgeting-explained">Zero-Based
-            Budgeting</a></small>
+<div *ngIf="loggedIn()">
+  <div class="container mt-2" style="position:relative;">
+    <div *ngIf="hasPopulatedBudgetType">
+      <div class="row">
+        <div class="col caption">
+          <h3>Budget Breakdown</h3>
+          <p>
+            Use this breakdown to track the progress you're making toward your budget
+          </p>
+        </div>
       </div>
 
-    </div>
-  </div>
-  <div class="col">
-    <!-- envelope -->
-    <div class="learning card border-1 shadow col">
-      <div class="card-body info">
-        <h3 class="asideLink mt-2 card-title">Envelope System</h3>
-        <hr>
-        With the Envelope System, you physically allocate portions of your monthly income (in cash) toward different
-        spending categories, which you designate with an envelope.
-        <br>
-        <small class="text-muted">Source: NerdWallet<br>
-          Learn more about
-          <a href="https://www.nerdwallet.com/article/finance/envelope-system"> The Envelope System</a>
-        </small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <!-- 50 -->
-    <div class="learning card border-1 shadow col">
-      <div class="card-body info">
-        <h3 class="asideLink mt-2 card-title">50/30/20 Budget</h3>
-        <hr>
-        The 50/30/20 budgeting plan divides your expenses into three categories: needs, wants, and savings / debt
-        repayment. Your net income is then allocated 50% to needs, 30% to wants, 20% to savings / debt repayment.
-        <br>
-        <small class="text-muted"> Source: NerdWallet<br>
-          Learn more about
-          <a href="https://www.nerdwallet.com/article/finance/nerdwallet-budget-calculator"> 50/30/20 budgeting</a>
-        </small>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- select a budget  -->
-<div class="row">
-  <div class="col-2">
-    <h3>Select a budget plan</h3>
-  </div>
-  <div class="col">
-    <div class="learning card border-1 shadow">
-      <div class="card-body">
-        <div class="dropdown">
-          <button class="btn buttonColor dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Budget Plan
-          </button>
-          <div class="dropdown-menu dropDownColor" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" data-toggle="collapse" href="#zbb">Zero Based</a>
-            <a class="dropdown-item" data-toggle="collapse" href="#envelope">Envelope</a>
-            <a class="dropdown-item" data-toggle="collapse" href="#fifty">50/30/20</a>
+      <!-- Calculate the budget based on total income entered and budget chosen -->
+      <div class="row">
+        <div class="col">
+          <div class="card pl-3 pt-3">
+            <div class="card-body">
+              <div class="row no-gutters">
+                <div class="col-2">
+                </div>
+                <div class="col-5 border-bottom text-center">
+                  <p>Target</p>
+                </div>
+                <div class="col-5 border-bottom text-center">
+                  <p> Actual </p>
+                </div>
+              </div>
+              <div class="row no-gutters">
+                <div class="col-2">
+                  <label class="text-center mt-2 ml-n2">
+                    Income
+                  </label>
+                </div>
+                <div class="col-5 ml-3 mr-n3">
+                  <input type="number" readonly class="form-control-plaintext text-center" id="staticTargetIncome"
+                    placeholder="0" [(ngModel)]="budgetBreakdown.income">
+                </div>
+                <div class=" col-5">
+                  <input type="number" readonly class="form-control-plaintext text-center" id="staticActualIncome"
+                    placeholder="0.00" [(ngModel)]="incomeAmount">
+                </div>
+              </div>
+              <div class="row no-gutters">
+                <div class="col-2">
+                  <label class="text-center mt-2 ml-n2">Savings</label>
+                </div>
+                <div class="col-5 ml-3 mr-n3">
+                  <input type="number" readonly class="form-control-plaintext text-center" id="staticTargetSavings"
+                    placeholder="0.00" [(ngModel)]="targetSavingsAmount">
+
+                </div>
+                <div class="col-5 ">
+                  <input type="number" readonly class="form-control-plaintext text-center" id="staticActualSavings"
+                    placeholder="0.00" [(ngModel)]="savingAmount">
+                </div>
+              </div>
+              <div class="row no-gutters">
+                <div class="col-2">
+                  <label class="text-center mt-2 ml-n2"> Expenses</label>
+                </div>
+                <div class="col-5 ml-3 mr-n3">
+                  <input type="number" readonly class="form-control-plaintext text-center" id="staticTargetExpenses"
+                    placeholder="0.00" [(ngModel)]="targetExpenseAmount">
+
+
+                </div>
+                <div class="col-5">
+                  <input type="number" readonly class="form-control-plaintext text-center" id="staticActualExpenses"
+                    placeholder="0.00" [(ngModel)]="expenseAmount">
+                </div>
+              </div>
+
+
+            </div>
           </div>
         </div>
-        <div class="">
-          <div class="collapse mt-3" id="zbb">
-            <!-- zero based will work by having them input all of their incomes first, then 
-enter their savings + expenses, but as they're entering these, the amount from the income 
-keeps gets substracted - have a part that says : amount remaining 
-stop when they don't have anythign left-->
-            <form #zbbForm="ngForm" class="form-profile">
-              Income
-              <p class="small text-muted">Enter all income that you expect in a month</p>
-              <hr>
-              <div class="form-group row mt-3">
-                <div class="col">
-                  <div class="row">
-                    <div class="col">
-                      <label for="employerSalary" class="mt-2">Paycheck</label>
-                      <input type="number" class="form-control" id="employerSalary" name="employerSalary" placeholder=""
-                        required>
-                    </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="text-center">
+            <img src="assets/images/computer.PNG" width="35%">
+          </div>
+        </div>
+      </div>
 
-                    <div class="col">
-                      <label for="interest" class="mt-2">Interest and Dividends</label>
-                      <input type="number" class="form-control" id="interest" name="interest" placeholder="" required>
-                    </div>
+    </div>
+
+    <div *ngIf="!hasPopulatedBudgetType">
+      <div class="row">
+        <!-- <div class="col-2">
+      <nav id="navbar-example3" class="navbar toc sticky">
+        <nav class="nav flex-column">
+          <a class="nav-link" href="budget#gettingstarted">Getting Started</a>
+          <nav class="nav flex-column">
+            <a class="nav-link ml-3 my-1" href="budget#zbbIntro">Zero Based Budgeting</a>
+            <a class="nav-link ml-3 my-1" href="budget#fiftyIntro">50/30/20 Budgeting</a>
+            <a class="nav-link ml-3 my-1" href="budget#envelopeIntro">Envelope System Budgeting</a>
+          </nav>
+          <a class="nav-link" href="budget#selection">Select a Budget</a>
+          <a class="nav-link" href="budget#inputs">Enter Income, Savings, and Expenses</a>
+          <a href="budget#budgetBreakdown" class="nav-link">Budget Breakdown</a>
+        </nav>
+      </nav>
+      </div> -->
+
+        <div class="col">
+          <div style="position:relative;">
+            <div class="caption">
+              <h3 id="gettingstarted" class="">Getting started</h3>
+              <p class="">Learn about 3 tried-and-true budgeting plans</p>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-4">
+                <div class="card px-4 py-4 border learning shadow">
+                  <h5 id="zbbIntro" class="text-center">Zero Based</h5>
+                  <div class="icon mt-2">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-diagram-3" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z" />
+                    </svg>
                   </div>
-
-                  <div class="row">
-                    <div class="col">
-                      <label for="ss" class="mt-2">Social Security Benefits</label>
-                      <input type="number" class="form-control" id="ss" name="ss" placeholder="" required>
-                    </div>
-
-                    <div class="col">
-                      <label for="unemployment" class="mt-2">Unemployment Benefits</label>
-                      <input type="number" class="form-control" id="unemployment" name="unemployment" placeholder=""
-                        required>
-                    </div>
+                  <hr>
+                  <p>
+                    "Zero-based budgeting is a method that has you allocate all of your money to expenses, savings, and
+                    debt
+                    payments. The goal is that your income minus your expenditures equals zero by the end of the month."
+                    <br>
+                    <small class="text-muted">Source: NerdWallet <br>
+                      <a href="https://www.nerdwallet.com/article/finance/zero-based-budgeting-explained">Learn
+                        More</a></small>
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4">
+                <div class="card px-4 py-4 shadow learning">
+                  <h5 id="fiftyIntro" class="text-center">50/30/20</h5>
+                  <div class="icon mt-2">
+                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-grid-1x2" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M6 1H1v14h5V1zm9 0h-5v5h5V1zm0 9h-5v5h5v-5zM0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1V1zm1 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-5z" />
+                    </svg>
                   </div>
-
-                  <div class="row">
-                    <div class="col">
-                      <label for="alimony" class="mt-2">Alimony</label>
-                      <input type="number" class="form-control" id="alimony" name="alimony" placeholder="" required>
-                    </div>
-
-                    <div class="col">
-                      <label for="custom" class="mt-2">Custom</label>
-                      <input type="number" class="form-control" id="custom" name="custom" placeholder="" required>
-                    </div>
+                  <hr>
+                  <p>
+                    The 50/30/20 budgeting plan divides your expenses into three categories: needs, wants, and savings /
+                    debt
+                    repayment. Your net income is then allocated 50% to needs, 30% to wants, 20% to savings / debt
+                    repayment.
+                    <br>
+                    <small class="text-muted"> Source: NerdWallet<br>
+                      <a href="https://www.nerdwallet.com/article/finance/nerdwallet-budget-calculator"> Learn more</a>
+                    </small>
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4">
+                <div class="card px-4 py-4 shadow learning">
+                  <h5 id="envelopeIntro" class="text-center">Envelope System</h5>
+                  <div class="icon mt-2">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
+                    </svg>
                   </div>
-
-
-                  <!-- need section for custom inputs 
-                  allow infinite custom inputs -->
+                  <hr>
+                  <p>
+                    With the Envelope System, you physically allocate portions of your monthly income (in cash) toward
+                    different
+                    spending categories, which you designate with an envelope.
+                    <br>
+                    <small class="text-muted">Source: NerdWallet<br>
+                      <a href="https://www.nerdwallet.com/article/finance/envelope-system"> Learn more</a>
+                    </small>
+                  </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-              Savings
-              <hr>
-              <div class="row">
-                <div class="col">
-                  <!-- maybe do a tooltip that explains what it is? -->
-                  <label for="employerSponsed" class="mt-2">Employer Sponsored Savings</label>
-                  <input type="number" class="form-control" id="employerSponsed" name="employerSponsed" placeholder=""
-                    required>
-                </div>
+    <div class="row mt-2">
+      <!-- if budget is empty, show select a budget -->
+      <div class="col">
+        <div *ngIf="!hasPopulatedBudgetType">
+          <div class="caption">
+              <h3 id="selection" class="">Select A Budget</h3>
+              <p class="">After reviewing each budget plan, select a plan that best fits your lifestyle.
+                <br>
+                Start by considering how each plan works with your financial goals.
+                <br>
+                 Also take into account the amount of
+                time you want to dedicate each day / week / month to budgeting.
+              </p>
+          </div>
 
-                <div class="col">
-                  <label for="SavingsAccount" class="mt-2">Savings Account</label>
-                  <input type="number" class="form-control" id="SavingsAccount" name="SavingsAccount" placeholder=""
-                    required>
-                </div>
+
+        </div>
+
+        <!--  if budget is populated, show update budget plan -->
+        <div *ngIf="hasPopulatedBudgetType" class="caption">
+          <h3 >Update your budget selection</h3>
+          <p>
+            Ready to try a different budget plan?
+          </p>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row ">
+
+          <!-- radio buttons -->
+          <div class="col-sm-2 col-md-4 ">
+            <div class="text-center">
+              <img src="assets/images/money.PNG" width="45%">
+            </div>
+          </div>
+          <div class="col-sm-2 col-md-3">
+            <form id="budgetSelections">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="budgetType" data-target="#ze" value="zbb"
+                  data-toggle="collapse" (click)="showInputBox()" [(ngModel)]="budgetBreakdown.budgetType">
+                <label class="form-check-label" for="zbb">
+                  Zero-Based
+                </label>
               </div>
-              <div class="row">
-                <div class="col">
-                  <!-- maybe do a tooltip that explains what it is? -->
-                  <label for="mma" class="mt-2">Money Market Account</label>
-                  <input type="number" class="form-control" id="mma" name="mma" placeholder="" required>
-                </div>
-
-                <div class="col">
-                  <label for="cd" class="mt-2">Certificate of Deposit</label>
-                  <input type="number" class="form-control" id="cd" name="cd" placeholder="" required>
-                </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="budgetType" data-target="#ze" #radioToggle
+                  value="envelope" data-toggle="collapse" (click)="showInputBox()"
+                  [(ngModel)]="budgetBreakdown.budgetType">
+                <label class="form-check-label" for="envelope">
+                  Envelope
+                </label>
               </div>
-              <!-- again need custom option -->
-              
-              Expenses
-              <hr>
-              <h5>Bills and Utilities</h5>
-              <div class="row">
-
-                <div class="col">
-
-                  <label for="housing" class="mt-2">Housing</label>
-                  <input type="number" class="form-control" id="housing" name="housing" placeholder="" required>
-                </div>
-
-                <div class="col">
-                  <label for="wg" class="mt-2">Water and Gas</label>
-                  <input type="number" class="form-control" id="wg" name="wg" placeholder="" required>
-                </div>
+              <div class="form-check disabled">
+                <input class="form-check-input" type="radio" name="budgetType" id="fifty" value="fifty"
+                  data-toggle="collapse" (click)="hideInputBox()" [(ngModel)]="budgetBreakdown.budgetType">
+                <label class="form-check-label" for="fifty">
+                  50/30/20
+                </label>
               </div>
-              <div class="row">
-                <div class="col">
-                  <!-- maybe do a tooltip that explains what it is? -->
-                  <label for="cable" class="mt-2">Cable & Internet</label>
-                  <input type="number" class="form-control" id="cable" name="cable" placeholder="" required>
-                </div>
-
-                <div class="col">
-                  <label for="mobile" class="mt-2">Mobile</label>
-                  <input type="number" class="form-control" id="mobile" name="mobile" placeholder="" required>
-                </div>
-              </div>
-
-              <button class="btn btn-primary" type="submit" [disabled]="!zbbForm.valid">
-                <!-- <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-                      ></span> -->
-                Save Changes
-              </button>
             </form>
-
-
-
           </div>
-          <div class="collapse mt-3" id="envelope">
-            Here goes the envelope form
-            <!-- for envelope, they will enter their total monthly income 
-            they will enter amounts for savings + expense categories 
-          will also subtract from income, but will allow them to overspend  -->
-          </div>
-          <div class="collapse mt-3" id="fifty">
-            <!-- will enter income
-              savings will automatically be calculated based 20% rule
 
-            will enter amounts into expense - need group (auto calculate 50%)
-          will enter amounts into expense - want group (auto calculate 30%)
-         -->
-            here goes the fifty form
+          <!-- budget breakdown for zero based and envelope - does not show if zbb or envelope radio button not selected  -->
+          <div class="col-sm-8 col-md-5">
+            <div class="card w-100" #ze [hidden]="hide">
+              <div class="card-body">
+                <form>
+                  <div class="row">
+                    <div class="col-sm-4 col-md-6">
+                      <label class="mt-2" for="targetExpenses">
+                        Target Expense Budget
+                      </label>
+                    </div>
+                    <div class="col-sm-6 col-md-5 text-center mr-n5">
+                      <input type="number" min="0" max="100" step="1" class="form-control" id="targetExpenses"
+                        aria-describedby="targetExpenses" placeholder="% of income"
+                        [(ngModel)]="budgetBreakdown.expensesBreakdown" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-2 mt-2 text-center ml-n4 ">
+                      <p>%</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4 col-md-6">
+                      <label class="mt-2" for="targetSavings">Target Savings Budget</label>
+                    </div>
+                    <div class="col-sm-6 col-md-5 text-center  mr-n4">
+                      <input type="number" min="0" max="100" step="1" class="form-control" id="targetSavings"
+                        aria-describedby="targetSavings" placeholder="% of income"
+                        [(ngModel)]="budgetBreakdown.savingsBreakdown" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-2 mt-2 text-center ml-n5">
+                      <p>%</p>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<h4>Set goals</h4>
 
 
 
+    <div class="row">
+      <div class="col-12">
+        <div class="mt-2">
+          <div class="caption">
+            <h3 class="text-capitalize">
+              Enter your current monthly income, savings, and expenses
+            </h3>
+            <p>
+              Add, update, and remove items from your finances as often as you'd like
+            </p>
 
-
-<!-- If budget plan is not blank-->
-<div>
-  <div class="row">
-    <div class="col">
-      <h4 class="mt-4">Key points about their selected budget plan</h4>
-      <!-- if budget plan is zbb, then info -->
-      <!-- if budget is 50, then info -->
-      <!-- if budget is envelop, then info -->
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
+          {{errorMessage}}
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="showSuccessMessage">
+          <!--  -->
+          {{successMessage}}
+        </div>
+      </div>
     </div>
-    <div class="col-9">
-      <h4>Change Budget Plan</h4>
-      <h4>Update Expenses, Income, Savings</h4>
-      <h4>Set goals</h4>
+
+    <div class="row" id="inputs">
+      <div class="col-12">
+      </div>
+      <div class="col-sm-12 col-md-7 mt-3">
+        <div class="inputs border">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link links active" data-toggle="tab" href="#incomeZ">Income</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link links" data-toggle="tab" href="#savingsZ">Savings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link links" data-toggle="tab" href="#expensesZ">Expenses</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <!-- (ngSubmit)="onSubmit()" -->
+            <div id="incomeZ" class="tab-pane active">
+              <app-budgetIncome (incomeChangeEvent)="recalculateIncome($event)"
+                [budgetType]="budgetBreakdown.budgetType"></app-budgetIncome>
+            </div>
+
+            <div id="expensesZ" class="tab-pane">
+              <app-budgetExpenses (expensesEventEmit)="recalculateExpenses($event)"
+                [budgetType]="budgetBreakdown.budgetType"></app-budgetExpenses>
+            </div>
+
+            <div id="savingsZ" class="tab-pane">
+              <app-budget-Savings (savingsChangeEvent)="recalculateSavings($event)"
+                [budgetType]="budgetBreakdown.budgetType"></app-budget-Savings>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class class="col-sm-12 col-md-4">
+        <div class=" nw mt-3">
+          <div class="icon">
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-calculator" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M12 1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
+              <path
+                d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z" />
+            </svg>
+          </div>
+
+          <!-- add up from input fields from input forms-->
+          <h6 class="card-title text-center mt-2">
+            Net Worth Calculator
+          </h6>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <p>Total Income</p>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control mb-3 smallText" id="totalIncomeAmount" [(ngModel)]="incomeAmount"
+                name="totalIncomeAmount" placeholder="0.00" readonly>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Total Expenses</p>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control mb-3 smallText" id="totalExpensesAmount"
+                [(ngModel)]="expenseAmount" name="totalExpensesAmount" placeholder="0.00" readonly>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Total Savings</p>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control mb-3 smallText" id="totalSavingsAmount"
+                [(ngModel)]="savingAmount" name="totalSavingsAmount" placeholder="0.00" readonly>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <p><strong>Net Worth</strong></p>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control mb-3 smallText" id="nwAmount" [(ngModel)]="total" name="nwAmount"
+                placeholder="0" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-12 text-center mb-3">
+        <button class="btn ml-4 mt-4 buttonColor" (click)="onSubmit()" [disabled]="!enableSubmit"> Submit</button>
+      </div>
+    </div>
+
+
   </div>
 </div>

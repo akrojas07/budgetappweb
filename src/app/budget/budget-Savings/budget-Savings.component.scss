@@ -1,0 +1,62 @@
+.options{
+    font-size:small;
+}
+.optionInputs{
+    font-size:small;
+}
+
+.removeIcon{
+    color: red;
+    margin-left:-50%;
+}
+
+@media screen and (max-width: 500px){
+    .removeIcon{
+        display: none;
+    }
+    .options{
+        right: 5%;
+    }
+    .optionInputs{
+        margin-right: -5%;
+    }
+    .smallText{
+        font-size:x-small;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .options{
+        font-size:small;
+        width: 100%;
+        margin-left: 10%;
+
+    }
+    .smallText{
+        font-size:x-small;
+    }
+    .removeIcon{
+        font-size: small;
+    }
+    .optionInputs{
+        font-size: small;
+    }
+
+  }
+
+  @media screen and (min-width: 1200px) {
+    .options{
+        font-size:medium;
+        width: 220px;
+        margin-left: 20%;
+    }
+    .optionInputs{
+        font-size:medium;
+        width: 125px;
+        margin-left: 25%;
+        margin-right: -15%;
+    }
+    .removeIcon{
+        margin-left:0%;
+    }
+  }

@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
 import { UserLoginResponse } from '../_models/userLoginResponse';
 import { UserLoginRequest } from '../_models/userLoginRequest';
 import { UserUpdateProfile } from '../_models/userUpdateProfileResponse';
-import {UserProfileUpdateRequest } from '../_models/UserProfileUpdateRequest';
+import { UserProfileUpdateRequest } from '../_models/UserProfileUpdateRequest';
 import { UserUpdatePasswordRequest } from '../_models/UserUpdatePasswordRequest';
-// import { UserUpdatePasswordResponse } from '../_models/UserUpdatePasswordResponse';
+
 
 @Injectable({
   providedIn: 'root',

@@ -1,0 +1,65 @@
+.buttonColor {
+  background-color: rgb(36, 134, 128);
+  color: whitesmoke;
+}
+
+.enterGoalsCard {
+  font-size: medium;
+  padding: 2%;
+}
+
+.progressBar {
+  background-color: rgb(130, 228, 208);
+}
+
+.general{
+  font-size: medium;
+}
+
+th{
+  border-bottom: 1px solid;
+}
+.goalsTable{
+  table-layout: auto;
+  margin: 2%;
+}
+
+@media screen and (max-width: 400px) {
+  .goalText {
+    display: none;
+  }
+  .toDisplay{
+    font-size: large;
+  }
+  .goalsTable{
+    font-size:large;
+    margin: 5%;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .enterGoalsCard {
+    font-size: large;
+  }
+  .goalText {
+    display: none;
+  }
+  .toDisplay{
+    font-size: large;
+  }
+
+  .goalsTable{
+    font-size:large;
+    margin: 5%;
+  }
+}
+
+@media screen and (max-width: 2000px) {
+  .enterGoalsCard {
+    font-size: large;
+    width: 100%;
+  }
+  .goalsTable{
+    font-size:large;
+  }
+}

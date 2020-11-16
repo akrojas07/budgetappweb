@@ -1,4 +1,5 @@
 export class Goals {
+    Id: Number;
     GoalName: string;
     GoalSummary: string;
     GoalAmount: number;

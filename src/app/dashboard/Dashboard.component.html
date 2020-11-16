@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-3">
-    <div class="col-6">
+    <div class="col-7">
       <div class="card">
         <div class="card-header text-center">
           Budget Progress
@@ -15,7 +15,7 @@
       </div>
       
     </div>
-    <div class="col-6">
+    <div class="col-5">
       <div class="card">
         <div class="card-header text-center">
           Goal Progress
@@ -57,7 +57,51 @@
     </div>
   </div>
 
-<div class="card mt-4">
+  <div class="row mt-3">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header text-center">
+          Expense Breakdown
+        </div>
+        <div class="card-body">
+          <div style="display: block;">
+            <canvas baseChart 
+              [data]="pieChartData1" 
+              [labels]="pieChartLabels1" 
+              [chartType]="pieChartType1"
+              [options]="pieChartOptions1"
+              [plugins]="pieChartPlugins1"
+              [colors]="pieChartColors"
+              [legend]="pieChartLegend1">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header text-center">
+          Savings Breakdown
+        </div>
+        <div class="card-body">
+          <div style="display: block;">
+            <canvas baseChart 
+              [data]="pieChartData2" 
+              [labels]="pieChartLabels2" 
+              [chartType]="pieChartType2"
+              [options]="pieChartOptions2"
+              [plugins]="pieChartPlugins2"
+              [colors]="pieChartColors"
+              [legend]="pieChartLegend2">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="card mt-3">
   <div class="card-header">
     <h3 id="goals">Financial Goals</h3>
   </div>

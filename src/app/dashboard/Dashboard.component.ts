@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GoalsService } from '../_services/goals.service';
 import { ChartOptions, ChartType, ChartDataSets, TickOptions, ChartData } from 'chart.js';
-import { Colors, Label } from 'ng2-charts';
+import { Colors, Label, SingleDataSet } from 'ng2-charts';
 import { GoalsResponse } from '../_models/GoalsResponse';
 import { Goals } from '../_models/GoalsRequest';
 
@@ -37,6 +37,26 @@ export class DashboardComponent implements OnInit {
   ];
   public barChartOptions1: ChartOptions = { responsive: true, scales: { yAxes:[{ticks: {min: 0}}]}};
 
+
+  public pieChartOptions1: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels1: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
+  public pieChartData1: SingleDataSet = [300, 500, 100];
+  public pieChartType1: ChartType = 'pie';
+  public pieChartLegend1 = true;
+  public pieChartPlugins1 = [];
+  public pieChartColors: Colors[] = [{backgroundColor:['#82e4d0', '#cadfdf', '#90bbc2', '#98d7c2', '#248680', '#dedce1']}]
+  
+  public pieChartOptions2: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels2: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
+  public pieChartData2: SingleDataSet = [300, 500, 100];
+  public pieChartType2: ChartType = 'pie';
+  public pieChartLegend2 = true;
+  public pieChartPlugins2 = [];
+
   goalsList: Goals[] = [];
   userId: number;
 
@@ -64,6 +84,7 @@ export class DashboardComponent implements OnInit {
           let progress = ((goal.amount / goal.targetAmount) * 100);
 
           this.goalsList.push({
+            Id: goal.id,
             GoalAmount: goal.amount,
             GoalName: goal.goalName,
             GoalSummary: goal.goalSummary,
@@ -74,6 +95,7 @@ export class DashboardComponent implements OnInit {
           });
         }
       });
+      console.log(this.goalsList);
   }
 
   // populateGoalDataset(): void {

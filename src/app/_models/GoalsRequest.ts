@@ -1,5 +1,6 @@
-export class Goals {
-    Id: Number;
+export class GoalsRequest {
+    Id: number;
+    UserId: number;
     GoalName: string;
     GoalSummary: string;
     GoalAmount: number;

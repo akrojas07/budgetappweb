@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Goals } from '../_models/GoalsRequest';
+import { GoalsRequest } from '../_models/GoalsRequest';
 import { GoalsResponse } from '../_models/GoalsResponse';
 
 @Injectable({
@@ -17,8 +17,8 @@ export class GoalsService {
     return this.http.get<GoalsResponse[]>(this.baseUrl + userId);
   }
 
-  upsertGoals(model: Goals[]): Observable<any>{
-    const body = {Goals: model};
+  upsertGoals(model: GoalsRequest[]): Observable<any>{
+    const body = {UpsertGoals: model};
     return this.http.put(this.baseUrl, body);
   }
 }

@@ -1,76 +1,116 @@
-<button type="button" class="btn">
+<button type="button" class="btn" data-toggle="collapse" data-target="#newGoalForm">
   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
     xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
     <path fill-rule="evenodd"
       d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
   </svg>
-  Add New Goal
-</button>
-<button type="button" class="btn">
-  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-    <path fill-rule="evenodd"
-      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-  </svg>
-  Update Goal
+  Add Goal
 </button>
 
+<div class="row">
+  <div class="col-2">
 
-<div class="card enterGoalsCard">
-  <div class="card-body">
-    <form>
-      <div class="form-group row">
-        <label for="goalName" class="col-sm-4 col-form-label">Goal Name</label>
-        <div class="col-sm-7">
-          <!-- for nw -->
-          <input type="text" class="form-control" id="goalName" placeholder="Save for downpayment">
-  
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="goalSummary" class="col-sm-4 col-form-label">Goal Summary</label>
-        <div class="col-sm-7">
-          <textarea class="form-control" id="goalSummary" rows="3"
-            placeholder="Save $200,000 for downpayment on $800,000 house"></textarea>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="goalAmount" class="col-sm-4 col-form-label">Target Amount</label>
-        <div class="col-sm-7">
-          <input type="number" class="form-control" id="goalAmount" placeholder="200,000.000">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="startDate" class="col-sm-4 col-form-label">Start Date</label>
-        <div class="col-sm-7">
-          <input type="date" class="form-control" id="startDate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="endDate" class="col-sm-4 col-form-label">End Date</label>
-        <div class="col-sm-7">
-          <input type="date" class="form-control" id="endDate">
-        </div>
-      </div>
-  
-      <hr>
-      <div class="row">
-        <div class="col">
-          <button type="submit" class="btn buttonColor ">
-            <div class="">
-              Submit
-            </div>
-          </button>
-        </div>
-        <div class="col">
-  
-        </div>
-      </div>
-  
-  
-    </form>
   </div>
+  <div class="col">
+    <div class="card collapse" id="newGoalForm">
+      <div class="card-header">
+        Add New Goal
+      </div>
+      <div class="card-body">
+        <form #newGoalForm="ngForm" (ngSubmit) = "addGoalEventEmit()">
+          <div class="alert alert-danger p-1" role="alert" *ngIf="showErrorMessage">
+            {{errorMessage}}
+          </div>
+          <div class="form-group">
+            <label for="goalName">Goal Name</label>
+            <input type="text" class="form-control" id="goalName" placeholder="Save for downpayment" name = "goalName" [(ngModel)]="model.GoalName" required>
+          </div>
+          <div class="form-group">
+            <label for="goalSummary">Goal Summary</label>
+            <input type="text" class="form-control" id="goalSummary" name="goalSummary" [(ngModel)]="model.GoalSummary" 
+            placeholder="Save $200,000 for downpayment on $800,000 house" 
+            required>
+          </div>
+          <div class="form-group">
+            <label for="targetAmount">Target Amount</label>
+            <input type="number" class="form-control" id="targetAmount" name="targetAmount" [(ngModel)]="model.TargetAmount" 
+            placeholder="200,000.000"
+            min="0"
+            required>
+          </div>
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="model.StartDate" required>
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="model.EndDate" required>
+          </div>
+          <button type="submit" class="btn buttonColor text-center" (submit)="addGoalEventEmit()" [disabled]="!newGoalForm.valid">Submit</button>
 
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="updateGoalModal" tabindex="-1" data-show="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateGoalModalLabel">Update Goal</h5>
+        <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateGoal()">
+          <div class="alert alert-danger p-1" role="alert" *ngIf="showErrorMessage">
+            {{errorMessage}}
+          </div>
+          <div class="form-group">
+            <label for="goalName">Goal Name</label>
+            <input type="text" class="form-control" id="goalName" placeholder="Save for downpayment"
+            name = "updateGoalName" 
+              [(ngModel)]="model.GoalName" required>
+          </div>
+          <div class="form-group">
+            <label for="goalSummary">Goal Summary</label>
+            <input type="text" class="form-control" id="goalSummary" 
+            name = "updateGoalSummary" [(ngModel)]="model.GoalSummary" required>
+          </div>
+          <div class="form-group">
+            <label for="targetAmount">Target Amount</label>
+            <input type="number" class="form-control" id="targetAmount" name="updateTargetAmount"
+            [(ngModel)]="model.TargetAmount" required>
+          </div>
+          <div class="form-group">
+            <label for="currentAmount">Current Amount</label>
+            <input type="number" class="form-control" id="currentAmount" name = "UpdateGoalAmount"[(ngModel)]="model.GoalAmount" required>
+          </div>
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" class="form-control" id="startDate" name = "updateStartDate"[(ngModel)]="model.StartDate" required>
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="date" class="form-control" id="endDate" name="updateEndDate"[(ngModel)]="model.EndDate" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="saveChanges" [disabled]="!updateForm.valid">Save
+              changes</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
 </div>

@@ -1,14 +1,16 @@
-<div class="container">
-  <div class="row mt-3">
+<div class="container-fluid">
+  <h1 class="text-center">Dashboard</h1>
+  <div class="row mt-4">
     <div class="col-7">
-      <div class="card">
-        <div class="card-header text-center">
-          Budget Progress
-        </div>
+      <div class="caption">
+        <h4>Budget Progress</h4>
+      </div>
+      <div class="card mt-3">
         <div class="card-body">
           <div style="display: block;">
-            <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions1"
-              [plugins]="barChartPlugins1" [legend]="barChartLegend1" [colors]="barChartColors" [chartType]="barChartType1">
+            <canvas baseChart [colors]="barChartColors" [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions1"
+              [plugins]="barChartPlugins1" [legend]="barChartLegend1"  [chartType]="barChartType1">
+              <!--  -->
             </canvas>
           </div>
         </div>
@@ -16,10 +18,14 @@
       
     </div>
     <div class="col-5">
-      <div class="card">
-        <div class="card-header text-center">
-          Goal Progress
-        </div>
+      <div class="caption">
+        <h4>Goal Progress</h4>
+      </div>
+      <div class="card mt-3">
+        <!-- <div class="card-title pl-5 pt-2">
+          <h3>Current stats:</h3>
+          <h3>{{goalsList.length}} goals</h3>
+        </div> -->
         <div class="card-body">
           <div class="table-responsive">
             <table width="100%">
@@ -60,10 +66,10 @@
 
   <div class="row mt-3">
     <div class="col-6">
-      <div class="card">
-        <div class="card-header text-center">
-          Expense Breakdown
-        </div>
+      <div class="caption">
+        <h4>Expense Breakdown</h4>
+      </div>
+      <div class="card mt-3">
         <div class="card-body">
           <div style="display: block;">
             <canvas baseChart 
@@ -81,10 +87,10 @@
     </div>
 
     <div class="col-6">
-      <div class="card">
-        <div class="card-header text-center">
-          Savings Breakdown
-        </div>
+      <div class="caption">
+        <h4>Savings Breakdown</h4>
+      </div>
+      <div class="card mt-3">
         <div class="card-body">
           <div style="display: block;">
             <canvas baseChart 
@@ -102,9 +108,7 @@
     </div>
   </div>
 
-  <p id="createGoals" class="mt-3 mb-n1">
-    Create short and long term financial goals
-  </p>
+
   <app-dashboard-goals [goalsList]="this.goalsList" (goalEvent)="addGoal($event)"></app-dashboard-goals>
 
 

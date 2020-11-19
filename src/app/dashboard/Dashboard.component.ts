@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GoalsService } from '../_services/goals.service';
 import {
   ChartOptions,
@@ -12,6 +12,7 @@ import { GoalsResponse } from '../_models/GoalsResponse';
 import { GoalsRequest } from '../_models/GoalsRequest';
 import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
 import { identifierModuleUrl } from '@angular/compiler';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-Dashboard',
@@ -28,6 +29,8 @@ export class DashboardComponent implements OnInit {
 
   goalsList: GoalsRequest[] = [];
   userId: number;
+
+  @Output() goals =  new EventEmitter<GoalsRequest>();
 
   public barChartLabels1: Label[] = ['Savings', 'Expenses'];
   public barChartType1: ChartType = 'bar';
@@ -148,33 +151,25 @@ export class DashboardComponent implements OnInit {
     window.location.reload();
   }
 
-  addGoal(event: GoalsRequest): void {
-    console.log(this.goalsList);
-    this.goalsList.push({
-      UserId: event.UserId,
-      GoalAmount: 0,
-      GoalName: event.GoalName,
-      GoalSummary: event.GoalSummary,
-      StartDate : event.StartDate,
-      EndDate : event.EndDate,
-      TargetAmount: event.TargetAmount,
-      Id: event.Id,
-      Progress: 0
-    });
+  addGoal(event: GoalsRequest[]): void {
+    this.goalsList = [];
+
+    for(const goal of event)
+    {
+      this.goalsList.push(goal);
+    }
+
     this.upsertGoals();
-
-
   }
 
+
   upsertGoals(): void {
+    console.log(this.goalsList);
     this.goalsService.upsertGoals(this.goalsList).subscribe(
       (res) => {
         this.successMessage = 'Save Successful';
         this.showSuccessMessage = true;
         setTimeout(this.refresh, 3000);
-
-
-        
       },
       (error) => {
         this.errorMessage = 'Unable to save';
@@ -184,9 +179,4 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  removeGoal(i: number): void {
-    this.goalsList.splice(i, 1);
-    console.log(this.goalsList);
-    //this.upsertGoals();
-  }
 }

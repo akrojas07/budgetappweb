@@ -26,9 +26,12 @@ export class DashboardComponent implements OnInit {
   showSuccessMessage: boolean;
   showErrorMessage: boolean;
   showNoGoalsMessage: boolean;
+  hide: boolean;
+
   successMessage: string;
   errorMessage: string;
   noGoalsMessage: string;
+  sysdate = new Date().toLocaleDateString();
 
   goalsList: GoalsRequest[] = [];
   targetExpenseDataTotal: number;
@@ -61,6 +64,7 @@ export class DashboardComponent implements OnInit {
   public barChartOptions1: ChartOptions = {
     responsive: true,
     scales: { yAxes: [{ ticks: { min: 0 } }] },
+    maintainAspectRatio: false
   };
   public barChartData1: ChartDataSets[] = [{label: 'Target', data: [500, 800]}, {label: 'Actual', data: [500, 800]}];
 
@@ -108,14 +112,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.showErrorMessage = false;
     this.showSuccessMessage = false;
-
+    this.hide = true;
     this.userId = Number(localStorage.getItem('userId'));
     this.getGoalsList();
     this.getActualData();
     this.getIncomeData();
     this.getTargetData();
-
   }
+
+
 
   getGoalsList(): void {
     this.goalsList = [];
@@ -125,6 +130,7 @@ export class DashboardComponent implements OnInit {
           for (let i = 0; i < res.length; i++) {
             let goal = res[i];
             let progress = (goal.amount / goal.targetAmount) * 100;
+            let timeRemaining = Math.abs(new Date(goal.endDate).getTime() - new Date(this.sysdate).getTime());
 
             this.goalsList.push({
               Id: goal.id,
@@ -136,6 +142,7 @@ export class DashboardComponent implements OnInit {
               EndDate: goal.endDate,
               TargetAmount: goal.targetAmount,
               Progress: progress > 100 ? 100 : progress,
+              DaysRemaining: Math.ceil(timeRemaining / (1000 * 3600 * 24))
             });
           }
         }
@@ -204,8 +211,7 @@ export class DashboardComponent implements OnInit {
     for (const goal of event) {
       this.goalsList.push(goal);
     }
-
-    this.upsertGoals();
+    this.hide = false;
   }
 
   upsertGoals(): void {

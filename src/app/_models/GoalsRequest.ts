@@ -8,4 +8,5 @@ export class GoalsRequest {
     EndDate: Date;
     TargetAmount: number;
     Progress: number;
+    DaysRemaining: number;
 }

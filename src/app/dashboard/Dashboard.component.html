@@ -1,115 +1,114 @@
-<div class="container-fluid">
+<div class="container-fluid w-75">
   <h1 class="text-center">Dashboard</h1>
   <div class="row mt-4">
-    <div class="col-7">
-      <div class="caption">
-        <h4>Budget Progress</h4>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <div style="display: block;">
-            <canvas baseChart [colors]="barChartColors" [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions1"
-              [plugins]="barChartPlugins1" [legend]="barChartLegend1"  [chartType]="barChartType1">
-              <!--  -->
-            </canvas>
+    <div class="col-sm-12 col-md-7">
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="caption">Budget Progress</div>
+          <div class="card mt-3">
+            <div class="card-body">
+              <div class="chart-container" >
+                <canvas baseChart [colors]="barChartColors" [datasets]="barChartData1" [labels]="barChartLabels1"
+                  [options]="barChartOptions1" [plugins]="barChartPlugins1" [legend]="barChartLegend1"
+                  [chartType]="barChartType1">
+                </canvas>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="col-12">
+          <div class="">
+            <div>
+              <div class="caption  mt-3">
+                Goal Progress
+              </div>
+              <div class="card mt-3 cardFontSizing">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table width="100%">
+                      <thead>
+                        <th class="border-bottom">
+                          Goal Name
+                        </th>
+                        <th class="border-bottom displayHideSmall text-center">
+                          Days Remaining
+                        </th>
+                        <th class="border-bottom text-center" colspan="2">
+                          Goal Progress
+                        </th>
       
-    </div>
-    <div class="col-5">
-      <div class="caption">
-        <h4>Goal Progress</h4>
-      </div>
-      <div class="card mt-3">
-        <!-- <div class="card-title pl-5 pt-2">
-          <h3>Current stats:</h3>
-          <h3>{{goalsList.length}} goals</h3>
-        </div> -->
-        <div class="card-body">
-          <div class="table-responsive">
-            <table width="100%">
-              <thead>
-                <th class="border-bottom">
-                  Goal Name
-                </th>
-                <th class="border-bottom">
-                  End Date                                              
-                </th>
-                <th class="border-bottom">
-                  Goal Progress                                              
-                </th>
-
-              </thead>
-
-              <tr *ngFor="let goal of goalsList; let i = index">
-                <td>
-                  <input type="text" readonly class="form-control-plaintext"
-                  [ngModel]="goal.GoalName" [ngModelOptions]="{standalone: true}">
-                </td>
-                <td>
-                  <input type="datetime" readonly class="form-control-plaintext"
-                  [ngModel]="goal.EndDate | date:'MM/dd/yyyy'" [ngModelOptions]="{standalone: true}">
-                </td>
-                <td>
-                  <div >
-                    <progress-bar [progress]="goal.Progress" [color]="'#90bbc2'"></progress-bar>
+                      </thead>
+      
+                      <tr *ngFor="let goal of goalsList; let i = index">
+                        <td class="progressBarName">
+                          {{goal.GoalName}}
+                        </td>
+                        <td class="displayHideSmall text-center">
+                          {{goal.DaysRemaining}}
+                        </td>
+                        <td>
+                          <div class="progressBarText">
+                            <progress-bar [progress]="goal.Progress" [color]="'#90bbc2'"></progress-bar>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
-                </td>
-              </tr>
-            </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="row mt-3">
-    <div class="col-6">
-      <div class="caption">
-        <h4>Expense Breakdown</h4>
       </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <div style="display: block;">
-            <canvas baseChart 
-              [data]="pieChartData1" 
-              [labels]="pieChartLabels1" 
-              [chartType]="pieChartType1"
-              [options]="pieChartOptions1"
-              [plugins]="pieChartPlugins1"
-              [colors]="pieChartColors"
-              [legend]="pieChartLegend1">
-            </canvas>
+    </div>
+    <div class="col-sm-12 col-md-5 displayHideSmall">
+      <div class="">
+        <div class="caption">
+          Savings Breakdown
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <div style="display: block;">
+              <canvas baseChart [data]="pieChartData2" [labels]="pieChartLabels2" [chartType]="pieChartType2"
+                [options]="pieChartOptions2" [plugins]="pieChartPlugins2" [colors]="pieChartColors"
+                [legend]="pieChartLegend2">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="caption mt-3">
+            Expense Breakdown
+          </div>
+          <div class="card mt-3">
+            <div class="card-body">
+              <div style="display: block;">
+                <canvas baseChart [data]="pieChartData1" [labels]="pieChartLabels1" [chartType]="pieChartType1"
+                  [options]="pieChartOptions1" [plugins]="pieChartPlugins1" [colors]="pieChartColors"
+                  [legend]="pieChartLegend1">
+                </canvas>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-6">
-      <div class="caption">
-        <h4>Savings Breakdown</h4>
-      </div>
-      <div class="card mt-3">
-        <div class="card-body">
-          <div style="display: block;">
-            <canvas baseChart 
-              [data]="pieChartData2" 
-              [labels]="pieChartLabels2" 
-              [chartType]="pieChartType2"
-              [options]="pieChartOptions2"
-              [plugins]="pieChartPlugins2"
-              [colors]="pieChartColors"
-              [legend]="pieChartLegend2">
-            </canvas>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
 
-  <app-dashboard-goals [goalsList]="this.goalsList" (goalEvent)="addGoal($event)"></app-dashboard-goals>
+
+  <div class="row">
+    <div class="col">
+      <app-dashboard-goals [goalsList]="this.goalsList" (goalEvent)="addGoal($event)"></app-dashboard-goals>
+    </div>
+  </div>
+
+  <button type="submit" class="btn buttonColor mt-3" id="saveUpdates" #upsert [hidden]="this.hide"
+  (click)="upsertGoals()">Save Changes</button>
 
 
 </div>

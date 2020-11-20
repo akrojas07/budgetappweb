@@ -16,18 +16,25 @@ import { GoalsRequest } from '../../_models/GoalsRequest';
   styleUrls: ['./dashboard-goals.component.scss'],
 })
 export class DashboardGoalsComponent implements OnInit {
-  showErrorMessage: boolean;
-  showSuccessMessage: boolean;
+  showAddErrorMessage: boolean;
+  showAddSuccessMessage: boolean;
+  showUpdateErrorMessage: boolean;
+  showUpdateSuccessMessage: boolean;
+  hide: boolean;
 
-  errorMessage: string;
-  successMessage: string;
+  addErrorMessage: string;
+  addSuccessMessage: string;
+  updateErrorMessage: string;
+  updateSuccessMessage: string;
+
+  indexNumber: number;
   userId: number;
 
   model: GoalsRequest;
   updateModel: GoalsRequest;
   currentGoalList: GoalsRequest[];
 
-  indexNumber: number;
+
 
   @ViewChild('closebutton') closebutton;
   @ViewChild('goalForm') goalForm;
@@ -40,8 +47,11 @@ export class DashboardGoalsComponent implements OnInit {
 
   ngOnInit() {
     this.userId = Number(localStorage.getItem('userId'));
-    this.showSuccessMessage = false;
-    this.showErrorMessage = false;
+    this.showAddSuccessMessage = false;
+    this.showAddErrorMessage = false;
+    this.showUpdateErrorMessage = false;
+    this.showUpdateSuccessMessage = false;
+    this.hide = false;
     this.model = new GoalsRequest();
     this.updateModel = new GoalsRequest();
     this.currentGoalList = this.goalsList;
@@ -75,8 +85,13 @@ export class DashboardGoalsComponent implements OnInit {
     goal.TargetAmount = this.model.TargetAmount;
     goal.StartDate = this.model.StartDate;
     goal.EndDate = this.model.EndDate;
+    goal.Progress = 0;
     this.currentGoalList.push(goal);
     this.goalEventEmit();
+    this.hide = true;
+    this.addSuccessMessage = 'Goal Added';
+    this.showAddSuccessMessage = true;
+
   }
 
   updateGoalsList(): void {
@@ -98,6 +113,8 @@ export class DashboardGoalsComponent implements OnInit {
     this.currentGoalList[this.indexNumber].EndDate = this.updateModel.EndDate;
 
     this.goalEventEmit();
+    this.closebutton.nativeElement.click();
+
   }
 
   removeGoal(i: number): void {

@@ -1,7 +1,23 @@
 .profileUpdate{
     font-size: large;
 }
-
+.buttonColor {
+    background-color: rgb(144, 187, 194);
+    color: whitesmoke;
+  }
 .links{
     color: rgb(97,194,162);
 }
+
+.caption{
+    padding: 1%;
+    color: rgb(144, 187, 194);
+    border-color: rgb(152,215,194);
+    border-radius: 10px;
+    border-width: 4px;
+    border-style: double;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    text-align: center;
+  
+  }

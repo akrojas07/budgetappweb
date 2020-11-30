@@ -1,14 +1,11 @@
-<div class="container">
+<div class="container mt-5">
+    <div class="caption">
+        <h3 class="text-capitalize">
+            Profile
+        </h3>
+    </div>
 
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link links active" data-toggle="tab" href="#profile">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link links" data-toggle="tab" href="#accounts">Accounts</a>
-        </li>
-    </ul>
-
+    
     <div class="tab-content">
         <div id="profile" class="tab-pane active">
             <div id="profile" class="profileUpdate">
@@ -56,22 +53,27 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid">
+                    <button class="btn buttonColor" type="submit" [disabled]="!profileForm.valid">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
                             *ngIf="formSubmitted"></span>
                         Save Changes
                     </button>
                 </form>
-                <hr>
+                
 
-                <h3>Update Password</h3>
+                <div class="caption">
+                    <h3 class="text-capitalize">
+                        Update Password
+                    </h3>
+                    <p class="text-muted">Choose a password that will be hard for other to guess</p>
+                </div>
                 <div class="alert alert-danger py-2 my-2" role="alert" *ngIf="showPasswordError">
                     {{errorMessage}}
                 </div>
                 <div class="alert alert-success py-2 my-2" role="alert" *ngIf="showPasswordSuccess">
                     {{successMessage}}
                 </div>
-                <p class="text-muted">Choose a password that will be hard for other to guess</p>
+
                 <form #passwordForm="ngForm" class="form-password w-75" (ngSubmit)="submitPasswordChanges()">
                     <div class="form-group row mt-3">
                         <div class="col">
@@ -87,7 +89,7 @@
                                 [(ngModel)]="confirmPassword" required>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit"
+                    <button class="btn buttonColor" type="submit"
                         [disabled]="!passwordForm.valid || !passwordFormValid">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
                             *ngIf="passwordFormSubmitted"></span>
@@ -98,8 +100,5 @@
         </div>
 
 
-        <div id="accounts" class="tab-pane">
-            <p>Some content in menu 1.</p>
-        </div>
     </div>
 </div>

@@ -19,11 +19,12 @@
 
     <div class="row">
       <div class="col-md-4 mt-5">
-        <p class="lead">Learn about different budgeting plans</p>
+        <h4 class="lead">Learn about different budgeting plans</h4>
         <hr>
         <p>
           Start by diving into three tried-and-true budgeting plans that are easy to implement
         </p>
+        
         <ul>
           <li>Zero Based Budget</li>
           <li>Envelope System</li>
@@ -45,7 +46,7 @@
         <div class="row mb-4"></div>
         <div class="row">
           <div class="col">
-          <p class="lead"> Select your preferred plan </p>
+          <h4 class="lead"> Select your preferred plan </h4>
           <hr>
           <p>After learning about the different plans, choose the one that would best fit into your lifestyle and
              suit your needs.
@@ -59,7 +60,7 @@
 
     <div class="row mt-5">
       <div class="col-md-4">
-        <p class="lead">Enter your financial information </p>
+        <h4 class="lead">Enter your financial information </h4>
         <hr>
         <p>Understanding your current financial situation is key to getting your finances under control.
           By laying out your monthly income, expenses, and savings, you'll get a better idea of how you're 
@@ -73,9 +74,9 @@
       </div>
     </div>
 
-    <p class="lead text-center mt-5">
+    <h4 class="lead text-center mt-5">
       And just like that, you're closer to achieving your financial goals. 
-    </p>
+    </h4>
 
     <div class="text-center">
       <img src="assets/images/progress.PNG">
@@ -95,7 +96,49 @@
 
 
   <div *ngIf="loggedIn()">
-    <p>Reasons to learn about personal finance, budgeting, and money management:</p>
+    <h1 class="text-center mt-4">Welcome to Mi Feria!</h1>
+    <div class="row">
+      <div class="col">
+        <h2>Why "Mi Feria"</h2>
+        <p>In spanish, the term "Feria" roughly translates to cash and "Mi Feria" translates to my money.
+          The Mi Feria Budgeting Application is all about learning to own your money and take control of your financial situation! </p>
+      </div>
+      <div class="col">
+        <div class="text-center">
+          <img src="assets/images/working.PNG">
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col ">
+        <div class="text-center">
+          <img src="assets/images/relaxing.PNG">
+        </div>
+      </div>
+      <div class="col pt-5">
+        <h2>Money is not scary</h2>
+        <p>
+          At some point, someone said money was scary and everyone agreed. But money is not scary, and taking control of your financial situation shouldn't be either.
+          Once you accept this, meeting your short and long term financial goals will be as easy as pie.
+        </p>
+      </div>
+    </div>
+    <div class="row mt-5 mb-5">
+      <div class="col pt-5">
+        <h2>"Budget" is not a bad word</h2>
+        <p>Through the Mi Feria process, you will learn that budget is not a bad word! In fact, your budget will become your best friend. As you progress, you will learn to use your budget to achieve your short and long term financial goals.</p>
+      </div>
+      <div class="col">
+        <div class="text-center">
+          <img src="assets/images/monies.PNG">
+        </div>
+      </div>
+    </div>
+
+    
+
+    <p class="lead">Go to <a class="reroute" [routerLink]="['/budget']">Budget</a></p>
+
   </div>
 
 </div>

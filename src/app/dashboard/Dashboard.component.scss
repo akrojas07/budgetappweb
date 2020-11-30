@@ -2,6 +2,10 @@
   color: red;
 }
 
+.alerts{
+  color:rgb(144,187,194);
+  text-align: center;
+}
 .buttonColor{
   background-color: rgb(144, 187, 194);
   color: whitesmoke;
@@ -42,7 +46,9 @@
       display: none;
   }
   .caption,
-  .cardFontSizing{
+  .cardFontSizing,
+  .alerts,
+  .alert-success{
     font-size: small;
   }
   .chart-container{
@@ -59,7 +65,9 @@
       display: none;
   }
   .caption,
-  .cardFontSizing{
+  .cardFontSizing,
+  .alerts,
+  .alert-success{
     font-size: small;
   }
   .chart-container{

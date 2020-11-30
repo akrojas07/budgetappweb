@@ -148,9 +148,9 @@ export class DashboardComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
-        this.showNoGoalsMessage = true;
         this.noGoalsMessage = 'No Existing Goals';
+        this.showNoGoalsMessage = true;
+
       }
     );
   }
@@ -215,7 +215,6 @@ export class DashboardComponent implements OnInit {
   }
 
   upsertGoals(): void {
-    console.log(this.goalsList);
     this.goalsService.upsertGoals(this.goalsList).subscribe(
       (res) => {
         this.successMessage = 'Save Successful';
@@ -225,7 +224,6 @@ export class DashboardComponent implements OnInit {
       (error) => {
         this.errorMessage = 'Unable to save';
         this.showErrorMessage = true;
-        console.log(error);
       }
     );
   }

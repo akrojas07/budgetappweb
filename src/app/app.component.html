@@ -1,10 +1,6 @@
 <app-nav (errorOccurredEvent)="errorOccurred($event)"></app-nav>
 
-<div class="container-fluid body">
-  <h1 class="welcome" style="text-align: center">
-    Welcome to {{title}}
-  </h1>
-  <br />
+<div class="body">
   <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
     {{errorMessage}}
   </div>

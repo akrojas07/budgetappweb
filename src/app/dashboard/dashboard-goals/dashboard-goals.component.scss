@@ -1,0 +1,45 @@
+.buttonColor{
+    background-color: rgb(144, 187, 194);
+    color: whitesmoke;
+    font-size: small;
+}
+.cancel{
+    font-size: small;
+}
+.removeIcon{
+    color: red;
+}
+
+.pencilIcon{
+    color: seagreen;
+}
+
+.caption {
+    padding: 5px;
+    color: rgb(144, 187, 194);
+    border-color: rgb(152, 215, 194);
+    border-radius: 10px;
+    border-width: 4px;
+    border-style: double;
+    text-align: center;
+  }
+
+  .sizing{
+      font-size: smaller;
+  }
+
+  @media screen and (max-width: 500px) {
+    .displayHideSmall{
+        display: none;
+    }
+  }
+  
+  @media screen and (max-width: 980px) {
+    .displayMedHide{
+        display: none;
+    }
+  }
+  
+  @media screen and (max-width: 2000px) {
+  
+  }

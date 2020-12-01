@@ -106,7 +106,7 @@ export class BudgetExpensesComponent implements OnInit {
 
   }
 
-  removeNewExpense(i:number){
+  removeNewExpense(i: number){
     this.newExpenses.splice(i,1);
     this.emitExpenseEvent();
   }

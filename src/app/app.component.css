@@ -1,16 +1,7 @@
-h1{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color:rgb(22,125,127);
-}
 
-.welcome{
-    padding-top: 25px;
-    margin-bottom: -2%;
-}
-.body{
-    font-family:'Open Sans', 'Helvetica Neue', sans-serif;
-    color:rgb(22,125,127);
-    font-size: medium;
+.lead{
+    font-family: monospace;
+    font-size: x-large;
 }
 
 

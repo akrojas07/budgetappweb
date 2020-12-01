@@ -1,8 +1,10 @@
+<h1 class="text-center mt-2 welcome">Welcome to Mi Feria</h1>
 <div class="d-flex justify-content-center">
   <div id="signIn" class="signIn">
     <div class="alert alert-danger p-1" role="alert" *ngIf="showErrorMessage">
       {{errorMessage}}
     </div>
+
     <!-- pretty sure this is an example of output event binding -->
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="login()">
       <input type="email" class="form-control mt-3" id="exampleInputEmail1" name="email" placeholder="Email Address"
@@ -19,7 +21,7 @@
         </span>
       </div>
       <!--  [disabled]="!loginForm.valid" is an example of input property binding -->
-      <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">
+      <button class="btn buttonColor" type="submit" [disabled]="!loginForm.valid">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="formSubmitted"></span>
         Submit
       </button>
@@ -29,8 +31,5 @@
     <p class="text-left">New around here? <a href="#signupModal" data-toggle="modal" data-target="#signupModal">Sign
         Up</a></p>
 
-    <p class="text-left"><a [routerLink]="['/resetPassword']">Forgot Password?</a></p>
-    <!--this will send them to a link where they enter their 
-        email and if they exist, an update password link will be sent-->
   </div>
 </div>

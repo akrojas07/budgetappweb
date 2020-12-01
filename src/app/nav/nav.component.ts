@@ -24,13 +24,10 @@ export class NavComponent implements OnInit {
 
   logout(){
     let userId = Number(localStorage.getItem('userId'));
-    console.log('userid:');
-    console.log(userId);
     this.userService.logOut(userId)
       .subscribe(res =>{
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
-        console.log('logged out');
         this.router.navigate(['/home']);
       },error =>{
         console.log(error);

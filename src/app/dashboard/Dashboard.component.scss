@@ -1,0 +1,86 @@
+.removeIcon {
+  color: red;
+}
+
+.alerts{
+  color:rgb(144,187,194);
+  text-align: center;
+}
+.buttonColor{
+  background-color: rgb(144, 187, 194);
+  color: whitesmoke;
+  font-size: small;
+}
+
+.caption {
+  padding: 5px;
+  color: rgb(144, 187, 194);
+  border-color: rgb(152, 215, 194);
+  border-radius: 10px;
+  border-width: 4px;
+  border-style: double;
+  text-align: center;
+  font-size: medium;
+}
+
+
+.progressBarText{
+  font-size: x-small;
+}
+
+.progressBarName{
+  width: 30%;
+}
+
+.cardFontSizing{
+  font-size: medium;
+}
+
+.displayHideSmall{
+  width: 25%;
+}
+
+
+@media screen and (max-width: 500px) {
+  .displayHideSmall{
+      display: none;
+  }
+  .caption,
+  .cardFontSizing,
+  .alerts,
+  .alert-success{
+    font-size: small;
+  }
+  .chart-container{
+    position: relative;
+    height: 15%;
+  }
+
+}
+
+
+
+@media screen and (max-width: 980px) {
+  .displayMedHide{
+      display: none;
+  }
+  .caption,
+  .cardFontSizing,
+  .alerts,
+  .alert-success{
+    font-size: small;
+  }
+  .chart-container{
+    position: relative;
+    height: 15%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .chart-container{
+    position: relative;
+    height: 300px;
+    
+  }
+}
+

@@ -18,7 +18,6 @@ export class AppComponent {
   }
 
   errorOccurred(message: string){
-    console.log('in here');
     this.showErrorMessage = true;
     this.errorMessage = message;
   }

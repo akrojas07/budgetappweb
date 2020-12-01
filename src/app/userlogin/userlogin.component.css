@@ -6,6 +6,13 @@ p,
 .signIn{
     width: 15%;
 }
+.buttonColor {
+  background-color: rgb(144, 187, 194);
+  color: whitesmoke;
+}
+.welcome{
+  color: rgb(144,187,194);
+}
 
 @media screen and (max-width: 400px) {
   .signIn {

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 
@@ -8,7 +7,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(private http: HttpClient, private userService: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
   }

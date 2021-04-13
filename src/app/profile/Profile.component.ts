@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component,  OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserProfileUpdateRequest } from '../_models/UserProfileUpdateRequest';
 import { UserUpdateProfile } from '../_models/userUpdateProfileResponse';
@@ -30,7 +27,7 @@ export class ProfileComponent implements OnInit {
   passwordFormSubmitted: boolean;
   passwordFormValid: boolean;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService) {}
 
 
   ngOnInit() {
@@ -66,7 +63,6 @@ export class ProfileComponent implements OnInit {
     this.showErrorMessage = false;
     this.userService.updateProfile(this.updateUser).subscribe(
       (res) => {
-        console.log('Update hit');
         this.successMessage = 'Update Successful';
         this.showSuccessMessage = true;
         this.formSubmitted = false;
@@ -88,7 +84,6 @@ export class ProfileComponent implements OnInit {
     this.showPasswordError = false;
     this.userService.updatePassword(this.updatedPassword).subscribe(
       (res) => {
-        console.log('Password hit');
         this.successMessage = 'Password Update Successful';
         this.showPasswordSuccess = true;
         this.passwordFormSubmitted = false;
@@ -103,8 +98,6 @@ export class ProfileComponent implements OnInit {
 
   validatePasswordsMatch(): void{
     if ((this.updatedPassword.Password === this.confirmPassword)){
-      this.errorMessage = undefined;
-      this.showPasswordError = false;
       this.passwordFormValid = true;
       return;
     }

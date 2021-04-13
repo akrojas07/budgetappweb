@@ -17,7 +17,6 @@ import { ProfileComponent } from './profile/Profile.component';
 import { DashboardComponent } from './dashboard/Dashboard.component';
 import { BudgetComponent } from './budget/Budget.component';
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
 import { NavComponent } from './nav/nav.component';
 import { UserloginComponent } from './userlogin/userlogin.component';
 import { PasswordResetComponent } from './passwordReset/passwordReset.component';
@@ -30,7 +29,6 @@ import { DashboardGoalsComponent} from './dashboard/dashboard-goals/dashboard-go
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     NavComponent,
     UserloginComponent,
     HomeComponent,

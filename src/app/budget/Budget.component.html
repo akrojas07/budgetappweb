@@ -1,5 +1,4 @@
 <!-- If budget plan is blank -->
-<!-- https://www.mint.com/mint-categories -->
 <div *ngIf="loggedIn()">
   <div class="container mt-2" style="position:relative;">
     <div *ngIf="hasPopulatedBudgetType">
@@ -304,7 +303,7 @@
           </div>
         </div>
       </div>
-      <div class="col-7">
+      <div class="col-12">
         <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
           {{errorMessage}}
         </div>
@@ -331,7 +330,6 @@
             </li>
           </ul>
           <div class="tab-content">
-            <!-- (ngSubmit)="onSubmit()" -->
             <div id="incomeZ" class="tab-pane active">
               <app-budgetIncome (incomeChangeEvent)="recalculateIncome($event)"
                 [budgetType]="budgetBreakdown.budgetType"></app-budgetIncome>

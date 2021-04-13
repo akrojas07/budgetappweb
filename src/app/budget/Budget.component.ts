@@ -23,7 +23,7 @@ import { BudgetSavingsService } from '../_services/budgetSavings.service';
   templateUrl: './Budget.component.html',
   styleUrls: ['./Budget.component.scss'],
 })
-export class BudgetComponent implements OnInit, OnDestroy {
+export class BudgetComponent implements OnInit {
   savingAmount: number;
   savingsList: SavingsRequest[] = [];
   targetSavingsAmount: number;
@@ -79,7 +79,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
     this.getBudgetBreakdown();
   }
 
-  // maybe?
   loggedIn() {
     return this.userService.loggedIn();
   }
@@ -209,7 +208,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
   }
 
   updateTargetExpenses() {
-    // if(this.ze.nativeElement.style == 'visibility:hidden')
     if (this.hide === true) {
       this.targetExpenseAmount = this.incomeAmount * 0.8;
     } else {
@@ -223,18 +221,12 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   hideInputBox() {
     this.hide = true;
-    // this.ze.nativeElement.style = 'visibility: hidden';
   }
 
   showInputBox() {
     this.hide = false;
-    // this.ze.nativeElement.style = 'visibility: visible';
   }
 
-  success()
-  {
-
-  }
   //make inputs box visible end
 
   refresh(): void {
@@ -244,14 +236,17 @@ export class BudgetComponent implements OnInit, OnDestroy {
   // submit information start
   onSubmit() {
     this.setFiftyBudgetDefault();
+    this.budgetBreakdown.userId = this.userId;
 
     if (this.expenseList.length === 0) {
+      this.showSuccessMessage = false;
       this.errorMessage = 'Please review your expense entries and try again';
       this.showErrorMessage = true;
     } else {
       this.expenseService.upsertExpense(this.expenseList).subscribe(
         (res) => {
           if (this.savingsList.length === 0) {
+            this.showSuccessMessage = false;
             this.errorMessage =
             'Please review your savings entries and try again';
             this.showErrorMessage = true;
@@ -259,15 +254,17 @@ export class BudgetComponent implements OnInit, OnDestroy {
             this.savingsService.upsertSavings(this.savingsList).subscribe(
               (res) => {
                 if (this.incomeList.length === 0) {
+                  this.showSuccessMessage = false;
                   this.errorMessage = 'Please review your income entries and try again';
                   this.showErrorMessage = true;
                 } else {
                   this.incomeService.upsertIncomes(this.incomeList).subscribe(
                     (res) => {
-                      if (this.budgetBreakdown.budgetType === undefined) {
+                      if (this.budgetBreakdown.id === undefined || this.budgetBreakdown.id === 0) {
                         this.budgetService.addNewBudgetBreakdown(this.budgetBreakdown)
                         .subscribe(
                           (res) => {
+                            this.showErrorMessage = false;
                             this.successMessage = 'Submit Successful';
                             this.showSuccessMessage = true;
                             setTimeout(this.refresh, 3000);
@@ -276,6 +273,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
                             console.log(error);
                             this.errorMessage = 'Please review your budget breakdowns and try again ';
                             this.showErrorMessage = true;
+                            this.showSuccessMessage = false;
                           }
                         );
                       } else {
@@ -284,25 +282,29 @@ export class BudgetComponent implements OnInit, OnDestroy {
                           (res) => {
                             this.successMessage = 'Update Successful';
                             this.showSuccessMessage = true;
+                            this.showErrorMessage = false;
                             setTimeout(this.refresh, 3000);
                           },
                           (error) => {
                             console.log(error);
                             this.errorMessage = 'Please review your budget breakdowns and try again ';
                             this.showErrorMessage = true;
+                            this.showSuccessMessage = false;
                           }
                         );
                       }
                     },
                     (err) => {
-                      this.errorMessage =
-                        'Please review your income entries and try again';
+                      this.showSuccessMessage = false;
+                      this.errorMessage = 'Please review your income entries and try again';
                       this.showErrorMessage = true;
+                      
                     }
                   );
                 }
               },
               (error) => {
+                this.showSuccessMessage = false;
                 this.errorMessage =
                   'Please review your savings entries and try again';
                 this.showErrorMessage = true;
@@ -311,6 +313,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
           }
         },
         (err) => {
+          this.showSuccessMessage = false;
           this.errorMessage =
             'Please review your expense entries and try again';
           this.showErrorMessage = true;
@@ -319,7 +322,4 @@ export class BudgetComponent implements OnInit, OnDestroy {
     }
   }
   //submit information end
-
-  // async
-  ngOnDestroy() {}
 }

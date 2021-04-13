@@ -31,12 +31,11 @@ export class UserloginComponent implements OnInit {
     this.showErrorMessage = false;
     this.userService.login(this.model)
       .subscribe(res => {
-        console.log('Login Successful');
         localStorage.setItem('token', res.token);
         this.formSubmitted = false;
         localStorage.setItem('userId', res.userId.toString());
       }, error => {
-        this.errorMessage = error;
+        this.errorMessage = "Email Address or Password Incorrect";
         this.showErrorMessage = true;
         this.formSubmitted = false;
       }, () => {

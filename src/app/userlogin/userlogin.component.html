@@ -1,11 +1,10 @@
 <h1 class="text-center mt-2 welcome">Welcome to Mi Feria</h1>
 <div class="d-flex justify-content-center">
   <div id="signIn" class="signIn">
-    <div class="alert alert-danger p-1" role="alert" *ngIf="showErrorMessage">
+    <div class="alert alert-danger p-3" role="alert" *ngIf="showErrorMessage">
       {{errorMessage}}
     </div>
 
-    <!-- pretty sure this is an example of output event binding -->
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="login()">
       <input type="email" class="form-control mt-3" id="exampleInputEmail1" name="email" placeholder="Email Address"
         required [(ngModel)]="model.email">
@@ -13,14 +12,7 @@
         <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password"
           required [(ngModel)]="model.password">
       </div>
-      <div class="checkbox">
-        <span class="align-baseline">
-          <label class="checkMe">
-            <input  type="checkbox" value="remember-me"> Remember me
-          </label>
-        </span>
-      </div>
-      <!--  [disabled]="!loginForm.valid" is an example of input property binding -->
+     
       <button class="btn buttonColor" type="submit" [disabled]="!loginForm.valid">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="formSubmitted"></span>
         Submit
